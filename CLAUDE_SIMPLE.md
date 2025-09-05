@@ -523,6 +523,8 @@ open http://localhost:5174
 ## 🚀 DEPLOYMENT READY
 
 ### Railway Deployment
+**🌐 PRODUCTION URL:** https://oblinor-simple-production.up.railway.app
+
 The system is ready for Railway deployment with:
 - Frontend: Uses `serve` for production build
 - Backend: Production-ready Express server

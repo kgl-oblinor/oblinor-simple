@@ -1,5 +1,7 @@
 # Oblinor Simple - Emission Platform
 
+🌐 **LIVE DEMO:** https://oblinor-simple-production.up.railway.app
+
 A fully functional share emission platform where companies can issue new shares and investors can subscribe to them. Features real Norwegian shareholder data and strict level-based access control with blur effects. Production-ready with complete test coverage.
 
 ## 🚀 Quick Start

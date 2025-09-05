@@ -3,12 +3,19 @@
   "version": "1.0.0",
   "description": "Root package for Railway deployment",
   "scripts": {
-    "build:backend": "cd backend && npm install && npm run build",
-    "build:frontend": "cd frontend && npm install && npm run build",
-    "start:backend": "cd backend && npm start",
-    "start:frontend": "cd frontend && npm start"
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && VITE_API_URL='' npm run build",
+    "build": "npm run build:backend && npm run build:frontend && cp -r frontend/dist backend/",
+    "start": "cd backend && npm start"
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "devDependencies": {
+    "@railway/cli": "^4.6.3"
   }
 }

@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { LoginRequest, LoginResponse, User, Shareholder, Emission, EmissionSubscription } from './types';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4001';
+// In production, use relative URLs since frontend is served from backend
+// If VITE_API_URL is empty string, use relative URLs
+const API_URL = import.meta.env.VITE_API_URL === '' ? '' : (import.meta.env.VITE_API_URL || 'http://localhost:4001');
 
 // Create axios instance
 export const api = axios.create({
