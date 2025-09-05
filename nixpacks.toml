@@ -1,0 +1,11 @@
+# This file tells Railway/Nixpacks that this is a monorepo
+# Each service should be deployed separately with its own root directory
+
+[phases.setup]
+nixPkgs = ["nodejs-18_x", "postgresql"]
+
+[phases.build]
+cmds = ["echo 'This is a monorepo. Deploy /backend and /frontend as separate services with Root Directory set.'"]
+
+[start]
+cmd = "echo 'Set Root Directory to /backend or /frontend in Railway service settings'"]
