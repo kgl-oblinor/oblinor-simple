@@ -1,0 +1,14 @@
+{
+  "name": "oblinor-simple-monorepo",
+  "version": "1.0.0",
+  "description": "Root package for Railway deployment",
+  "scripts": {
+    "build:backend": "cd backend && npm install && npm run build",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm start"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
