@@ -1,0 +1,232 @@
+import React, { useState, useEffect } from 'react';
+import { User } from '../types';
+import { usersAPI } from '../api';
+import BlurredContent from './BlurredContent';
+import { useAuth } from '../context/AuthContext';
+
+const UserManagement: React.FC = () => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [updatingUser, setUpdatingUser] = useState<number | null>(null);
+  const { user: currentUser } = useAuth();
+
+  const containerStyle: React.CSSProperties = {
+    backgroundColor: '#123543',
+    padding: '20px',
+    borderRadius: '12px',
+    color: '#fcfbfa',
+  };
+
+  const titleStyle: React.CSSProperties = {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    marginBottom: '20px',
+    borderBottom: '2px solid rgba(252, 251, 250, 0.3)',
+    paddingBottom: '10px',
+  };
+
+  const tableStyle: React.CSSProperties = {
+    width: '100%',
+    borderCollapse: 'collapse',
+    marginTop: '15px',
+  };
+
+  const thStyle: React.CSSProperties = {
+    padding: '12px',
+    textAlign: 'left',
+    borderBottom: '1px solid rgba(252, 251, 250, 0.3)',
+    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    fontWeight: 'bold',
+  };
+
+  const tdStyle: React.CSSProperties = {
+    padding: '12px',
+    borderBottom: '1px solid rgba(252, 251, 250, 0.2)',
+  };
+
+  const selectStyle: React.CSSProperties = {
+    padding: '6px 10px',
+    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    border: '1px solid rgba(252, 251, 250, 0.3)',
+    borderRadius: '4px',
+    color: '#fcfbfa',
+    fontSize: '14px',
+  };
+
+  const buttonStyle: React.CSSProperties = {
+    padding: '6px 12px',
+    backgroundColor: '#fcfbfa',
+    color: '#123543',
+    border: 'none',
+    borderRadius: '4px',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    marginLeft: '8px',
+  };
+
+  const loadingStyle: React.CSSProperties = {
+    textAlign: 'center',
+    padding: '40px',
+    fontSize: '18px',
+    opacity: 0.8,
+  };
+
+  const errorStyle: React.CSSProperties = {
+    color: '#ff6b6b',
+    textAlign: 'center',
+    padding: '20px',
+    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+    borderRadius: '8px',
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      setLoading(true);
+      const response = await usersAPI.list();
+      setUsers(response.users);
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Failed to fetch users');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLevelChange = async (userId: number, newLevel: number) => {
+    try {
+      setUpdatingUser(userId);
+      await usersAPI.updateLevel(userId, newLevel);
+      
+      // Update local state
+      setUsers(users.map(user => 
+        user.id === userId ? { ...user, level: newLevel } : user
+      ));
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Failed to update user level');
+    } finally {
+      setUpdatingUser(null);
+    }
+  };
+
+  const getValidLevels = (role: string) => {
+    return role === 'ADMIN' ? [1, 2] : [1, 2, 3];
+  };
+
+
+  if (!currentUser) return null;
+
+  return (
+    <BlurredContent
+      requiredLevel={1}
+      userLevel={currentUser.level}
+      userRole={currentUser.role}
+      adminOnly={true}
+    >
+      <div style={containerStyle}>
+        <h2 style={titleStyle}>
+          User Management ({users.length})
+        </h2>
+
+        {loading && (
+          <div style={loadingStyle}>
+            Loading users...
+          </div>
+        )}
+
+        {error && (
+          <div style={errorStyle}>
+            {error}
+          </div>
+        )}
+
+        {!loading && !error && users.length > 0 && (
+          <table style={tableStyle}>
+            <thead>
+              <tr>
+                <th style={thStyle}>Name</th>
+                <th style={thStyle}>Email</th>
+                <th style={thStyle}>Role</th>
+                <th style={thStyle}>Level</th>
+                <th style={thStyle}>Created</th>
+                <th style={thStyle}>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.id}>
+                  <td style={tdStyle}>{user.name}</td>
+                  <td style={tdStyle}>{user.email}</td>
+                  <td style={tdStyle}>
+                    <span style={{
+                      padding: '4px 8px',
+                      backgroundColor: user.role === 'ADMIN' ? '#4CAF50' : '#2196F3',
+                      color: '#fcfbfa',
+                      borderRadius: '12px',
+                      fontSize: '12px',
+                      fontWeight: 'bold'
+                    }}>
+                      {user.role}
+                    </span>
+                  </td>
+                  <td style={tdStyle}>
+                    <select
+                      value={user.level}
+                      onChange={(e) => handleLevelChange(user.id, parseInt(e.target.value))}
+                      style={selectStyle}
+                      disabled={updatingUser === user.id || user.id === currentUser.id}
+                    >
+                      {getValidLevels(user.role).map(level => (
+                        <option key={level} value={level}>
+                          Level {level}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td style={tdStyle}>
+                    {/* Created date not available in User type */}
+                    -
+                  </td>
+                  <td style={tdStyle}>
+                    {updatingUser === user.id ? (
+                      <span style={{ fontSize: '12px', opacity: 0.7 }}>Updating...</span>
+                    ) : user.id === currentUser.id ? (
+                      <span style={{ fontSize: '12px', opacity: 0.7 }}>Current User</span>
+                    ) : (
+                      <button
+                        style={buttonStyle}
+                        onClick={() => {
+                          // Could add more actions here like delete, etc.
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.9)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#fcfbfa';
+                        }}
+                      >
+                        Edit
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+
+        {!loading && !error && users.length === 0 && (
+          <div style={loadingStyle}>
+            No users found
+          </div>
+        )}
+      </div>
+    </BlurredContent>
+  );
+};
+
+export default UserManagement;
