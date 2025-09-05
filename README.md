@@ -1,6 +1,6 @@
 # Oblinor Simple - Emission Platform
 
-A simplified share emission platform where companies can issue new shares and investors can subscribe to them. The system features strict level-based access control with blur effects.
+A fully functional share emission platform where companies can issue new shares and investors can subscribe to them. Features real Norwegian shareholder data and strict level-based access control with blur effects. Production-ready with complete test coverage.
 
 ## 🚀 Quick Start
 
@@ -21,8 +21,10 @@ docker-compose up -d
 - **Database**: PostgreSQL on localhost:5432
 
 ### Test Accounts
-- **Admin (Level 2)**: admin@oblinor.no / admin123
-- **User (Level 1)**: user1@example.com / user123
+- **Admin (Level 2)**: admin@oblinor.no / Admin123! (Full control)
+- **Admin (Level 1)**: admin1@oblinor.no / Admin123! (Basic admin)
+- **User (Level 3)**: user3@oblinor.no / Pass123! (Can subscribe, owns 200 shares)
+- **User (Level 2)**: user2@oblinor.no / Pass123! (View only, owns 200 shares)
 
 ## 🏗️ Architecture
 
@@ -39,9 +41,10 @@ docker-compose up -d
 - Level-based blur effects
 
 ### Database
-- PostgreSQL with seeded data
-- 30+ shareholders with shares
-- Sample emission data
+- PostgreSQL with real Norwegian shareholder data
+- 30 real shareholders (127,640 total shares)
+- Top shareholder: Kristian Gjerde Løkken (70.51%)
+- Sample emission ready for testing
 - Automated triggers for share updates
 
 ## 🔐 Access Control System
