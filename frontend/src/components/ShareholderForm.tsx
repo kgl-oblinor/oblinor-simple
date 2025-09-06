@@ -78,6 +78,7 @@ const ShareholderForm: React.FC<ShareholderFormProps> = ({ shareholder, onClose,
     fontSize: '16px',
     marginBottom: '15px',
     backgroundColor: '#fcfbfa',
+    color: '#123543',
   };
 
   const buttonContainerStyle: React.CSSProperties = {

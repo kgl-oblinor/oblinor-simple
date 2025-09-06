@@ -3,7 +3,7 @@
 **📍 SINGLE SOURCE OF TRUTH FOR ALL AI AGENTS**  
 **⚡ STATUS:** Production Live on Railway | **🎯 TARGET:** Norwegian share emission platform  
 **🔗 LIVE:** https://oblinoremisjonrailway-production.up.railway.app  
-**Last Updated:** 2025-09-05 19:50
+**Last Updated:** 2025-09-06 Mobile Responsive Update
 
 ---
 
@@ -69,11 +69,10 @@ Level: User Level 1 (everything blurred)
 oblinor-simple/
 ├── backend/          # Express.js API + serves frontend in production
 ├── frontend/         # React SPA (built to backend/dist in production)
-├── database/         # PostgreSQL schemas and migrations
 ├── types/           # Shared TypeScript definitions
 ├── railway.json     # Railway deployment config
 ├── package.json     # Root monorepo scripts
-└── docker-compose.yml # Local development
+└── README.md        # User documentation
 ```
 
 **Key Technologies:**
@@ -108,30 +107,45 @@ CONSTRAINT valid_level CHECK (
 
 ## 📝 IMPORTANT DEVELOPMENT NOTES
 
+### 🔄 Two Ways to Run the System
+
+#### 1. **Railway (Production)** 🌐
+- Live production system on the internet
+- URL: https://oblinoremisjonrailway-production.up.railway.app/
+- Automatically updates when you push to GitHub
+- Used by real users
+
+#### 2. **Local (Development)** 💻  
+- Runs on your own machine for development
+- Backend: `localhost:4001` 
+- Frontend: `localhost:5174`
+- For testing and developing new features
+
+### 🔄 Typical Development Workflow
+
+```bash
+# 1. Develop locally on your machine
+cd backend && npm run dev    # Local backend
+cd frontend && npm run dev   # Local frontend
+
+# 2. Test changes on localhost
+open http://localhost:5174
+
+# 3. Push to GitHub when satisfied
+git push
+
+# 4. Railway automatically updates production
+# Users see changes on https://oblinoremisjonrailway-production.up.railway.app/
+```
+
 **Railway Deployment:**
 1. Uses single service serving both API and frontend
 2. Frontend built with empty VITE_API_URL for relative paths
 3. Backend serves frontend from dist/ folder
 4. Environment variables set via Railway dashboard
 
-**Local Development:**
-```bash
-# Start with Docker Compose
-docker-compose up
-
-# Or run separately
-cd backend && npm run dev  # Port 4001
-cd frontend && npm run dev # Port 5174
-```
-
-**Database Migrations:**
-```bash
-# Railway database
-psql "postgresql://postgres:iuzakIAZhFviojhSMiTFfbgdnIAFRWGJ@hopper.proxy.rlwy.net:42209/railway" < database/init.sql
-
-# Or via Railway CLI
-npx @railway/cli run "psql \$DATABASE_URL < database/init.sql"
-```
+**Production Database:**
+All data is already migrated and live on Railway. No local database files needed.
 
 ---
 
@@ -147,6 +161,63 @@ npx @railway/cli run "psql \$DATABASE_URL < database/init.sql"
 - 0.2-0.3s transitions
 - 5px blur for restricted content
 - Consistent spacing and typography
+
+## 📱 MOBILE RESPONSIVE SYSTEM
+
+**CRITICAL: Platform is now fully mobile-optimized using CSS Modules**
+
+**Responsive Breakpoints:**
+- **Mobile:** < 768px (Mobile-first design)
+- **Tablet:** 768px - 1024px
+- **Desktop:** > 1024px
+
+**CSS Architecture:**
+- **Global CSS Variables:** `frontend/src/styles/globals.module.css`
+- **Component CSS Modules:** Each component has `.module.css` file
+- **Mobile-First Approach:** All styles start mobile, scale up
+
+**Key Mobile Features:**
+- **Collapsible Sidebar:** Hamburger menu on mobile, fixed sidebar on desktop
+- **Touch-Optimized:** 44px minimum touch targets throughout
+- **Responsive Tables:** Cards on mobile, tables on desktop (ShareholderList)
+- **Adaptive Forms:** Full-width inputs, stacked buttons on mobile
+- **Responsive Typography:** Scales from mobile to desktop
+
+**Mobile Layout Rules:**
+- Sidebar: Hidden on mobile, overlay menu with hamburger toggle
+- Content: Full width on mobile, 250px left margin on desktop
+- Tables: Convert to card layout or horizontal scroll on mobile
+- Forms: Single column, full-width inputs with proper touch targets
+- Buttons: Stack vertically on mobile, inline on desktop
+
+**CSS Variables (Global):**
+```css
+:root {
+  --color-primary: #123543;
+  --color-background: #fcfbfa;
+  --sidebar-width: 250px; /* Desktop only */
+  --touch-target-min: 44px;
+  --spacing-xs: 4px to --spacing-xxl: 40px;
+  --border-radius: 8px;
+  --transition: all 0.2s ease;
+}
+```
+
+**MANDATORY for NEW Components:**
+1. Create `.module.css` file with mobile-first breakpoints
+2. Use global CSS variables for colors/spacing
+3. Implement minimum 44px touch targets
+4. Test on mobile viewport (< 768px)
+5. Ensure table data converts to cards on mobile
+
+**Component Mobile Status:**
+- ✅ Layout.tsx - Responsive with sidebar toggle
+- ✅ Sidebar.tsx - Mobile hamburger menu
+- ✅ LandingPage.tsx - Mobile-optimized cards and typography  
+- ✅ LoginPage.tsx - Touch-friendly forms
+- ✅ UserDashboard.tsx - Mobile tab navigation
+- ✅ ShareholderList.tsx - Mobile card layout
+- ✅ SubscriptionForm.tsx - Mobile-optimized forms
 
 ---
 
@@ -204,17 +275,29 @@ SELECT * FROM emissions WHERE status = 'ACTIVE';
 
 ## 📚 RELATED FILES
 
-- `RAILWAY_DEPLOY.md` - Deployment instructions
-- `database/init.sql` - Complete database schema
-- `backend/.env.example` - Environment variables template
+- `CLAUDE_SIMPLE.md` - Compact AI agent instructions
+- `CLAUDE_SIMPLE_DETAILED.md` - Comprehensive technical reference  
 - `README.md` - User-facing documentation
+- `backend/` - Express.js API with all routes
+- `frontend/` - React application
+- `types/` - Shared TypeScript definitions
 
 ---
 
-## 🔄 RECENT UPDATES (2025-09-05)
+## 🔄 RECENT UPDATES
 
+**2025-09-06 - Mobile Responsive Implementation:**
+1. ✅ **Complete Mobile Optimization** - Platform now fully responsive
+2. ✅ **CSS Modules Architecture** - Mobile-first responsive design system
+3. ✅ **Collapsible Sidebar** - Hamburger menu for mobile navigation
+4. ✅ **Touch-Optimized Forms** - 44px touch targets throughout
+5. ✅ **Responsive Tables** - ShareholderList converts to cards on mobile
+6. ✅ **Mobile-First Components** - All components now mobile-responsive
+7. ✅ **Global Design Variables** - Consistent spacing and breakpoints
+
+**2025-09-05 - Production Deployment:**
 1. ✅ Deployed to Railway successfully
-2. ✅ Imported 30 real Norwegian shareholders
+2. ✅ Imported 30 real Norwegian shareholders  
 3. ✅ Created user accounts for all shareholders
 4. ✅ Updated emission with real data (Serie B)
 5. ✅ Fixed monorepo deployment (single service)

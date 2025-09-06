@@ -1,0 +1,275 @@
+/* Global CSS Module for Oblinor Platform */
+/* Mobile-First Responsive Design */
+
+/* ========== GLOBAL VARIABLES ========== */
+:root {
+  /* Colors - NEVER CHANGE */
+  --color-primary: #123543;
+  --color-background: #fcfbfa;
+  
+  /* Spacing Scale */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 20px;
+  --spacing-xl: 30px;
+  --spacing-xxl: 40px;
+  
+  /* Border Radius */
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+  
+  /* Transitions */
+  --transition: all 0.2s ease;
+  --transition-slow: all 0.3s ease;
+  
+  /* Typography Scale */
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 28px;
+  --font-size-hero: 32px;
+  
+  /* Layout */
+  --sidebar-width: 0px; /* Mobile first - no sidebar */
+  --content-padding: var(--spacing-md);
+  --container-max-width: 100%;
+  
+  /* Touch Targets */
+  --touch-target-min: 44px;
+}
+
+/* ========== TABLET BREAKPOINT ========== */
+@media (min-width: 768px) {
+  :root {
+    --content-padding: var(--spacing-lg);
+    --font-size-hero: 40px;
+    --container-max-width: 1200px;
+  }
+}
+
+/* ========== DESKTOP BREAKPOINT ========== */
+@media (min-width: 1024px) {
+  :root {
+    --sidebar-width: 250px;
+    --content-padding: var(--spacing-xl);
+    --font-size-hero: 48px;
+  }
+}
+
+/* ========== UTILITY CLASSES ========== */
+
+/* Layout Utilities */
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--content-padding);
+}
+
+.flex {
+  display: flex;
+}
+
+.flexColumn {
+  flex-direction: column;
+}
+
+.flexCenter {
+  align-items: center;
+  justify-content: center;
+}
+
+.flexBetween {
+  justify-content: space-between;
+}
+
+.flexWrap {
+  flex-wrap: wrap;
+}
+
+/* Spacing Utilities */
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
+
+.m-sm { margin: var(--spacing-sm); }
+.m-md { margin: var(--spacing-md); }
+.m-lg { margin: var(--spacing-lg); }
+
+/* Typography Utilities */
+.textCenter { text-align: center; }
+.textBold { font-weight: bold; }
+
+.fontSize-sm { font-size: var(--font-size-sm); }
+.fontSize-base { font-size: var(--font-size-base); }
+.fontSize-md { font-size: var(--font-size-md); }
+.fontSize-lg { font-size: var(--font-size-lg); }
+.fontSize-xl { font-size: var(--font-size-xl); }
+.fontSize-xxl { font-size: var(--font-size-xxl); }
+.fontSize-hero { font-size: var(--font-size-hero); }
+
+/* Color Utilities */
+.colorPrimary { color: var(--color-primary); }
+.colorBackground { color: var(--color-background); }
+.bgPrimary { background-color: var(--color-primary); }
+.bgBackground { background-color: var(--color-background); }
+
+/* Border Utilities */
+.borderRadius { border-radius: var(--border-radius); }
+.borderRadiusLg { border-radius: var(--border-radius-lg); }
+
+/* Transition Utilities */
+.transition { transition: var(--transition); }
+.transitionSlow { transition: var(--transition-slow); }
+
+/* Touch Target Utilities */
+.touchTarget {
+  min-height: var(--touch-target-min);
+  min-width: var(--touch-target-min);
+}
+
+/* Responsive Utilities */
+.hideMobile {
+  display: none;
+}
+
+.hideTablet {
+  display: block;
+}
+
+.hideDesktop {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .hideMobile {
+    display: block;
+  }
+  
+  .hideTablet {
+    display: none;
+  }
+  
+  .showTablet {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hideDesktop {
+    display: none;
+  }
+  
+  .showDesktop {
+    display: block;
+  }
+}
+
+/* ========== GLOBAL COMPONENT PATTERNS ========== */
+
+/* Form Controls */
+.input {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 1px solid rgba(18, 53, 67, 0.3);
+  border-radius: var(--border-radius);
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  font-size: var(--font-size-md);
+  transition: var(--transition);
+  min-height: var(--touch-target-min);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(18, 53, 67, 0.1);
+}
+
+/* Buttons */
+.button {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-md);
+  font-weight: bold;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonPrimary {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+}
+
+.buttonPrimary:hover, .buttonPrimary:focus {
+  background-color: rgba(18, 53, 67, 0.9);
+}
+
+.buttonSecondary {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.buttonSecondary:hover, .buttonSecondary:focus {
+  background-color: rgba(18, 53, 67, 0.05);
+}
+
+/* Cards */
+.card {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+}
+
+.cardLight {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+}
+
+/* Tables - Mobile Responsive */
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Force horizontal scroll on mobile */
+}
+
+.table th,
+.table td {
+  padding: var(--spacing-md);
+  text-align: left;
+  border-bottom: 1px solid rgba(252, 251, 250, 0.2);
+}
+
+.table th {
+  background-color: rgba(252, 251, 250, 0.1);
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .table {
+    min-width: auto;
+  }
+}

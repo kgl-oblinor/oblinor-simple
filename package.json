@@ -11,11 +11,5 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  },
-  "dependencies": {
-    "concurrently": "^8.2.2"
-  },
-  "devDependencies": {
-    "@railway/cli": "^4.6.3"
   }
 }

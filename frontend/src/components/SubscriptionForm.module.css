@@ -1,0 +1,210 @@
+/* SubscriptionForm - Mobile-First Responsive */
+
+.form {
+  background-color: var(--color-background);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.title {
+  color: var(--color-primary);
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.emissionInfo {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-lg);
+}
+
+.emissionTitle {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-xs);
+  font-weight: bold;
+}
+
+.emissionDetail {
+  font-size: var(--font-size-sm);
+  margin: var(--spacing-xs) 0;
+}
+
+.inputGroup {
+  margin-bottom: var(--spacing-md);
+}
+
+.label {
+  display: block;
+  color: var(--color-primary);
+  font-size: var(--font-size-base);
+  font-weight: bold;
+  margin-bottom: var(--spacing-xs);
+}
+
+.input {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-md);
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  min-height: var(--touch-target-min);
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: rgba(18, 53, 67, 0.8);
+  box-shadow: 0 0 0 2px rgba(18, 53, 67, 0.1);
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.summaryBox {
+  background-color: rgba(18, 53, 67, 0.05);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-lg);
+}
+
+.summaryTitle {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-md);
+  font-weight: bold;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: var(--font-size-md);
+  border-top: 2px solid var(--color-primary);
+  padding-top: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  color: var(--color-primary);
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+.button {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-md);
+  font-weight: bold;
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  min-height: var(--touch-target-min);
+  text-align: center;
+}
+
+.subscribeButton {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+}
+
+.subscribeButton:hover,
+.subscribeButton:focus {
+  background-color: rgba(18, 53, 67, 0.9);
+}
+
+.subscribeButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.cancelButton:hover,
+.cancelButton:focus {
+  background-color: rgba(18, 53, 67, 0.05);
+}
+
+.cancelButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  color: var(--color-background);
+  background-color: var(--color-primary);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+.infoText {
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-sm);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+  .form {
+    padding: var(--spacing-xl);
+  }
+  
+  .title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .buttonContainer {
+    flex-direction: row;
+    gap: var(--spacing-md);
+  }
+  
+  .button {
+    flex: 1;
+    font-size: var(--font-size-md);
+  }
+  
+  .summaryRow,
+  .totalRow {
+    font-size: var(--font-size-base);
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .input {
+    font-size: var(--font-size-lg);
+  }
+  
+  .emissionTitle {
+    font-size: var(--font-size-lg);
+  }
+}

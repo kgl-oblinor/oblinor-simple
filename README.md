@@ -1,142 +1,175 @@
 # Oblinor Simple - Emission Platform
 
-🌐 **LIVE DEMO:** https://oblinor-simple-production.up.railway.app
+🌐 **LIVE SYSTEM:** https://oblinoremisjonrailway-production.up.railway.app/
 
-A fully functional share emission platform where companies can issue new shares and investors can subscribe to them. Features real Norwegian shareholder data and strict level-based access control with blur effects. Production-ready with complete test coverage.
+A fully functional share emission platform where companies can issue new shares and investors can subscribe to them. Features real Norwegian shareholder data and strict level-based access control with blur effects.
 
-## 🚀 Quick Start
+## 🎯 What is this?
 
-### Prerequisites
-- Docker and Docker Compose
-- Node.js 18+ (if running without Docker)
-- PostgreSQL (if running without Docker)
+Oblinor Simple is a **simplified emission platform** designed for private companies conducting digital capital raises. The system replaces manual Excel-based processes with a structured, secure, and transparent solution.
 
-### Start with Docker (Recommended)
-```bash
-cd /Users/KristianGjerdeLokken/Desktop/oblinor-simple
-docker-compose up -d
-```
+### Key Features:
+- **Level-based access control** with blur effects for restricted content
+- **30 real Norwegian shareholders** (127,640 total shares) 
+- **Active emission system** where qualified users can subscribe
+- **Admin approval workflow** with automatic share allocation
+- **Secure authentication** and role management
 
-### Access the Application
-- **Frontend**: http://localhost:5174
-- **Backend API**: http://localhost:4001
-- **Database**: PostgreSQL on localhost:5432
+## 🔐 User Access System
 
-### Test Accounts
-- **Admin (Level 2)**: admin@oblinor.no / Admin123! (Full control)
-- **Admin (Level 1)**: admin1@oblinor.no / Admin123! (Basic admin)
-- **User (Level 3)**: user3@oblinor.no / Pass123! (Can subscribe, owns 200 shares)
-- **User (Level 2)**: user2@oblinor.no / Pass123! (View only, owns 200 shares)
-
-## 🏗️ Architecture
-
-### Backend (Port 4001)
-- Express.js + TypeScript
-- PostgreSQL database
-- JWT authentication (24h expiry)
-- bcrypt password hashing
-
-### Frontend (Port 5174)
-- React 18 + TypeScript
-- Vite build tool
-- Axios for API calls
-- Level-based blur effects
-
-### Database
-- PostgreSQL with real Norwegian shareholder data
-- 30 real shareholders (127,640 total shares)
-- Top shareholder: Kristian Gjerde Løkken (70.51%)
-- Sample emission ready for testing
-- Automated triggers for share updates
-
-## 🔐 Access Control System
+The platform uses a strict **5-level access control**:
 
 ```
-USER Level 1  → Everything blurred (no access)
-USER Level 2  → Can see shareholders list only  
+USER Level 1  → Everything blurred (default for new users)
+USER Level 2  → Can view shareholders list only  
 USER Level 3  → Full access + can subscribe to emissions
 
 ADMIN Level 1 → Basic admin functions
 ADMIN Level 2 → Full control + approve subscriptions
 ```
 
+## 🚀 How to Use the Platform
+
+### 1. Access the System
+Visit: **https://oblinoremisjonrailway-production.up.railway.app/**
+
+### 2. Test Accounts Available
+- **Admin (Full Control)**: `admin@oblinor.no` / `Admin123!`
+- **Admin (Basic)**: `admin1@oblinor.no` / `Admin123!`  
+- **User (Can Subscribe)**: `user3@oblinor.no` / `Pass123!`
+- **User (View Only)**: `user2@oblinor.no` / `Pass123!`
+
+### 3. User Experience by Level
+
+#### Level 1 Users (New/Restricted)
+- All content appears blurred with "Level X required" messages
+- Cannot access any functionality until admin upgrades access
+
+#### Level 2 Users (Shareholders List Access)
+- Can view complete list of all 30 shareholders
+- Can see share distribution and ownership percentages  
+- Cannot access emission details or subscribe
+
+#### Level 3 Users (Full Access)  
+- Can view all shareholders
+- Can read full emission details and presentation materials
+- Can subscribe to active emissions
+- Receive confirmation of subscription status
+
+#### Admin Users
+- **Level 1:** Basic user management functions
+- **Level 2:** Full system control, can approve subscriptions, manage emissions
+
+## 📊 Real Data Included
+
+### Norwegian Shareholders (30 total)
+- **127,640 total shares** across real Norwegian investors
+- **Largest shareholder:** Kristian Gjerde Løkken (90,000 shares, 70.51%)
+- **Complete ownership registry** with real names and email addresses
+
+### Active Emission
+- **Title:** Oblinor Serie B - Vekstkapital  
+- **New shares offered:** 20,000 shares
+- **Price per share:** 222 NOK
+- **Total raise:** 4,440,000 NOK
+- **Period:** October 1 - November 30, 2025
+
+## 🔄 Emission Process
+
+1. **Admin creates emission** (DRAFT status)
+2. **Admin publishes** (ACTIVE status)
+3. **Level 3 users can subscribe** with desired number of shares
+4. **Admin reviews subscriptions** and allocates shares
+5. **Admin approves** → System automatically updates shareholder ownership
+6. **Emission completed** (COMPLETED status)
+
 ## 🎨 Design System
 
-**Colors** (STRICT - Only these two):
+**Strict Color Palette:**
 - Primary: `#123543` (Dark Teal)
-- Secondary: `#fcfbfa` (Off-White)
+- Background: `#fcfbfa` (Off-White)
+- **Note:** Only these two colors are used throughout the entire system
 
-**Blur Effect**: 5px blur + overlay for insufficient access levels
+**Accessibility Features:**
+- 5px blur effect for restricted content
+- Clear access level indicators
+- Consistent navigation and layout
 
-## 📊 Key Features
+## 🏗️ Technical Architecture
 
-### For Users
-- Level-based content visibility
-- Blur effects for restricted content
-- Shareholder list viewing (Level 2+)
-- Emission subscription (Level 3+)
+### Frontend
+- **React 18** with TypeScript
+- **Vite** for fast development and production builds
+- **Axios** for API communication
+- **React Router** for navigation
 
-### For Admins
-- User level management
-- Shareholder CRUD operations
-- Emission creation and management
-- Subscription approval workflow
+### Backend  
+- **Express.js** with TypeScript
+- **PostgreSQL** database with real data
+- **JWT authentication** (24-hour expiry)
+- **bcrypt** password hashing
 
-## 🔄 Emission Workflow
+### Security
+- Database-level access constraints
+- JWT token validation on all protected routes
+- Role and level verification for all operations
+- Secure password hashing with salt rounds
 
-1. Admin creates emission (DRAFT)
-2. Admin publishes (ACTIVE)  
-3. Level 3 users subscribe
-4. Admin reviews & allocates shares
-5. Admin approves → Auto-update shareholder.shares_owned
-6. Emission completed (COMPLETED)
+## 🔧 For Developers
 
-## 🛠️ Development
+### Two Ways to Run the System
 
-### Manual Setup
+#### 1. **Railway (Production)** 🌐
+- Live production system on the internet
+- URL: https://oblinoremisjonrailway-production.up.railway.app/
+- Automatically updates when you push to GitHub
+- Used by real users
+
+#### 2. **Local (Development)** 💻  
+- Runs on your own machine for development
+- Backend: `localhost:4001` 
+- Frontend: `localhost:5174`
+- For testing and developing new features
+
+### 🔄 Typical Development Workflow
+
 ```bash
-# Backend
-cd backend
-npm install
-npm run dev  # Port 4001
+# 1. Develop locally on your machine
+cd backend && npm run dev    # Local backend
+cd frontend && npm run dev   # Local frontend
 
-# Frontend  
-cd frontend
-npm install
-npm run dev  # Port 5174
+# 2. Test changes on localhost
+open http://localhost:5174
 
-# Database
-psql postgresql://oblinor_admin:SecretPassword123@localhost:5432/oblinor_simple
+# 3. Push to GitHub when satisfied
+git push
+
+# 4. Railway automatically updates production
+# Users see changes on https://oblinoremisjonrailway-production.up.railway.app/
 ```
 
-### API Endpoints
-- `POST /auth/login` - Login
-- `GET /shareholders` - List shareholders (Level 2+)
-- `GET /emissions` - List emissions (All users)
-- `POST /emissions/:id/subscribe` - Subscribe (Level 3+)
-- `PATCH /users/:id/level` - Change user level (Admin only)
+### AI Agent Documentation
+- [CLAUDE.md](./CLAUDE.md) - Primary AI agent instructions
+- [CLAUDE_SIMPLE.md](./CLAUDE_SIMPLE.md) - Compact AI reference  
+- [CLAUDE_SIMPLE_DETAILED.md](./CLAUDE_SIMPLE_DETAILED.md) - Comprehensive technical guide
 
-## 📝 Database Schema
+## 📈 Success Metrics
 
-- **users** - User accounts with role/level
-- **shareholders** - Shareholder registry with shares
-- **emissions** - Share emission events  
-- **emission_subscriptions** - User subscriptions to emissions
+The platform successfully demonstrates:
+- ✅ Secure multi-level access control
+- ✅ Real Norwegian shareholder data (30 shareholders)
+- ✅ Functional emission subscription workflow  
+- ✅ Admin approval and automatic share allocation
+- ✅ Responsive blur effects for access control
+- ✅ Production-ready Railway deployment
+- ✅ Consistent two-color design system
 
-## 🚦 Success Criteria
+## 📞 Support & Contact
 
-- [x] Admin login works (admin@oblinor.no)
-- [x] 30 shareholders visible (level 2+ users)
-- [x] Level 1 users see everything blurred
-- [x] Level 2 users see shareholders only
-- [x] Level 3 users can subscribe to emissions
-- [x] Admin can create/edit emissions
-- [x] Admin can approve subscriptions
-- [x] Shares auto-update on approval
-- [x] Docker Compose starts without errors
-- [x] Only two colors used everywhere
-- [x] Ports 4001 and 5174 working
+- **Live System:** https://oblinoremisjonrailway-production.up.railway.app/
+- **Source Code:** https://github.com/kgl-oblinor/oblinor-simple
+- **Issues:** Report via GitHub Issues
 
-## 📄 License
+---
 
-Private - Oblinor AS
+**Built for Oblinor AS** | **Powered by Railway** | **Production Ready**

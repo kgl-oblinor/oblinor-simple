@@ -1,104 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import styles from './Sidebar.module.css';
 
 const Sidebar: React.FC = () => {
   const { user, logout } = useAuth();
-
-  const sidebarStyle: React.CSSProperties = {
-    width: '250px',
-    height: '100vh',
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
-    padding: '20px',
-    position: 'fixed',
-    left: 0,
-    top: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    borderRight: '1px solid rgba(252, 251, 250, 0.3)',
-  };
-
-  const headerStyle: React.CSSProperties = {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '30px',
-    borderBottom: '2px solid rgba(252, 251, 250, 0.3)',
-    paddingBottom: '15px',
-  };
-
-  const userInfoStyle: React.CSSProperties = {
-    marginBottom: '30px',
-    padding: '15px',
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
-    borderRadius: '8px',
-    fontSize: '14px',
-  };
-
-  const levelBadgeStyle: React.CSSProperties = {
-    display: 'inline-block',
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
-    padding: '4px 8px',
-    borderRadius: '12px',
-    fontSize: '12px',
-    fontWeight: 'bold',
-    marginTop: '8px',
-  };
-
-  const logoutButtonStyle: React.CSSProperties = {
-    marginTop: 'auto',
-    padding: '12px 16px',
-    backgroundColor: 'rgba(252, 251, 250, 0.2)',
-    border: '1px solid rgba(252, 251, 250, 0.3)',
-    borderRadius: '8px',
-    color: '#fcfbfa',
-    cursor: 'pointer',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    transition: 'all 0.3s ease',
-  };
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
+    setIsOpen(false); // Close mobile menu after logout
+  };
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsOpen(false);
   };
 
   return (
-    <div style={sidebarStyle}>
-      <div style={headerStyle}>
-        Oblinor Simple
+    <>
+      {/* Mobile Header */}
+      <div className={styles.mobileHeader}>
+        <h1 className={styles.mobileTitle}>Oblinor</h1>
+        <button 
+          className={styles.hamburgerButton}
+          onClick={toggleSidebar}
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
       </div>
-      
-      {user && (
-        <div style={userInfoStyle}>
-          <div style={{ fontWeight: 'bold', marginBottom: '8px' }}>
-            {user.name}
-          </div>
-          <div style={{ fontSize: '12px', opacity: 0.8, marginBottom: '8px' }}>
-            {user.email}
-          </div>
-          <div style={levelBadgeStyle}>
-            {user.role} Level {user.level}
-          </div>
+
+      {/* Mobile Overlay */}
+      <div 
+        className={`${styles.overlay} ${isOpen ? styles.visible : ''}`}
+        onClick={closeSidebar}
+      />
+
+      {/* Sidebar */}
+      <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
+        <div className={styles.header}>
+          <span>Oblinor Simple</span>
+          <button 
+            className={styles.closeButton}
+            onClick={closeSidebar}
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
         </div>
-      )}
+        
+        {user && (
+          <div className={styles.userInfo}>
+            <div className={styles.userName}>
+              {user.name}
+            </div>
+            <div className={styles.userEmail}>
+              {user.email}
+            </div>
+            <div className={styles.levelBadge}>
+              {user.role} Level {user.level}
+            </div>
+          </div>
+        )}
 
-      <div style={{ flex: 1 }}>
-        {/* Navigation items would go here if needed */}
+        <div className={styles.navigation}>
+          {/* Navigation items would go here if needed */}
+        </div>
+
+        <button
+          className={styles.logoutButton}
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
       </div>
-
-      <button
-        style={logoutButtonStyle}
-        onClick={handleLogout}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.3)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.2)';
-        }}
-      >
-        Logout
-      </button>
-    </div>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import { Shareholder } from '../types';
 import { shareholdersAPI } from '../api';
 import BlurredContent from './BlurredContent';
 import { useAuth } from '../context/AuthContext';
+import styles from './ShareholderList.module.css';
 
 const ShareholderList: React.FC = () => {
   const [shareholders, setShareholders] = useState<Shareholder[]>([]);
@@ -10,65 +11,6 @@ const ShareholderList: React.FC = () => {
   const [error, setError] = useState('');
   const { user } = useAuth();
 
-  const containerStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
-    padding: '20px',
-    borderRadius: '12px',
-    color: '#fcfbfa',
-  };
-
-  const titleStyle: React.CSSProperties = {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '20px',
-    borderBottom: '2px solid rgba(252, 251, 250, 0.3)',
-    paddingBottom: '10px',
-  };
-
-  const tableStyle: React.CSSProperties = {
-    width: '100%',
-    borderCollapse: 'collapse',
-    marginTop: '15px',
-  };
-
-  const thStyle: React.CSSProperties = {
-    padding: '12px',
-    textAlign: 'left',
-    borderBottom: '1px solid rgba(252, 251, 250, 0.3)',
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
-    fontWeight: 'bold',
-  };
-
-  const tdStyle: React.CSSProperties = {
-    padding: '12px',
-    borderBottom: '1px solid rgba(252, 251, 250, 0.2)',
-  };
-
-  const loadingStyle: React.CSSProperties = {
-    textAlign: 'center',
-    padding: '40px',
-    fontSize: '18px',
-    opacity: 0.8,
-  };
-
-  const errorStyle: React.CSSProperties = {
-    color: '#ff6b6b',
-    textAlign: 'center',
-    padding: '20px',
-    backgroundColor: 'rgba(255, 107, 107, 0.1)',
-    borderRadius: '8px',
-    marginTop: '20px',
-  };
-
-  const totalSharesStyle: React.CSSProperties = {
-    marginTop: '20px',
-    padding: '15px',
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
-    borderRadius: '8px',
-    fontSize: '18px',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  };
 
   useEffect(() => {
     fetchShareholders();
@@ -100,59 +42,83 @@ const ShareholderList: React.FC = () => {
       userLevel={user.level}
       userRole={user.role}
     >
-      <div style={containerStyle}>
-        <h2 style={titleStyle}>
+      <div className={styles.container}>
+        <h2 className={styles.title}>
           Shareholders ({shareholders.length})
         </h2>
 
         {loading && (
-          <div style={loadingStyle}>
+          <div className={styles.loading}>
             Loading shareholders...
           </div>
         )}
 
         {error && (
-          <div style={errorStyle}>
+          <div className={styles.error}>
             {error}
           </div>
         )}
 
         {!loading && !error && shareholders.length > 0 && (
           <>
-            <table style={tableStyle}>
-              <thead>
-                <tr>
-                  <th style={thStyle}>Name</th>
-                  <th style={thStyle}>Email</th>
-                  <th style={thStyle}>Shares Owned</th>
-                  <th style={thStyle}>% Ownership</th>
-                </tr>
-              </thead>
-              <tbody>
-                {shareholders.map((shareholder) => (
-                  <tr key={shareholder.id}>
-                    <td style={tdStyle}>{shareholder.name}</td>
-                    <td style={tdStyle}>{shareholder.email}</td>
-                    <td style={tdStyle}>{formatNumber(shareholder.shares_owned)}</td>
-                    <td style={tdStyle}>
+            {/* Mobile Card Layout */}
+            <div className={styles.mobileCardContainer}>
+              {shareholders.map((shareholder) => (
+                <div key={shareholder.id} className={styles.mobileCard}>
+                  <div className={styles.mobileCardName}>{shareholder.name}</div>
+                  <div className={styles.mobileCardEmail}>{shareholder.email}</div>
+                  <div className={styles.mobileCardStats}>
+                    <span className={styles.mobileCardShares}>
+                      {formatNumber(shareholder.shares_owned)} shares
+                    </span>
+                    <span className={styles.mobileCardPercentage}>
                       {totalShares > 0 
                         ? ((shareholder.shares_owned / totalShares) * 100).toFixed(2)
                         : '0.00'
                       }%
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-            <div style={totalSharesStyle}>
+            {/* Desktop Table Layout */}
+            <div className={styles.tableContainer}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th className={styles.tableHeader}>Name</th>
+                    <th className={styles.tableHeader}>Email</th>
+                    <th className={styles.tableHeader}>Shares Owned</th>
+                    <th className={styles.tableHeader}>% Ownership</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {shareholders.map((shareholder) => (
+                    <tr key={shareholder.id}>
+                      <td className={styles.tableCell}>{shareholder.name}</td>
+                      <td className={styles.tableCell}>{shareholder.email}</td>
+                      <td className={styles.tableCell}>{formatNumber(shareholder.shares_owned)}</td>
+                      <td className={styles.tableCell}>
+                        {totalShares > 0 
+                          ? ((shareholder.shares_owned / totalShares) * 100).toFixed(2)
+                          : '0.00'
+                        }%
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className={styles.totalShares}>
               Total Shares Outstanding: {formatNumber(totalShares)}
             </div>
           </>
         )}
 
         {!loading && !error && shareholders.length === 0 && (
-          <div style={loadingStyle}>
+          <div className={styles.noData}>
             No shareholders found
           </div>
         )}
