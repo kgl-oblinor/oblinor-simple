@@ -5,7 +5,6 @@ import ShareholderList from '../components/ShareholderList';
 import EmissionList from '../components/EmissionList';
 import EmissionView from '../components/EmissionView';
 import BlurredContent from '../components/BlurredContent';
-import styles from './UserDashboard.module.css';
 
 type UserTab = 'overview' | 'shareholders' | 'emissions';
 
@@ -14,6 +13,45 @@ const UserDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<UserTab>('overview');
   const [viewingEmission, setViewingEmission] = useState<number | null>(null);
 
+  const headerStyle: React.CSSProperties = {
+    marginBottom: '30px',
+    padding: window.innerWidth <= 768 ? '15px' : '20px',
+    backgroundColor: '#123543',
+    color: '#fcfbfa',
+    borderRadius: '12px',
+  };
+
+  const titleStyle: React.CSSProperties = {
+    fontSize: window.innerWidth <= 768 ? '24px' : '32px',
+    fontWeight: 'bold',
+    margin: 0,
+    marginBottom: '10px',
+  };
+
+  const subtitleStyle: React.CSSProperties = {
+    fontSize: window.innerWidth <= 768 ? '16px' : '18px',
+    opacity: 0.8,
+    margin: 0,
+  };
+
+  const sectionStyle: React.CSSProperties = {
+    marginBottom: '30px',
+  };
+
+  const accessInfoStyle: React.CSSProperties = {
+    backgroundColor: '#123543',
+    color: '#fcfbfa',
+    padding: window.innerWidth <= 768 ? '15px' : '20px',
+    borderRadius: '12px',
+    marginBottom: '20px',
+  };
+
+  const accessItemStyle: React.CSSProperties = {
+    margin: '8px 0',
+    padding: '8px 0',
+    borderBottom: '1px solid rgba(252, 251, 250, 0.2)',
+    fontSize: window.innerWidth <= 768 ? '14px' : '16px',
+  };
 
   if (!user) {
     return <div>Loading...</div>;
@@ -32,6 +70,27 @@ const UserDashboard: React.FC = () => {
     }
   };
 
+  const tabStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
+    gap: '10px',
+    marginBottom: '20px',
+    borderBottom: '2px solid #123543',
+    paddingBottom: '10px',
+  };
+
+  const tabButtonStyle = (isActive: boolean): React.CSSProperties => ({
+    padding: window.innerWidth <= 768 ? '12px 16px' : '10px 20px',
+    fontSize: '16px',
+    fontWeight: isActive ? 'bold' : 'normal',
+    backgroundColor: isActive ? '#123543' : '#fcfbfa',
+    color: isActive ? '#fcfbfa' : '#123543',
+    border: `2px solid #123543`,
+    borderRadius: window.innerWidth <= 768 ? '8px' : '8px 8px 0 0',
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+    minHeight: '44px',
+  });
 
   const renderTabContent = () => {
     if (viewingEmission) {
@@ -47,28 +106,45 @@ const UserDashboard: React.FC = () => {
       case 'overview':
         return (
           <>
-            <div className={styles.accessInfo}>
-              <h3 className={styles.accessTitle}>
+            <div style={accessInfoStyle}>
+              <h3 style={{ 
+                margin: '0 0 15px 0', 
+                fontSize: window.innerWidth <= 768 ? '18px' : '20px', 
+                fontWeight: 'bold' 
+              }}>
                 Your Access Level: {user.level}
               </h3>
-              <div className={styles.accessItem}>
+              <div style={accessItemStyle}>
                 <strong>Current Access:</strong> {getAccessDescription()}
               </div>
-              <div className={styles.accessItem}>
+              <div style={accessItemStyle}>
                 <strong>Level 1:</strong> Everything blurred (no access)
               </div>
-              <div className={styles.accessItem}>
+              <div style={accessItemStyle}>
                 <strong>Level 2:</strong> Can see shareholders list
               </div>
-              <div className={styles.accessItem}>
+              <div style={{ ...accessItemStyle, borderBottom: 'none' }}>
                 <strong>Level 3:</strong> Full access + can subscribe to emissions
               </div>
             </div>
             
             {user.level === 1 && (
-              <div className={styles.limitedAccess}>
-                <h3 className={styles.limitedAccessTitle}>Limited Access</h3>
-                <p className={styles.limitedAccessText}>
+              <div style={{ 
+                marginTop: '30px', 
+                padding: window.innerWidth <= 768 ? '20px' : '30px',
+                backgroundColor: 'rgba(18, 53, 67, 0.05)', 
+                borderRadius: '12px',
+                textAlign: 'center'
+              }}>
+                <h3 style={{ 
+                  color: '#123543', 
+                  marginBottom: '10px',
+                  fontSize: window.innerWidth <= 768 ? '18px' : '20px'
+                }}>Limited Access</h3>
+                <p style={{ 
+                  color: '#123543',
+                  fontSize: window.innerWidth <= 768 ? '14px' : '16px'
+                }}>
                   Your account has Level 1 access. Content is restricted until an administrator upgrades your access level.
                 </p>
               </div>
@@ -107,35 +183,35 @@ const UserDashboard: React.FC = () => {
 
   return (
     <Layout>
-      <div className={styles.header}>
-        <h1 className={styles.title}>Welcome, {user.name}</h1>
-        <p className={styles.subtitle}>
+      <div style={headerStyle}>
+        <h1 style={titleStyle}>Welcome, {user.name}</h1>
+        <p style={subtitleStyle}>
           {user.role} - Level {user.level}
         </p>
       </div>
 
-      <div className={styles.tabContainer}>
+      <div style={tabStyle}>
         <button
-          className={`${styles.tabButton} ${activeTab === 'overview' ? styles.active : ''}`}
+          style={tabButtonStyle(activeTab === 'overview')}
           onClick={() => setActiveTab('overview')}
         >
           Overview
         </button>
         <button
-          className={`${styles.tabButton} ${activeTab === 'shareholders' ? styles.active : ''}`}
+          style={tabButtonStyle(activeTab === 'shareholders')}
           onClick={() => setActiveTab('shareholders')}
         >
           Shareholders
         </button>
         <button
-          className={`${styles.tabButton} ${activeTab === 'emissions' ? styles.active : ''}`}
+          style={tabButtonStyle(activeTab === 'emissions')}
           onClick={() => setActiveTab('emissions')}
         >
           Emissions
         </button>
       </div>
 
-      <div className={styles.section}>
+      <div style={sectionStyle}>
         {renderTabContent()}
       </div>
     </Layout>

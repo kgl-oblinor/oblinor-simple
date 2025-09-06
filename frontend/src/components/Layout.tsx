@@ -1,19 +1,28 @@
 import React from 'react';
 import Sidebar from './Sidebar';
-import styles from './Layout.module.css';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const contentStyle: React.CSSProperties = {
+    marginLeft: window.innerWidth <= 768 ? '0' : '250px',
+    marginTop: window.innerWidth <= 768 ? '60px' : '0',
+    padding: '20px',
+    backgroundColor: '#fcfbfa',
+    minHeight: '100vh',
+    color: '#123543',
+    transition: window.innerWidth <= 768 ? 'none' : 'margin-left 0.3s ease',
+  };
+
   return (
-    <div className={styles.layout}>
+    <>
       <Sidebar />
-      <div className={styles.content}>
+      <div style={contentStyle}>
         {children}
       </div>
-    </div>
+    </>
   );
 };
 
