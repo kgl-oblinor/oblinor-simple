@@ -1,3 +1,6 @@
+// Import User type first
+import { User } from '../../types/index';
+
 // Re-export shared types
 export * from '../../types/index';
 
@@ -17,6 +20,3 @@ export interface BlurredContentProps {
   userRole?: 'USER' | 'ADMIN';
   adminOnly?: boolean;
 }
-
-// Import User type
-import { User } from '../../types/index';
