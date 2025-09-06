@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Emission } from '../types';
 import api from '../api';
-import styles from './SubscriptionForm.module.css';
 
 interface SubscriptionFormProps {
   emission: Emission;
@@ -44,24 +43,147 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
     }
   };
 
+  const formStyle: React.CSSProperties = {
+    backgroundColor: '#fcfbfa',
+    padding: window.innerWidth <= 768 ? '20px' : '30px',
+    borderRadius: '12px',
+    maxWidth: '500px',
+    margin: '0 auto',
+  };
+
+  const titleStyle: React.CSSProperties = {
+    color: '#123543',
+    fontSize: window.innerWidth <= 768 ? '20px' : '24px',
+    fontWeight: 'bold',
+    marginBottom: '20px',
+  };
+
+  const emissionInfoStyle: React.CSSProperties = {
+    backgroundColor: '#123543',
+    color: '#fcfbfa',
+    padding: '15px',
+    borderRadius: '8px',
+    marginBottom: '20px',
+  };
+
+  const labelStyle: React.CSSProperties = {
+    display: 'block',
+    color: '#123543',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    marginBottom: '5px',
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    padding: window.innerWidth <= 768 ? '14px 12px' : '12px',
+    border: '2px solid #123543',
+    borderRadius: '6px',
+    fontSize: '18px',
+    marginBottom: '15px',
+    backgroundColor: '#fcfbfa',
+    minHeight: '44px',
+    boxSizing: 'border-box',
+  };
+
+  const summaryBoxStyle: React.CSSProperties = {
+    backgroundColor: 'rgba(18, 53, 67, 0.05)',
+    padding: window.innerWidth <= 768 ? '15px' : '20px',
+    borderRadius: '8px',
+    marginBottom: '20px',
+  };
+
+  const summaryRowStyle: React.CSSProperties = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '10px',
+    color: '#123543',
+    fontSize: window.innerWidth <= 768 ? '14px' : '16px',
+  };
+
+  const totalRowStyle: React.CSSProperties = {
+    ...summaryRowStyle,
+    fontWeight: 'bold',
+    fontSize: window.innerWidth <= 768 ? '16px' : '18px',
+    borderTop: '2px solid #123543',
+    paddingTop: '10px',
+  };
+
+  const buttonContainerStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
+    gap: '10px',
+    marginTop: '20px',
+  };
+
+  const buttonStyle: React.CSSProperties = {
+    flex: 1,
+    padding: window.innerWidth <= 768 ? '16px 12px' : '12px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    borderRadius: '6px',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'opacity 0.2s',
+    minHeight: '44px',
+  };
+
+  const subscribeButtonStyle: React.CSSProperties = {
+    ...buttonStyle,
+    backgroundColor: '#123543',
+    color: '#fcfbfa',
+  };
+
+  const cancelButtonStyle: React.CSSProperties = {
+    ...buttonStyle,
+    backgroundColor: '#fcfbfa',
+    color: '#123543',
+    border: '2px solid #123543',
+  };
+
+  const errorStyle: React.CSSProperties = {
+    color: '#fcfbfa',
+    backgroundColor: '#123543',
+    padding: '10px',
+    borderRadius: '6px',
+    marginBottom: '15px',
+    fontSize: window.innerWidth <= 768 ? '14px' : '16px',
+  };
+
+  const infoTextStyle: React.CSSProperties = {
+    color: '#123543',
+    fontSize: window.innerWidth <= 768 ? '12px' : '14px',
+    marginTop: '10px',
+    fontStyle: 'italic',
+    lineHeight: '1.4',
+  };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <h2 className={styles.title}>Subscribe to Emission</h2>
+    <form onSubmit={handleSubmit} style={formStyle}>
+      <h2 style={titleStyle}>Subscribe to Emission</h2>
 
-      <div className={styles.emissionInfo}>
-        <div className={styles.emissionTitle}>{emission.title}</div>
-        <div className={styles.emissionDetail}>Price per share: {emission.price_per_share} NOK</div>
-        <div className={styles.emissionDetail}>Available shares: {emission.new_shares_offered.toLocaleString()}</div>
+      <div style={emissionInfoStyle}>
+        <div style={{ 
+          fontSize: window.innerWidth <= 768 ? '16px' : '18px', 
+          marginBottom: '5px' 
+        }}>
+          {emission.title}
+        </div>
+        <div style={{ fontSize: window.innerWidth <= 768 ? '14px' : '16px' }}>
+          Price per share: {emission.price_per_share} NOK
+        </div>
+        <div style={{ fontSize: window.innerWidth <= 768 ? '14px' : '16px' }}>
+          Available shares: {emission.new_shares_offered.toLocaleString()}
+        </div>
       </div>
 
-      {error && <div className={styles.error}>{error}</div>}
+      {error && <div style={errorStyle}>{error}</div>}
 
-      <div className={styles.inputGroup}>
-        <label className={styles.label}>Number of Shares to Subscribe</label>
+      <div>
+        <label style={labelStyle}>Number of Shares to Subscribe</label>
         <input
           type="number"
-          className={styles.input}
+          style={inputStyle}
           value={sharesRequested || ''}
           onChange={(e) => setSharesRequested(parseInt(e.target.value) || 0)}
           min="1"
@@ -73,41 +195,67 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
       </div>
 
       {sharesRequested > 0 && (
-        <div className={styles.summaryBox}>
-          <h3 className={styles.summaryTitle}>Subscription Summary</h3>
-          <div className={styles.summaryRow}>
+        <div style={summaryBoxStyle}>
+          <h3 style={{ 
+            color: '#123543', 
+            marginBottom: '15px',
+            fontSize: window.innerWidth <= 768 ? '16px' : '18px'
+          }}>
+            Subscription Summary
+          </h3>
+          <div style={summaryRowStyle}>
             <span>Shares requested:</span>
             <span>{sharesRequested.toLocaleString()}</span>
           </div>
-          <div className={styles.summaryRow}>
+          <div style={summaryRowStyle}>
             <span>Price per share:</span>
             <span>{emission.price_per_share} NOK</span>
           </div>
-          <div className={styles.totalRow}>
+          <div style={totalRowStyle}>
             <span>Total cost:</span>
             <span>{totalCost.toLocaleString()} NOK</span>
           </div>
         </div>
       )}
 
-      <div className={styles.infoText}>
+      <div style={infoTextStyle}>
         * Your subscription will be reviewed by an administrator. You will be notified once your subscription is approved.
         Actual allocated shares may differ from requested amount based on total demand.
       </div>
 
-      <div className={styles.buttonContainer}>
+      <div style={buttonContainerStyle}>
         <button
           type="submit"
-          className={`${styles.button} ${styles.subscribeButton}`}
+          style={subscribeButtonStyle}
           disabled={loading || sharesRequested <= 0}
+          onMouseEnter={(e) => {
+            if (!loading && sharesRequested > 0) {
+              e.currentTarget.style.opacity = '0.9';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!loading && sharesRequested > 0) {
+              e.currentTarget.style.opacity = '1';
+            }
+          }}
         >
           {loading ? 'Submitting...' : 'Submit Subscription'}
         </button>
         <button
           type="button"
-          className={`${styles.button} ${styles.cancelButton}`}
+          style={cancelButtonStyle}
           onClick={onClose}
           disabled={loading}
+          onMouseEnter={(e) => {
+            if (!loading) {
+              e.currentTarget.style.backgroundColor = 'rgba(18, 53, 67, 0.05)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!loading) {
+              e.currentTarget.style.backgroundColor = '#fcfbfa';
+            }
+          }}
         >
           Cancel
         </button>
