@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { EmissionSubscription, User } from '../types';
-import api from '../api';
-import { THEME } from '../constants/theme';
+import { emissionsAPI } from '../api';
+import { THEME, isMobile } from '../constants/theme';
 
 interface SubscriptionListProps {
   emissionId: number;
@@ -24,12 +24,12 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
 
   const fetchSubscriptions = async () => {
     try {
-      const response = await api.get(`/emissions/${emissionId}/subscriptions`);
-      setSubscriptions(response.data);
+      const response = await emissionsAPI.getSubscriptions(emissionId);
+      setSubscriptions(response.subscriptions);
       
       // Initialize allocated shares
       const initialAllocated: { [key: number]: number } = {};
-      response.data.forEach((sub: SubscriptionWithUser) => {
+      response.subscriptions.forEach((sub: SubscriptionWithUser) => {
         initialAllocated[sub.id] = sub.shares_allocated || sub.shares_requested;
       });
       setAllocatedShares(initialAllocated);
@@ -42,7 +42,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
 
   const handleApprove = async (subscriptionId: number) => {
     try {
-      await api.patch(`/emissions/${emissionId}/subscriptions/${subscriptionId}`, {
+      await emissionsAPI.updateSubscription(emissionId, subscriptionId, {
         status: 'APPROVED',
         shares_allocated: allocatedShares[subscriptionId],
       });
@@ -59,7 +59,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
     }
 
     try {
-      await api.patch(`/emissions/${emissionId}/subscriptions/${subscriptionId}`, {
+      await emissionsAPI.updateSubscription(emissionId, subscriptionId, {
         status: 'REJECTED',
         shares_allocated: 0,
       });
@@ -175,7 +175,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
 
   // Mobile card styles
   const mobileCardContainerStyle: React.CSSProperties = {
-    display: window.innerWidth <= 768 ? 'block' : 'none',
+    display: isMobile() ? 'block' : 'none',
   };
 
   const mobileCardStyle: React.CSSProperties = {
@@ -263,7 +263,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
 
   // Desktop table styles
   const tableContainerStyle: React.CSSProperties = {
-    display: window.innerWidth <= 768 ? 'none' : 'block',
+    display: isMobile() ? 'none' : 'block',
     overflowX: 'auto',
   };
 
