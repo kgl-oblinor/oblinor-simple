@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { THEME } from '../constants/theme';
+import { THEME, getAdminTypography } from '../constants/theme';
 import Layout from '../components/Layout';
 import ShareholderList from '../components/ShareholderList';
 import ShareholderForm from '../components/ShareholderForm';
@@ -13,6 +13,7 @@ import { AdminTab } from '../types/navigation';
 
 const AdminDashboard: React.FC = () => {
   const { user } = useAuth();
+  const typography = getAdminTypography(); // User's exact requirement: no hooks!
   const [activeTab, setActiveTab] = useState<AdminTab>('users');
   const [showShareholderForm, setShowShareholderForm] = useState(false);
   const [editingShareholder, setEditingShareholder] = useState(null);
@@ -31,15 +32,13 @@ const AdminDashboard: React.FC = () => {
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: '32px',
-    fontWeight: 'bold',
+    ...typography.title,       // ✅ 24px mobile / 32px desktop
     margin: 0,
     marginBottom: '10px',
   };
 
   const subtitleStyle: React.CSSProperties = {
-    fontSize: '18px',
-    opacity: 0.8,
+    ...typography.subtitle,    // ✅ 16px mobile / 18px desktop
     margin: 0,
   };
 
