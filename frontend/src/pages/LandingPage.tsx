@@ -75,13 +75,12 @@ const LandingPage: React.FC = () => {
   };
 
   const highlightTitleStyle: React.CSSProperties = {
-    fontSize: isMobile ? '24px' : '32px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h1'),
     margin: '0 0 20px 0',
   };
 
   const highlightTextStyle: React.CSSProperties = {
-    fontSize: isMobile ? '16px' : '18px',
+    ...getResponsiveTypography('body'),
     margin: '5px 0',
     backgroundColor: ALPHA_COLORS.background.light,
     padding: '10px 20px',
@@ -96,14 +95,13 @@ const LandingPage: React.FC = () => {
   };
 
   const sectionTitleStyle: React.CSSProperties = {
-    fontSize: isMobile ? '28px' : '36px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h1'),
     margin: '0 0 15px 0',
     color: THEME.colors.primary,
   };
 
   const sectionSubtitleStyle: React.CSSProperties = {
-    fontSize: isMobile ? '16px' : '18px',
+    ...getResponsiveTypography('body'),
     margin: '0 0 50px 0',
     color: THEME.colors.primary,
     opacity: 0.8,
@@ -127,14 +125,12 @@ const LandingPage: React.FC = () => {
   };
 
   const cardTitleStyle: React.CSSProperties = {
-    fontSize: isMobile ? '18px' : '20px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h3'),
     margin: '0 0 15px 0',
   };
 
   const cardTextStyle: React.CSSProperties = {
-    fontSize: isMobile ? '14px' : '16px',
-    lineHeight: '1.6',
+    ...getResponsiveTypography('caption'),
     margin: 0,
     opacity: 0.9,
   };
@@ -147,13 +143,12 @@ const LandingPage: React.FC = () => {
   };
 
   const callToActionTitleStyle: React.CSSProperties = {
-    fontSize: isMobile ? '28px' : '36px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h1'),
     margin: '0 0 20px 0',
   };
 
   const callToActionTextStyle: React.CSSProperties = {
-    fontSize: isMobile ? '16px' : '18px',
+    ...getResponsiveTypography('body'),
     margin: '0 0 40px 0',
     opacity: 0.9,
   };
@@ -167,19 +162,18 @@ const LandingPage: React.FC = () => {
   };
 
   const footerTitleStyle: React.CSSProperties = {
-    fontSize: isMobile ? '20px' : '24px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h2'),
     margin: '0 0 15px 0',
   };
 
   const footerTextStyle: React.CSSProperties = {
-    fontSize: isMobile ? '14px' : '16px',
+    ...getResponsiveTypography('caption'),
     margin: '0 0 10px 0',
     opacity: 0.8,
   };
 
   const footerSmallTextStyle: React.CSSProperties = {
-    fontSize: isMobile ? '12px' : '14px',
+    ...getResponsiveTypography('small'),
     margin: '0 0 10px 0',
     opacity: 0.6,
   };

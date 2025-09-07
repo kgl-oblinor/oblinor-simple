@@ -71,7 +71,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
   const labelStyle: React.CSSProperties = {
     display: 'block',
     color: THEME.colors.primary,
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
     fontWeight: 'bold',
     marginBottom: '5px',
   };
@@ -81,7 +81,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
     padding: isMobile ? '14px 12px' : '12px',
     border: `2px solid ${THEME.colors.primary}`,
     borderRadius: '6px',
-    fontSize: '18px',
+    ...getResponsiveTypography('body'),
     marginBottom: '15px',
     backgroundColor: THEME.colors.background,
     minHeight: '44px',
@@ -121,7 +121,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
   const buttonStyle: React.CSSProperties = {
     flex: 1,
     padding: isMobile ? '16px 12px' : '12px',
-    fontSize: '16px',
+    ...getResponsiveTypography('body'),
     fontWeight: 'bold',
     borderRadius: '6px',
     border: 'none',
@@ -171,10 +171,10 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
         }}>
           {emission.title}
         </div>
-        <div style={{ fontSize: isMobile ? '14px' : '16px' }}>
+        <div style={{ ...getResponsiveTypography('caption') }}>
           Price per share: {emission.price_per_share} NOK
         </div>
-        <div style={{ fontSize: isMobile ? '14px' : '16px' }}>
+        <div style={{ ...getResponsiveTypography('caption') }}>
           Available shares: {emission.new_shares_offered.toLocaleString()}
         </div>
       </div>
@@ -201,7 +201,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
           <h3 style={{ 
             color: THEME.colors.primary, 
             marginBottom: '15px',
-            fontSize: isMobile ? '16px' : '18px'
+            ...getResponsiveTypography('h3')
           }}>
             Subscription Summary
           </h3>
