@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from './Sidebar';
-import { THEME, isMobile } from '../constants/theme';
+import { THEME, getResponsive } from '../constants/theme';
 import { NavigationTab, NavigationTabChangeHandler } from '../types/navigation';
 
 interface LayoutProps {
@@ -10,14 +10,16 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange }) => {
+  const { isMobile } = getResponsive();
+  
   const contentStyle: React.CSSProperties = {
-    marginLeft: isMobile() ? '0' : THEME.spacing.sidebarWidth,
-    marginTop: isMobile() ? '60px' : '0',
+    marginLeft: isMobile ? '0' : THEME.spacing.sidebarWidth,
+    marginTop: isMobile ? '60px' : '0',
     padding: '20px',
     backgroundColor: THEME.colors.background,
     minHeight: '100vh',
     color: THEME.colors.primary,
-    transition: isMobile() ? 'none' : THEME.transitions.sidebar,
+    transition: isMobile ? 'none' : THEME.transitions.sidebar,
   };
 
   return (

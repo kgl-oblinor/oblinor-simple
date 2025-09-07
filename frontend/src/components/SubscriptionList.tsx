@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { EmissionSubscription, User } from '../types';
 import { emissionsAPI } from '../api';
-import { THEME, isMobile, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
+import { THEME, getResponsive, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 
 interface SubscriptionListProps {
   emissionId: number;
@@ -12,6 +12,7 @@ interface SubscriptionWithUser extends EmissionSubscription {
 }
 
 const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
+  const { isMobile } = getResponsive();
   const [subscriptions, setSubscriptions] = useState<SubscriptionWithUser[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -174,7 +175,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
 
   // Mobile card styles
   const mobileCardContainerStyle: React.CSSProperties = {
-    display: isMobile() ? 'block' : 'none',
+    display: isMobile ? 'block' : 'none',
   };
 
   const mobileCardStyle: React.CSSProperties = {
@@ -262,7 +263,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
 
   // Desktop table styles
   const tableContainerStyle: React.CSSProperties = {
-    display: isMobile() ? 'none' : 'block',
+    display: isMobile ? 'none' : 'block',
     overflowX: 'auto',
   };
 

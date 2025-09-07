@@ -1,9 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { THEME, isMobile, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
+import { THEME, getResponsive, ALPHA_COLORS, getResponsiveTypography, getResponsiveSpacing } from '../constants/theme';
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
+  const { isMobile } = getResponsive();
 
   const pageStyle: React.CSSProperties = {
     minHeight: '100vh',
@@ -15,7 +16,7 @@ const LandingPage: React.FC = () => {
   const headerStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
-    padding: isMobile() ? '15px 20px' : '20px 40px',
+    padding: getResponsiveSpacing('15px 20px', '20px 40px'),
     boxShadow: `0 2px 4px ${ALPHA_COLORS.primary.subtle}`,
   };
 
@@ -26,19 +27,19 @@ const LandingPage: React.FC = () => {
 
   const heroStyle: React.CSSProperties = {
     textAlign: 'center',
-    padding: isMobile() ? '60px 20px' : '80px 40px',
+    padding: getResponsiveSpacing('60px 20px', '80px 40px'),
     backgroundColor: THEME.colors.background,
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '32px' : '48px', // Special large hero size
+    fontSize: isMobile ? '32px' : '48px', // Special large hero size
     fontWeight: 'bold',
     margin: '0 0 20px 0',
     color: THEME.colors.primary,
   };
 
   const subtitleStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '18px' : '24px', // Special large subtitle
+    fontSize: isMobile ? '18px' : '24px', // Special large subtitle
     margin: '0 0 40px 0',
     color: THEME.colors.primary,
     opacity: 0.8,
@@ -48,7 +49,7 @@ const LandingPage: React.FC = () => {
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
     border: 'none',
-    padding: isMobile() ? '16px 32px' : '20px 40px',
+    padding: getResponsiveSpacing('16px 32px', '20px 40px'),
     ...getResponsiveTypography('body'),
     fontWeight: 'bold',
     borderRadius: '8px',
@@ -60,7 +61,7 @@ const LandingPage: React.FC = () => {
   const emissionHighlightStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
-    padding: isMobile() ? '40px 20px' : '60px 40px',
+    padding: getResponsiveSpacing('40px 20px', '60px 40px'),
     textAlign: 'center',
   };
 
@@ -74,13 +75,13 @@ const LandingPage: React.FC = () => {
   };
 
   const highlightTitleStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '24px' : '32px',
+    fontSize: isMobile ? '24px' : '32px',
     fontWeight: 'bold',
     margin: '0 0 20px 0',
   };
 
   const highlightTextStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '16px' : '18px',
+    fontSize: isMobile ? '16px' : '18px',
     margin: '5px 0',
     backgroundColor: ALPHA_COLORS.background.light,
     padding: '10px 20px',
@@ -90,19 +91,19 @@ const LandingPage: React.FC = () => {
   };
 
   const sectionStyle: React.CSSProperties = {
-    padding: isMobile() ? '60px 20px' : '80px 40px',
+    padding: getResponsiveSpacing('60px 20px', '80px 40px'),
     textAlign: 'center',
   };
 
   const sectionTitleStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '28px' : '36px',
+    fontSize: isMobile ? '28px' : '36px',
     fontWeight: 'bold',
     margin: '0 0 15px 0',
     color: THEME.colors.primary,
   };
 
   const sectionSubtitleStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '16px' : '18px',
+    fontSize: isMobile ? '16px' : '18px',
     margin: '0 0 50px 0',
     color: THEME.colors.primary,
     opacity: 0.8,
@@ -110,7 +111,7 @@ const LandingPage: React.FC = () => {
 
   const cardContainerStyle: React.CSSProperties = {
     display: 'grid',
-    gridTemplateColumns: isMobile() ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+    gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
     gap: '30px',
     maxWidth: '1200px',
     margin: '0 auto',
@@ -126,13 +127,13 @@ const LandingPage: React.FC = () => {
   };
 
   const cardTitleStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '18px' : '20px',
+    fontSize: isMobile ? '18px' : '20px',
     fontWeight: 'bold',
     margin: '0 0 15px 0',
   };
 
   const cardTextStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '14px' : '16px',
+    fontSize: isMobile ? '14px' : '16px',
     lineHeight: '1.6',
     margin: 0,
     opacity: 0.9,
@@ -141,18 +142,18 @@ const LandingPage: React.FC = () => {
   const callToActionStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
-    padding: isMobile() ? '60px 20px' : '80px 40px',
+    padding: getResponsiveSpacing('60px 20px', '80px 40px'),
     textAlign: 'center',
   };
 
   const callToActionTitleStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '28px' : '36px',
+    fontSize: isMobile ? '28px' : '36px',
     fontWeight: 'bold',
     margin: '0 0 20px 0',
   };
 
   const callToActionTextStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '16px' : '18px',
+    fontSize: isMobile ? '16px' : '18px',
     margin: '0 0 40px 0',
     opacity: 0.9,
   };
@@ -160,25 +161,25 @@ const LandingPage: React.FC = () => {
   const footerStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.background,
     color: THEME.colors.primary,
-    padding: isMobile() ? '40px 20px' : '60px 40px',
+    padding: getResponsiveSpacing('40px 20px', '60px 40px'),
     textAlign: 'center',
     borderTop: `2px solid ${THEME.colors.primary}`,
   };
 
   const footerTitleStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '20px' : '24px',
+    fontSize: isMobile ? '20px' : '24px',
     fontWeight: 'bold',
     margin: '0 0 15px 0',
   };
 
   const footerTextStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '14px' : '16px',
+    fontSize: isMobile ? '14px' : '16px',
     margin: '0 0 10px 0',
     opacity: 0.8,
   };
 
   const footerSmallTextStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '12px' : '14px',
+    fontSize: isMobile ? '12px' : '14px',
     margin: '0 0 10px 0',
     opacity: 0.6,
   };
