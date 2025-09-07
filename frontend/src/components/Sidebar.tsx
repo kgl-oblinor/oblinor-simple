@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { THEME, getResponsive, ALPHA_COLORS } from '../constants/theme';
+import { THEME, getResponsive, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 import { NavigationTab, NavigationTabChangeHandler, UserTab, AdminTab } from '../types/navigation';
 
 interface SidebarProps {
@@ -46,7 +46,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     background: 'none',
     border: 'none',
     color: THEME.colors.background,
-    fontSize: '24px',
+    ...getResponsiveTypography('h2'),
     cursor: 'pointer',
     padding: '8px',
     borderRadius: '4px',
@@ -85,8 +85,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   };
 
   const headerStyle: React.CSSProperties = {
-    fontSize: '24px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h2'),
     marginBottom: '30px',
     borderBottom: `2px solid ${ALPHA_COLORS.background.strong}`,
     paddingBottom: '15px',
@@ -100,7 +99,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     background: 'none',
     border: 'none',
     color: THEME.colors.background,
-    fontSize: '24px',
+    ...getResponsiveTypography('h2'),
     cursor: 'pointer',
     padding: '4px',
   };
@@ -110,7 +109,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     padding: '15px',
     backgroundColor: ALPHA_COLORS.background.light,
     borderRadius: '8px',
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
   };
 
   const levelBadgeStyle: React.CSSProperties = {
@@ -119,7 +118,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     color: THEME.colors.primary,
     padding: '4px 8px',
     borderRadius: '12px',
-    fontSize: '12px',
+    ...getResponsiveTypography('small'),
     fontWeight: 'bold',
     marginTop: '8px',
   };
@@ -133,7 +132,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
 
   const navButtonStyle = (isActive: boolean): React.CSSProperties => ({
     padding: '12px 16px',
-    fontSize: '16px',
+    ...getResponsiveTypography('body'),
     fontWeight: isActive ? 'bold' : 'normal',
     backgroundColor: isActive ? ALPHA_COLORS.background.medium : 'transparent',
     color: THEME.colors.background,
@@ -154,7 +153,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     borderRadius: '8px',
     color: THEME.colors.background,
     cursor: 'pointer',
-    fontSize: '16px',
+    ...getResponsiveTypography('body'),
     fontWeight: 'bold',
     transition: 'all 0.3s ease',
   };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS } from '../constants/theme';
+import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 import Layout from '../components/Layout';
 import ShareholderList from '../components/ShareholderList';
 import EmissionList from '../components/EmissionList';
@@ -23,14 +23,13 @@ const UserDashboard: React.FC = () => {
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: isMobile ? '24px' : '32px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h1'),
     margin: 0,
     marginBottom: '10px',
   };
 
   const subtitleStyle: React.CSSProperties = {
-    fontSize: isMobile ? '16px' : '18px',
+    ...getResponsiveTypography('body'),
     opacity: 0.8,
     margin: 0,
   };

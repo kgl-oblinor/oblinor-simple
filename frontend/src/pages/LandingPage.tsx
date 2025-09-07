@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { THEME, isMobile, ALPHA_COLORS } from '../constants/theme';
+import { THEME, isMobile, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -20,8 +20,7 @@ const LandingPage: React.FC = () => {
   };
 
   const headerTitleStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '20px' : '24px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h2'),
     margin: 0,
   };
 
@@ -32,14 +31,14 @@ const LandingPage: React.FC = () => {
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '32px' : '48px',
+    fontSize: isMobile() ? '32px' : '48px', // Special large hero size
     fontWeight: 'bold',
     margin: '0 0 20px 0',
     color: THEME.colors.primary,
   };
 
   const subtitleStyle: React.CSSProperties = {
-    fontSize: isMobile() ? '18px' : '24px',
+    fontSize: isMobile() ? '18px' : '24px', // Special large subtitle
     margin: '0 0 40px 0',
     color: THEME.colors.primary,
     opacity: 0.8,
@@ -50,7 +49,7 @@ const LandingPage: React.FC = () => {
     color: THEME.colors.background,
     border: 'none',
     padding: isMobile() ? '16px 32px' : '20px 40px',
-    fontSize: isMobile() ? '16px' : '18px',
+    ...getResponsiveTypography('body'),
     fontWeight: 'bold',
     borderRadius: '8px',
     cursor: 'pointer',

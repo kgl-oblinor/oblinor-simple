@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Emission } from '../types';
 import { useAuth } from '../context/AuthContext';
-import { THEME, ALPHA_COLORS } from '../constants/theme';
+import { THEME, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 import api from '../api';
 import BlurredContent from './BlurredContent';
 import SubscriptionForm from './SubscriptionForm';
@@ -63,8 +63,7 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
 
   const titleStyle: React.CSSProperties = {
     color: THEME.colors.primary,
-    fontSize: '28px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h1'),
     marginBottom: '10px',
   };
 
@@ -72,7 +71,7 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
     display: 'inline-block',
     padding: '5px 15px',
     borderRadius: '20px',
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
     fontWeight: 'bold',
     backgroundColor: status === 'ACTIVE' ? THEME.colors.primary : ALPHA_COLORS.primary.strong,
     color: status === 'ACTIVE' ? THEME.colors.background : THEME.colors.primary,
@@ -93,20 +92,18 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
   };
 
   const labelStyle: React.CSSProperties = {
-    fontSize: '12px',
+    ...getResponsiveTypography('small'),
     opacity: 0.8,
     marginBottom: '5px',
   };
 
   const valueStyle: React.CSSProperties = {
-    fontSize: '20px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h3'),
   };
 
   const descriptionStyle: React.CSSProperties = {
     color: THEME.colors.primary,
-    fontSize: '16px',
-    lineHeight: '1.6',
+    ...getResponsiveTypography('body'),
     marginBottom: '20px',
   };
 
@@ -119,14 +116,13 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
 
   const presentationTitleStyle: React.CSSProperties = {
     color: THEME.colors.primary,
-    fontSize: '18px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h3'),
     marginBottom: '10px',
   };
 
   const buttonStyle: React.CSSProperties = {
     padding: '12px 24px',
-    fontSize: '16px',
+    ...getResponsiveTypography('body'),
     fontWeight: 'bold',
     borderRadius: '6px',
     border: 'none',

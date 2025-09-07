@@ -3,7 +3,7 @@ import { Emission } from '../types';
 import { emissionsAPI } from '../api';
 import BlurredContent from './BlurredContent';
 import { useAuth } from '../context/AuthContext';
-import { THEME, ALPHA_COLORS } from '../constants/theme';
+import { THEME, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 
 interface EmissionListProps {
   onSelectEmission?: (emission: Emission) => void;
@@ -25,7 +25,7 @@ const EmissionList: React.FC<EmissionListProps> = ({ onSelectEmission, onViewEmi
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: '24px',
+    ...getResponsiveTypography('h2'),
     fontWeight: 'bold',
     marginBottom: '20px',
     borderBottom: `2px solid ${ALPHA_COLORS.background.strong}`,
@@ -46,7 +46,7 @@ const EmissionList: React.FC<EmissionListProps> = ({ onSelectEmission, onViewEmi
     display: 'inline-block',
     padding: '4px 12px',
     borderRadius: '12px',
-    fontSize: '12px',
+    ...getResponsiveTypography('small'),
     fontWeight: 'bold',
     backgroundColor: 
       status === 'ACTIVE' ? THEME.colors.success :
@@ -58,7 +58,7 @@ const EmissionList: React.FC<EmissionListProps> = ({ onSelectEmission, onViewEmi
   const loadingStyle: React.CSSProperties = {
     textAlign: 'center',
     padding: '40px',
-    fontSize: '18px',
+    ...getResponsiveTypography('body'),
     opacity: 0.8,
   };
 
@@ -195,7 +195,7 @@ const EmissionList: React.FC<EmissionListProps> = ({ onSelectEmission, onViewEmi
                       color: THEME.colors.primary,
                       border: 'none',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      ...getResponsiveTypography('caption'),
                       fontWeight: 'bold',
                       cursor: 'pointer',
                       width: '100%',

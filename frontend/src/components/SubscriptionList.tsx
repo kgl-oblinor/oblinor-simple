@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { EmissionSubscription, User } from '../types';
 import { emissionsAPI } from '../api';
-import { THEME, isMobile, ALPHA_COLORS } from '../constants/theme';
+import { THEME, isMobile, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 
 interface SubscriptionListProps {
   emissionId: number;
@@ -77,8 +77,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
 
   const titleStyle: React.CSSProperties = {
     color: THEME.colors.primary,
-    fontSize: '24px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h2'),
     marginBottom: '20px',
   };
 
@@ -106,7 +105,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
     display: 'inline-block',
     padding: '4px 12px',
     borderRadius: '12px',
-    fontSize: '12px',
+    ...getResponsiveTypography('small'),
     fontWeight: 'bold',
     backgroundColor: 
       status === 'APPROVED' ? THEME.colors.primary : 
@@ -119,7 +118,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
 
   const buttonStyle: React.CSSProperties = {
     padding: '6px 12px',
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
     fontWeight: 'bold',
     borderRadius: '4px',
     border: 'none',
@@ -163,13 +162,13 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
   };
 
   const summaryLabelStyle: React.CSSProperties = {
-    fontSize: '12px',
+    ...getResponsiveTypography('small'),
     opacity: 0.8,
     marginBottom: '5px',
   };
 
   const summaryValueStyle: React.CSSProperties = {
-    fontSize: '24px',
+    ...getResponsiveTypography('h2'),
     fontWeight: 'bold',
   };
 
@@ -198,14 +197,14 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
   };
 
   const mobileCardInvestorNameStyle: React.CSSProperties = {
-    fontSize: '18px',
+    ...getResponsiveTypography('body'),
     fontWeight: 'bold',
     marginBottom: '4px',
     color: THEME.colors.primary,
   };
 
   const mobileCardInvestorEmailStyle: React.CSSProperties = {
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
     opacity: 0.7,
     color: THEME.colors.primary,
   };
@@ -225,14 +224,14 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
   };
 
   const mobileCardStatLabelStyle: React.CSSProperties = {
-    fontSize: '12px',
+    ...getResponsiveTypography('small'),
     opacity: 0.7,
     marginBottom: '4px',
     color: THEME.colors.primary,
   };
 
   const mobileCardStatValueStyle: React.CSSProperties = {
-    fontSize: '16px',
+    ...getResponsiveTypography('body'),
     fontWeight: 'bold',
     color: THEME.colors.primary,
   };
@@ -248,12 +247,12 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
     padding: '8px',
     border: `1px solid ${THEME.colors.primary}`,
     borderRadius: '4px',
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
   };
 
   const mobileButtonStyle: React.CSSProperties = {
     padding: '8px 12px',
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
     fontWeight: 'bold',
     borderRadius: '4px',
     border: 'none',

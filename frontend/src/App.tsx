@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { THEME } from './constants/theme';
+import { THEME, getResponsiveTypography } from './constants/theme';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import UserDashboard from './pages/UserDashboard';
@@ -19,7 +19,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
       minHeight: '100vh',
       backgroundColor: THEME.colors.background,
       color: THEME.colors.primary,
-      fontSize: '18px',
+      ...getResponsiveTypography('body'),
     };
 
     return (

@@ -3,7 +3,7 @@ import { User } from '../types';
 import { usersAPI } from '../api';
 import BlurredContent from './BlurredContent';
 import { useAuth } from '../context/AuthContext';
-import { THEME, getResponsive, ALPHA_COLORS } from '../constants/theme';
+import { THEME, getResponsive, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 
 const UserManagement: React.FC = () => {
   const { isMobile } = getResponsive(); // Agent 4's responsive system
@@ -21,8 +21,7 @@ const UserManagement: React.FC = () => {
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: '24px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h2'),
     marginBottom: '20px',
     borderBottom: `2px solid ${ALPHA_COLORS.background.strong}`,
     paddingBottom: '10px',
@@ -59,7 +58,7 @@ const UserManagement: React.FC = () => {
     border: `1px solid ${ALPHA_COLORS.background.strong}`,
     borderRadius: '4px',
     color: THEME.colors.background,
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
   };
 
   const buttonStyle: React.CSSProperties = {
@@ -68,7 +67,7 @@ const UserManagement: React.FC = () => {
     color: THEME.colors.primary,
     border: 'none',
     borderRadius: '4px',
-    fontSize: '12px',
+    ...getResponsiveTypography('small'),
     fontWeight: 'bold',
     cursor: 'pointer',
     marginLeft: '8px',
@@ -77,7 +76,7 @@ const UserManagement: React.FC = () => {
   const loadingStyle: React.CSSProperties = {
     textAlign: 'center',
     padding: '40px',
-    fontSize: '18px',
+    ...getResponsiveTypography('body'),
     opacity: 0.8,
   };
 
@@ -110,14 +109,13 @@ const UserManagement: React.FC = () => {
   };
 
   const mobileCardNameStyle: React.CSSProperties = {
-    fontSize: '18px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h3'),
     marginBottom: '4px',
     color: THEME.colors.background,
   };
 
   const mobileCardEmailStyle: React.CSSProperties = {
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
     opacity: 0.8,
     color: THEME.colors.background,
   };
@@ -143,7 +141,7 @@ const UserManagement: React.FC = () => {
     border: `1px solid ${ALPHA_COLORS.background.strong}`,
     borderRadius: '6px',
     color: THEME.colors.background,
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
     minHeight: '40px',
   };
 
@@ -153,7 +151,7 @@ const UserManagement: React.FC = () => {
     color: THEME.colors.primary,
     border: 'none',
     borderRadius: '6px',
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
     fontWeight: 'bold',
     cursor: 'pointer',
     minHeight: '40px',

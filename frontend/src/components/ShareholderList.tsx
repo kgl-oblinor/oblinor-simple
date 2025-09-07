@@ -3,7 +3,7 @@ import { Shareholder } from '../types';
 import { shareholdersAPI } from '../api';
 import BlurredContent from './BlurredContent';
 import { useAuth } from '../context/AuthContext';
-import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS } from '../constants/theme';
+import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 
 const ShareholderList: React.FC = () => {
   const { isMobile } = getResponsive(); // Agent 4's responsive system
@@ -20,8 +20,7 @@ const ShareholderList: React.FC = () => {
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: isMobile ? '20px' : '24px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h2'),
     marginBottom: '20px',
     borderBottom: `2px solid ${ALPHA_COLORS.background.strong}`,
     paddingBottom: '10px',
@@ -30,7 +29,7 @@ const ShareholderList: React.FC = () => {
   const loadingStyle: React.CSSProperties = {
     textAlign: 'center',
     padding: '40px',
-    fontSize: '18px',
+    ...getResponsiveTypography('body'),
     opacity: 0.8,
   };
 
@@ -72,7 +71,7 @@ const ShareholderList: React.FC = () => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '18px',
+    ...getResponsiveTypography('body'),
     fontWeight: 'bold',
     flexShrink: 0,
   };
@@ -82,14 +81,13 @@ const ShareholderList: React.FC = () => {
   };
 
   const mobileCardNameStyle: React.CSSProperties = {
-    fontSize: '20px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h3'),
     marginBottom: '2px',
     color: THEME.colors.background,
   };
 
   const mobileCardEmailStyle: React.CSSProperties = {
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
     opacity: 0.8,
     marginBottom: '12px',
     color: THEME.colors.background,
@@ -110,13 +108,13 @@ const ShareholderList: React.FC = () => {
   };
 
   const mobileCardStatsLabelStyle: React.CSSProperties = {
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
     opacity: 0.8,
     color: THEME.colors.background,
   };
 
   const mobileCardStatsValueStyle: React.CSSProperties = {
-    fontSize: '16px',
+    ...getResponsiveTypography('body'),
     fontWeight: 'bold',
     color: THEME.colors.background,
   };
@@ -143,7 +141,7 @@ const ShareholderList: React.FC = () => {
   });
 
   const mobileCardPercentageStyle: React.CSSProperties = {
-    fontSize: '18px',
+    ...getResponsiveTypography('body'),
     fontWeight: 'bold',
     backgroundColor: THEME.colors.background,
     color: THEME.colors.primary,
@@ -184,7 +182,7 @@ const ShareholderList: React.FC = () => {
     padding: '15px',
     backgroundColor: ALPHA_COLORS.background.light,
     borderRadius: '8px',
-    fontSize: isMobile ? '16px' : '18px',
+    ...getResponsiveTypography('body'),
     fontWeight: 'bold',
     textAlign: 'center',
   };

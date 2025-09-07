@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Emission, APIError } from '../types';
 import api from '../api';
-import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS } from '../constants/theme';
+import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 
 interface SubscriptionFormProps {
   emission: Emission;
@@ -56,8 +56,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
 
   const titleStyle: React.CSSProperties = {
     color: THEME.colors.primary,
-    fontSize: isMobile ? '20px' : '24px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h2'),
     marginBottom: '20px',
   };
 
@@ -101,13 +100,13 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
     justifyContent: 'space-between',
     marginBottom: '10px',
     color: THEME.colors.primary,
-    fontSize: isMobile ? '14px' : '16px',
+    ...getResponsiveTypography('caption'),
   };
 
   const totalRowStyle: React.CSSProperties = {
     ...summaryRowStyle,
     fontWeight: 'bold',
-    fontSize: isMobile ? '16px' : '18px',
+    ...getResponsiveTypography('body'),
     borderTop: `2px solid ${THEME.colors.primary}`,
     paddingTop: '10px',
   };
@@ -150,12 +149,12 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
     padding: '10px',
     borderRadius: '6px',
     marginBottom: '15px',
-    fontSize: isMobile ? '14px' : '16px',
+    ...getResponsiveTypography('caption'),
   };
 
   const infoTextStyle: React.CSSProperties = {
     color: THEME.colors.primary,
-    fontSize: isMobile ? '12px' : '14px',
+    ...getResponsiveTypography('small'),
     marginTop: '10px',
     fontStyle: 'italic',
     lineHeight: '1.4',
@@ -167,7 +166,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
 
       <div style={emissionInfoStyle}>
         <div style={{ 
-          fontSize: isMobile ? '16px' : '18px', 
+          ...getResponsiveTypography('body'), 
           marginBottom: '5px' 
         }}>
           {emission.title}

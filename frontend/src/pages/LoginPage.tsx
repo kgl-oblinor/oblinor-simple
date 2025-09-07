@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS } from '../constants/theme';
+import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 import { APIError } from '../types';
 
 const LoginPage: React.FC = () => {
@@ -32,8 +32,7 @@ const LoginPage: React.FC = () => {
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: isMobile ? '24px' : '28px',
-    fontWeight: 'bold',
+    ...getResponsiveTypography('h1'),
     marginBottom: '30px',
     textAlign: 'center',
   };
@@ -51,7 +50,7 @@ const LoginPage: React.FC = () => {
 
   const labelStyle: React.CSSProperties = {
     marginBottom: '8px',
-    fontSize: '14px',
+    ...getResponsiveTypography('caption'),
     fontWeight: 'bold',
   };
 
@@ -61,7 +60,7 @@ const LoginPage: React.FC = () => {
     border: `1px solid ${ALPHA_COLORS.background.strong}`,
     backgroundColor: ALPHA_COLORS.background.light,
     color: THEME.colors.background,
-    fontSize: '16px',
+    ...getResponsiveTypography('body'),
     minHeight: '44px',
     boxSizing: 'border-box',
   };
@@ -72,7 +71,7 @@ const LoginPage: React.FC = () => {
     color: THEME.colors.primary,
     border: 'none',
     borderRadius: '8px',
-    fontSize: '16px',
+    ...getResponsiveTypography('body'),
     fontWeight: 'bold',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
@@ -94,7 +93,7 @@ const LoginPage: React.FC = () => {
     padding: getResponsiveSpacing('15px', '20px'),
     backgroundColor: ALPHA_COLORS.background.light,
     borderRadius: '8px',
-    fontSize: isMobile ? '13px' : '14px',
+    ...getResponsiveTypography('small'),
   };
 
   const accountStyle: React.CSSProperties = {
