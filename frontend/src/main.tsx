@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { THEME } from './constants/theme';
 import App from './App';
 
 // Global styles
@@ -16,8 +17,8 @@ const globalStyles = `
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #fcfbfa;
-    color: #123543;
+    background-color: ${THEME.colors.background};
+    color: ${THEME.colors.primary};
   }
 
   #root {
@@ -36,7 +37,7 @@ const globalStyles = `
   input[type="email"], input[type="password"], input[type="text"], input[type="number"], select, textarea {
     background-color: rgba(252, 251, 250, 0.1);
     border: 1px solid rgba(252, 251, 250, 0.3);
-    color: #fcfbfa;
+    color: ${THEME.colors.background};
   }
 
   input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
@@ -51,11 +52,11 @@ const globalStyles = `
   }
 
   ::-webkit-scrollbar-track {
-    background: #fcfbfa;
+    background: ${THEME.colors.background};
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #123543;
+    background: ${THEME.colors.primary};
     border-radius: 4px;
   }
 

@@ -1,19 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { THEME } from '../constants/theme';
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
 
   const pageStyle: React.CSSProperties = {
     minHeight: '100vh',
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
+    backgroundColor: THEME.colors.background,
+    color: THEME.colors.primary,
     fontFamily: 'system-ui, -apple-system, sans-serif',
   };
 
   const headerStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     padding: window.innerWidth <= 768 ? '15px 20px' : '20px 40px',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
   };
@@ -27,26 +28,26 @@ const LandingPage: React.FC = () => {
   const heroStyle: React.CSSProperties = {
     textAlign: 'center',
     padding: window.innerWidth <= 768 ? '60px 20px' : '80px 40px',
-    backgroundColor: '#fcfbfa',
+    backgroundColor: THEME.colors.background,
   };
 
   const titleStyle: React.CSSProperties = {
     fontSize: window.innerWidth <= 768 ? '32px' : '48px',
     fontWeight: 'bold',
     margin: '0 0 20px 0',
-    color: '#123543',
+    color: THEME.colors.primary,
   };
 
   const subtitleStyle: React.CSSProperties = {
     fontSize: window.innerWidth <= 768 ? '18px' : '24px',
     margin: '0 0 40px 0',
-    color: '#123543',
+    color: THEME.colors.primary,
     opacity: 0.8,
   };
 
   const ctaButtonStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     border: 'none',
     padding: window.innerWidth <= 768 ? '16px 32px' : '20px 40px',
     fontSize: window.innerWidth <= 768 ? '16px' : '18px',
@@ -58,8 +59,8 @@ const LandingPage: React.FC = () => {
   };
 
   const emissionHighlightStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     padding: window.innerWidth <= 768 ? '40px 20px' : '60px 40px',
     textAlign: 'center',
   };
@@ -98,13 +99,13 @@ const LandingPage: React.FC = () => {
     fontSize: window.innerWidth <= 768 ? '28px' : '36px',
     fontWeight: 'bold',
     margin: '0 0 15px 0',
-    color: '#123543',
+    color: THEME.colors.primary,
   };
 
   const sectionSubtitleStyle: React.CSSProperties = {
     fontSize: window.innerWidth <= 768 ? '16px' : '18px',
     margin: '0 0 50px 0',
-    color: '#123543',
+    color: THEME.colors.primary,
     opacity: 0.8,
   };
 
@@ -117,8 +118,8 @@ const LandingPage: React.FC = () => {
   };
 
   const cardStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     padding: '30px',
     borderRadius: '12px',
     textAlign: 'left',
@@ -139,8 +140,8 @@ const LandingPage: React.FC = () => {
   };
 
   const callToActionStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     padding: window.innerWidth <= 768 ? '60px 20px' : '80px 40px',
     textAlign: 'center',
   };
@@ -158,11 +159,11 @@ const LandingPage: React.FC = () => {
   };
 
   const footerStyle: React.CSSProperties = {
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
+    backgroundColor: THEME.colors.background,
+    color: THEME.colors.primary,
     padding: window.innerWidth <= 768 ? '40px 20px' : '60px 40px',
     textAlign: 'center',
-    borderTop: '2px solid #123543',
+    borderTop: `2px solid ${THEME.colors.primary}`,
   };
 
   const footerTitleStyle: React.CSSProperties = {
@@ -209,7 +210,7 @@ const LandingPage: React.FC = () => {
             e.currentTarget.style.backgroundColor = 'rgba(18, 53, 67, 0.9)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#123543';
+            e.currentTarget.style.backgroundColor = THEME.colors.primary;
           }}
         >
           Logg inn
@@ -342,11 +343,11 @@ const LandingPage: React.FC = () => {
           onClick={() => navigate('/login')}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.9)';
-            e.currentTarget.style.color = '#123543';
+            e.currentTarget.style.color = THEME.colors.primary;
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#fcfbfa';
-            e.currentTarget.style.color = '#123543';
+            e.currentTarget.style.backgroundColor = THEME.colors.background;
+            e.currentTarget.style.color = THEME.colors.primary;
           }}
         >
           Logg inn på plattformen

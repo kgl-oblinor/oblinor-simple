@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { EmissionSubscription, User } from '../types';
 import api from '../api';
+import { THEME } from '../constants/theme';
 
 interface SubscriptionListProps {
   emissionId: number;
@@ -69,13 +70,13 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
   };
 
   const containerStyle: React.CSSProperties = {
-    backgroundColor: '#fcfbfa',
+    backgroundColor: THEME.colors.background,
     padding: '20px',
     borderRadius: '12px',
   };
 
   const titleStyle: React.CSSProperties = {
-    color: '#123543',
+    color: THEME.colors.primary,
     fontSize: '24px',
     fontWeight: 'bold',
     marginBottom: '20px',
@@ -88,8 +89,8 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
   };
 
   const thStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     padding: '12px',
     textAlign: 'left',
     fontWeight: 'bold',
@@ -98,7 +99,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
   const tdStyle: React.CSSProperties = {
     padding: '12px',
     borderBottom: '1px solid rgba(18, 53, 67, 0.1)',
-    color: '#123543',
+    color: THEME.colors.primary,
   };
 
   const statusBadgeStyle = (status: string): React.CSSProperties => ({
@@ -108,12 +109,12 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
     fontSize: '12px',
     fontWeight: 'bold',
     backgroundColor: 
-      status === 'APPROVED' ? '#123543' : 
+      status === 'APPROVED' ? THEME.colors.primary : 
       status === 'REJECTED' ? 'rgba(18, 53, 67, 0.3)' : 
       'rgba(18, 53, 67, 0.1)',
     color: 
-      status === 'APPROVED' ? '#fcfbfa' : 
-      '#123543',
+      status === 'APPROVED' ? THEME.colors.background : 
+      THEME.colors.primary,
   });
 
   const buttonStyle: React.CSSProperties = {
@@ -128,28 +129,28 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
 
   const approveButtonStyle: React.CSSProperties = {
     ...buttonStyle,
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
   };
 
   const rejectButtonStyle: React.CSSProperties = {
     ...buttonStyle,
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
-    border: '1px solid #123543',
+    backgroundColor: THEME.colors.background,
+    color: THEME.colors.primary,
+    border: `1px solid ${THEME.colors.primary}`,
   };
 
   const inputStyle: React.CSSProperties = {
     width: '100px',
     padding: '4px 8px',
-    border: '1px solid #123543',
+    border: `1px solid ${THEME.colors.primary}`,
     borderRadius: '4px',
     marginRight: '5px',
   };
 
   const summaryBoxStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     padding: '15px',
     borderRadius: '8px',
     marginBottom: '20px',
@@ -200,13 +201,13 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
     fontSize: '18px',
     fontWeight: 'bold',
     marginBottom: '4px',
-    color: '#123543',
+    color: THEME.colors.primary,
   };
 
   const mobileCardInvestorEmailStyle: React.CSSProperties = {
     fontSize: '14px',
     opacity: 0.7,
-    color: '#123543',
+    color: THEME.colors.primary,
   };
 
   const mobileCardStatsContainerStyle: React.CSSProperties = {
@@ -227,13 +228,13 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
     fontSize: '12px',
     opacity: 0.7,
     marginBottom: '4px',
-    color: '#123543',
+    color: THEME.colors.primary,
   };
 
   const mobileCardStatValueStyle: React.CSSProperties = {
     fontSize: '16px',
     fontWeight: 'bold',
-    color: '#123543',
+    color: THEME.colors.primary,
   };
 
   const mobileCardActionsStyle: React.CSSProperties = {
@@ -245,7 +246,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
   const mobileInputStyle: React.CSSProperties = {
     width: '100px',
     padding: '8px',
-    border: '1px solid #123543',
+    border: `1px solid ${THEME.colors.primary}`,
     borderRadius: '4px',
     fontSize: '14px',
   };
@@ -271,7 +272,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
   }
 
   if (error) {
-    return <div style={containerStyle}><div style={{ color: '#123543' }}>{error}</div></div>;
+    return <div style={containerStyle}><div style={{ color: THEME.colors.primary }}>{error}</div></div>;
   }
 
   const totalRequested = subscriptions.reduce((sum, sub) => sum + sub.shares_requested, 0);
@@ -350,13 +351,13 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
                 {editingId === sub.id ? (
                   <>
                     <button
-                      style={{ ...mobileButtonStyle, backgroundColor: '#123543', color: '#fcfbfa', flex: 1 }}
+                      style={{ ...mobileButtonStyle, backgroundColor: THEME.colors.primary, color: THEME.colors.background, flex: 1 }}
                       onClick={() => handleApprove(sub.id)}
                     >
                       Confirm
                     </button>
                     <button
-                      style={{ ...mobileButtonStyle, backgroundColor: '#fcfbfa', color: '#123543', border: '1px solid #123543', flex: 1 }}
+                      style={{ ...mobileButtonStyle, backgroundColor: THEME.colors.background, color: THEME.colors.primary, border: `1px solid ${THEME.colors.primary}`, flex: 1 }}
                       onClick={() => setEditingId(null)}
                     >
                       Cancel
@@ -365,13 +366,13 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
                 ) : (
                   <>
                     <button
-                      style={{ ...mobileButtonStyle, backgroundColor: '#123543', color: '#fcfbfa', flex: 1 }}
+                      style={{ ...mobileButtonStyle, backgroundColor: THEME.colors.primary, color: THEME.colors.background, flex: 1 }}
                       onClick={() => setEditingId(sub.id)}
                     >
                       Approve
                     </button>
                     <button
-                      style={{ ...mobileButtonStyle, backgroundColor: '#fcfbfa', color: '#123543', border: '1px solid #123543', flex: 1 }}
+                      style={{ ...mobileButtonStyle, backgroundColor: THEME.colors.background, color: THEME.colors.primary, border: `1px solid ${THEME.colors.primary}`, flex: 1 }}
                       onClick={() => handleReject(sub.id)}
                     >
                       Reject
@@ -382,7 +383,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
             )}
 
             {sub.status === 'APPROVED' && sub.approved_at && (
-              <div style={{ marginTop: '8px', fontSize: '12px', color: '#123543', opacity: 0.7 }}>
+              <div style={{ marginTop: '8px', fontSize: '12px', color: THEME.colors.primary, opacity: 0.7 }}>
                 Approved {new Date(sub.approved_at).toLocaleDateString()}
               </div>
             )}
@@ -466,7 +467,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
                     </>
                   )}
                   {sub.status === 'APPROVED' && sub.approved_at && (
-                    <span style={{ color: '#123543', fontSize: '12px' }}>
+                    <span style={{ color: THEME.colors.primary, fontSize: '12px' }}>
                       Approved {new Date(sub.approved_at).toLocaleDateString()}
                     </span>
                   )}
@@ -478,7 +479,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
       </div>
 
       {subscriptions.length === 0 && (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#123543' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: THEME.colors.primary }}>
           No subscriptions yet for this emission.
         </div>
       )}

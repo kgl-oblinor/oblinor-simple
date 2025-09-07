@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Emission, APIError } from '../types';
 import api from '../api';
+import { THEME } from '../constants/theme';
 
 interface EmissionFormProps {
   emission?: Emission | null;
@@ -61,7 +62,7 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
   };
 
   const formStyle: React.CSSProperties = {
-    backgroundColor: '#fcfbfa',
+    backgroundColor: THEME.colors.background,
     padding: window.innerWidth <= 768 ? '20px' : '30px',
     borderRadius: '12px',
     maxWidth: window.innerWidth <= 768 ? '100%' : '600px',
@@ -71,7 +72,7 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
   };
 
   const titleStyle: React.CSSProperties = {
-    color: '#123543',
+    color: THEME.colors.primary,
     fontSize: window.innerWidth <= 768 ? '20px' : '24px',
     fontWeight: 'bold',
     marginBottom: window.innerWidth <= 768 ? '15px' : '20px',
@@ -79,7 +80,7 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const labelStyle: React.CSSProperties = {
     display: 'block',
-    color: '#123543',
+    color: THEME.colors.primary,
     fontSize: '14px',
     fontWeight: 'bold',
     marginBottom: '5px',
@@ -88,11 +89,11 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
   const inputStyle: React.CSSProperties = {
     width: '100%',
     padding: window.innerWidth <= 768 ? '12px 16px' : '10px',
-    border: '2px solid #123543',
+    border: `2px solid ${THEME.colors.primary}`,
     borderRadius: '6px',
     fontSize: '16px',
     marginBottom: window.innerWidth <= 768 ? '12px' : '15px',
-    backgroundColor: '#fcfbfa',
+    backgroundColor: THEME.colors.background,
     minHeight: window.innerWidth <= 768 ? '44px' : 'auto',
     boxSizing: 'border-box',
   };
@@ -114,8 +115,8 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
   };
 
   const infoBoxStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     padding: '15px',
     borderRadius: '8px',
     marginBottom: '20px',
@@ -141,19 +142,19 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const saveButtonStyle: React.CSSProperties = {
     ...buttonStyle,
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
   };
 
   const cancelButtonStyle: React.CSSProperties = {
     ...buttonStyle,
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
-    border: '2px solid #123543',
+    backgroundColor: THEME.colors.background,
+    color: THEME.colors.primary,
+    border: `2px solid ${THEME.colors.primary}`,
   };
 
   const errorStyle: React.CSSProperties = {
-    color: '#123543',
+    color: THEME.colors.primary,
     backgroundColor: 'rgba(18, 53, 67, 0.1)',
     padding: '10px',
     borderRadius: '6px',

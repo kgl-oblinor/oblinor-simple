@@ -3,7 +3,7 @@
 **📍 SINGLE SOURCE OF TRUTH FOR ALL AI AGENTS**  
 **⚡ STATUS:** Production Live on Railway | **🎯 TARGET:** Norwegian share emission platform  
 **🔗 LIVE:** https://oblinoremisjonrailway-production.up.railway.app  
-**Last Updated:** 2025-09-06 Mobile Responsive Update
+**Last Updated:** 2025-09-07 THEME System Migration Complete
 
 ---
 
@@ -168,16 +168,49 @@ All data is already migrated and live on Railway. No local database files needed
 
 ## 🎨 DESIGN SYSTEM
 
-**Strict Color Palette:**
-- Primary: #123543 (Dark Teal)
-- Background: #fcfbfa (Off-White)
-- NO OTHER COLORS ALLOWED
+**🎯 CENTRALIZED THEME SYSTEM (MANDATORY):**
+ALL components MUST use the centralized THEME constants from `frontend/src/constants/theme.ts`:
+
+```typescript
+import { THEME } from '../constants/theme';
+
+// ✅ CORRECT - Always use THEME constants
+backgroundColor: THEME.colors.primary,
+color: THEME.colors.background,
+borderRadius: THEME.spacing.borderRadius,
+transition: THEME.transitions.default
+
+// ❌ FORBIDDEN - Never hardcode colors
+backgroundColor: '#123543',
+color: '#fcfbfa'
+```
+
+**THEME Structure:**
+```typescript
+THEME.colors = {
+  primary: '#123543',      // Dark Teal - Main brand color
+  background: '#fcfbfa',   // Off-White - Main background  
+  error: '#ff6b6b',        // Red - Error states
+  success: '#4CAF50',      // Green - Success states
+  info: '#2196F3',         // Blue - Info states
+  warning: '#FF9800'       // Orange - Warning states
+}
+THEME.spacing = {
+  borderRadius: '8px',     // Consistent rounded corners
+  touchTarget: '44px',     // Mobile touch targets
+  sidebarWidth: '250px'    // Desktop sidebar width
+}
+THEME.transitions = {
+  default: 'all 0.2s ease',
+  sidebar: 'left 0.3s ease'
+}
+```
 
 **Component Standards:**
-- 8px border radius
-- 0.2-0.3s transitions
+- THEME.spacing.borderRadius (8px) for all rounded corners
+- THEME.transitions.default (0.2s) for smooth interactions
 - 5px blur for restricted content
-- Consistent spacing and typography
+- Consistent spacing from THEME.spacing
 
 ## 📱 MOBILE RESPONSIVE SYSTEM
 
@@ -207,28 +240,30 @@ All data is already migrated and live on Railway. No local database files needed
 - Forms: Single column, full-width inputs with proper touch targets
 - Buttons: Stack vertically on mobile, inline on desktop
 
-**Color Constants (Inline Styles):**
+**THEME Import Pattern (MANDATORY):**
 ```typescript
-const COLORS = {
-  primary: '#123543',
-  background: '#fcfbfa'
-};
+import { THEME, isMobile } from '../constants/theme';
 
-const RESPONSIVE = {
-  sidebarWidth: '250px', // Desktop only
-  touchTarget: '44px',
-  borderRadius: '8px',
-  transition: 'all 0.2s ease'
+// All styling MUST use THEME constants
+const buttonStyle: React.CSSProperties = {
+  backgroundColor: THEME.colors.primary,
+  color: THEME.colors.background,
+  borderRadius: THEME.spacing.borderRadius,
+  transition: THEME.transitions.default,
+  padding: isMobile() ? '16px' : '12px',
+  minHeight: THEME.spacing.touchTarget
 };
 ```
 
 **MANDATORY for NEW Components:**
-1. Use inline React styles with CSSProperties typing
-2. Implement `window.innerWidth <= 768px` breakpoint checks
-3. Use COLORS constants for consistent theming
-4. Implement minimum 44px touch targets
-5. Test responsive behavior on mobile viewport (< 768px)
-6. Ensure table data converts to cards on mobile using conditional rendering
+1. Import THEME from '../constants/theme' - NO EXCEPTIONS
+2. Use inline React styles with CSSProperties typing  
+3. Implement responsive with `isMobile()` helper or `window.innerWidth <= THEME.breakpoints.mobile`
+4. Use THEME constants for ALL colors, spacing, transitions
+5. Implement minimum THEME.spacing.touchTarget (44px) for mobile
+6. Test responsive behavior on mobile viewport (< 768px)
+7. Ensure table data converts to cards on mobile using conditional rendering
+8. NEVER hardcode #123543 or #fcfbfa - always use THEME.colors
 
 **Component Mobile Status:**
 - ✅ Layout.tsx - Responsive with sidebar toggle
@@ -295,9 +330,7 @@ SELECT * FROM emissions WHERE status = 'ACTIVE';
 
 ## 📚 RELATED FILES
 
-- `CLAUDE_SIMPLE.md` - Compact AI agent instructions
-- `CLAUDE_SIMPLE_DETAILED.md` - Comprehensive technical reference  
-- `README.md` - User-facing documentation
+- `README.md` - User-facing documentation with THEME system guide
 - `backend/` - Express.js API with all routes
 - `frontend/` - React application
 - `types/` - Shared TypeScript definitions
@@ -306,14 +339,14 @@ SELECT * FROM emissions WHERE status = 'ACTIVE';
 
 ## 🔄 RECENT UPDATES
 
-**2025-09-07 - TypeScript Fixes & Local Development:**
-1. ✅ **TypeScript Errors Fixed** - Layout component type safety resolved
-2. ✅ **Railway Build Fixed** - ShareholderList unused parameter error resolved
-3. ✅ **Local Development Setup** - Complete .env file configuration documented
-4. ✅ **Production Deployment** - All changes successfully deployed to Railway
-5. ✅ **Enhanced Mobile Cards** - Premium ShareholderList with avatars and ownership bars
-6. ✅ **Sidebar Navigation** - Contextual tab navigation for User/Admin dashboards
-7. ✅ **Documentation Updated** - CLAUDE.md includes comprehensive local development guide
+**2025-09-07 - THEME System Migration & Documentation:**
+1. ✅ **Complete THEME Migration** - All 17 components migrated from hardcoded colors to THEME system
+2. ✅ **Centralized Design System** - Single source of truth in constants/theme.ts
+3. ✅ **AI Documentation Updated** - CLAUDE.md reflects new THEME architecture
+4. ✅ **Design Consistency** - Zero hardcoded colors remain in codebase
+5. ✅ **TypeScript Type Safety** - Full THEME typing with CSSProperties
+6. ✅ **Future-Proof Architecture** - All AI agents will use THEME system
+7. ✅ **Build Verification** - Frontend compiles successfully with THEME migration
 
 **2025-09-06 - Mobile Responsive Implementation:**
 1. ✅ **Complete Mobile Optimization** - Platform now fully responsive

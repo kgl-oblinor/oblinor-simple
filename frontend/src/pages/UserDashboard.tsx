@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { THEME } from '../constants/theme';
 import Layout from '../components/Layout';
 import ShareholderList from '../components/ShareholderList';
 import EmissionList from '../components/EmissionList';
@@ -15,8 +16,8 @@ const UserDashboard: React.FC = () => {
   const headerStyle: React.CSSProperties = {
     marginBottom: '30px',
     padding: window.innerWidth <= 768 ? '15px' : '20px',
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     borderRadius: '12px',
   };
 
@@ -38,8 +39,8 @@ const UserDashboard: React.FC = () => {
   };
 
   const accessInfoStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     padding: window.innerWidth <= 768 ? '15px' : '20px',
     borderRadius: '12px',
     marginBottom: '20px',
@@ -115,12 +116,12 @@ const UserDashboard: React.FC = () => {
                 textAlign: 'center'
               }}>
                 <h3 style={{ 
-                  color: '#123543', 
+                  color: THEME.colors.primary, 
                   marginBottom: '10px',
                   fontSize: window.innerWidth <= 768 ? '18px' : '20px'
                 }}>Limited Access</h3>
                 <p style={{ 
-                  color: '#123543',
+                  color: THEME.colors.primary,
                   fontSize: window.innerWidth <= 768 ? '14px' : '16px'
                 }}>
                   Your account has Level 1 access. Content is restricted until an administrator upgrades your access level.

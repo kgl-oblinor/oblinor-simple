@@ -3,6 +3,7 @@ import { Shareholder } from '../types';
 import { shareholdersAPI } from '../api';
 import BlurredContent from './BlurredContent';
 import { useAuth } from '../context/AuthContext';
+import { THEME } from '../constants/theme';
 
 const ShareholderList: React.FC = () => {
   const [shareholders, setShareholders] = useState<Shareholder[]>([]);
@@ -11,10 +12,10 @@ const ShareholderList: React.FC = () => {
   const { user } = useAuth();
 
   const containerStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
+    backgroundColor: THEME.colors.primary,
     padding: window.innerWidth <= 768 ? '15px' : '20px',
     borderRadius: '12px',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
   };
 
   const titleStyle: React.CSSProperties = {
@@ -64,8 +65,8 @@ const ShareholderList: React.FC = () => {
   const mobileCardAvatarStyle: React.CSSProperties = {
     width: '45px',
     height: '45px',
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
+    backgroundColor: THEME.colors.background,
+    color: THEME.colors.primary,
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
@@ -83,14 +84,14 @@ const ShareholderList: React.FC = () => {
     fontSize: '20px',
     fontWeight: 'bold',
     marginBottom: '2px',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
   };
 
   const mobileCardEmailStyle: React.CSSProperties = {
     fontSize: '14px',
     opacity: 0.8,
     marginBottom: '12px',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
   };
 
   const mobileCardStatsContainerStyle: React.CSSProperties = {
@@ -110,13 +111,13 @@ const ShareholderList: React.FC = () => {
   const mobileCardStatsLabelStyle: React.CSSProperties = {
     fontSize: '14px',
     opacity: 0.8,
-    color: '#fcfbfa',
+    color: THEME.colors.background,
   };
 
   const mobileCardStatsValueStyle: React.CSSProperties = {
     fontSize: '16px',
     fontWeight: 'bold',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
   };
 
   const mobileCardOwnershipBarContainerStyle: React.CSSProperties = {
@@ -135,7 +136,7 @@ const ShareholderList: React.FC = () => {
   const mobileCardOwnershipBarFillStyle = (percentage: number): React.CSSProperties => ({
     width: `${percentage}%`,
     height: '100%',
-    backgroundColor: '#fcfbfa',
+    backgroundColor: THEME.colors.background,
     borderRadius: '3px',
     transition: 'width 0.3s ease',
   });
@@ -143,8 +144,8 @@ const ShareholderList: React.FC = () => {
   const mobileCardPercentageStyle: React.CSSProperties = {
     fontSize: '18px',
     fontWeight: 'bold',
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
+    backgroundColor: THEME.colors.background,
+    color: THEME.colors.primary,
     padding: '6px 12px',
     borderRadius: '12px',
     textAlign: 'center',

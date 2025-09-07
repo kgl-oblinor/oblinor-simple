@@ -1,5 +1,6 @@
 import React from 'react';
 import { BlurredContentProps } from '../types';
+import { THEME } from '../constants/theme';
 
 const BlurredContent: React.FC<BlurredContentProps> = ({
   children,
@@ -45,12 +46,12 @@ const BlurredContent: React.FC<BlurredContentProps> = ({
     display: shouldBlur ? 'flex' : 'none',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(252, 251, 250, 0.8)',
-    color: '#123543',
+    backgroundColor: `rgba(252, 251, 250, 0.8)`,
+    color: THEME.colors.primary,
     fontSize: '16px',
     fontWeight: 'bold',
     zIndex: 10,
-    borderRadius: '8px',
+    borderRadius: THEME.spacing.borderRadius,
   };
 
   const getAccessMessage = () => {

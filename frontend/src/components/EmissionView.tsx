@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Emission } from '../types';
 import { useAuth } from '../context/AuthContext';
+import { THEME } from '../constants/theme';
 import api from '../api';
 import BlurredContent from './BlurredContent';
 import SubscriptionForm from './SubscriptionForm';
@@ -47,7 +48,7 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
   };
 
   const containerStyle: React.CSSProperties = {
-    backgroundColor: '#fcfbfa',
+    backgroundColor: THEME.colors.background,
     padding: '30px',
     borderRadius: '12px',
     maxWidth: '800px',
@@ -55,13 +56,13 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
   };
 
   const headerStyle: React.CSSProperties = {
-    borderBottom: '2px solid #123543',
+    borderBottom: `2px solid ${THEME.colors.primary}`,
     paddingBottom: '20px',
     marginBottom: '20px',
   };
 
   const titleStyle: React.CSSProperties = {
-    color: '#123543',
+    color: THEME.colors.primary,
     fontSize: '28px',
     fontWeight: 'bold',
     marginBottom: '10px',
@@ -73,8 +74,8 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
     borderRadius: '20px',
     fontSize: '14px',
     fontWeight: 'bold',
-    backgroundColor: status === 'ACTIVE' ? '#123543' : 'rgba(18, 53, 67, 0.3)',
-    color: status === 'ACTIVE' ? '#fcfbfa' : '#123543',
+    backgroundColor: status === 'ACTIVE' ? THEME.colors.primary : 'rgba(18, 53, 67, 0.3)',
+    color: status === 'ACTIVE' ? THEME.colors.background : THEME.colors.primary,
   });
 
   const infoGridStyle: React.CSSProperties = {
@@ -85,10 +86,10 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
   };
 
   const infoBoxStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     padding: '15px',
-    borderRadius: '8px',
+    borderRadius: THEME.spacing.borderRadius,
   };
 
   const labelStyle: React.CSSProperties = {
@@ -103,7 +104,7 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
   };
 
   const descriptionStyle: React.CSSProperties = {
-    color: '#123543',
+    color: THEME.colors.primary,
     fontSize: '16px',
     lineHeight: '1.6',
     marginBottom: '20px',
@@ -112,12 +113,12 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
   const presentationBoxStyle: React.CSSProperties = {
     backgroundColor: 'rgba(18, 53, 67, 0.05)',
     padding: '20px',
-    borderRadius: '8px',
+    borderRadius: THEME.spacing.borderRadius,
     marginBottom: '20px',
   };
 
   const presentationTitleStyle: React.CSSProperties = {
-    color: '#123543',
+    color: THEME.colors.primary,
     fontSize: '18px',
     fontWeight: 'bold',
     marginBottom: '10px',
@@ -130,8 +131,8 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
     borderRadius: '6px',
     border: 'none',
     cursor: 'pointer',
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     marginRight: '10px',
   };
 
@@ -143,9 +144,9 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
 
   const closeButtonStyle: React.CSSProperties = {
     ...buttonStyle,
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
-    border: '2px solid #123543',
+    backgroundColor: THEME.colors.background,
+    color: THEME.colors.primary,
+    border: `2px solid ${THEME.colors.primary}`,
   };
 
   if (loading) {
@@ -155,7 +156,7 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
   if (error || !emission) {
     return (
       <div style={containerStyle}>
-        <div style={{ color: '#123543' }}>{error || 'Emission not found'}</div>
+        <div style={{ color: THEME.colors.primary }}>{error || 'Emission not found'}</div>
         {onClose && (
           <button style={closeButtonStyle} onClick={onClose}>
             Close
@@ -208,7 +209,7 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
             {emission.presentation_material && (
               <div style={presentationBoxStyle}>
                 <h3 style={presentationTitleStyle}>Presentation Material</h3>
-                <div style={{ whiteSpace: 'pre-wrap', color: '#123543' }}>
+                <div style={{ whiteSpace: 'pre-wrap', color: THEME.colors.primary }}>
                   {emission.presentation_material}
                 </div>
               </div>

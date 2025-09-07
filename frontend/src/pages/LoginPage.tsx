@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { THEME } from '../constants/theme';
 import { APIError } from '../types';
 
 const LoginPage: React.FC = () => {
@@ -13,7 +14,7 @@ const LoginPage: React.FC = () => {
 
   const pageStyle: React.CSSProperties = {
     minHeight: '100vh',
-    backgroundColor: '#fcfbfa',
+    backgroundColor: THEME.colors.background,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -21,12 +22,12 @@ const LoginPage: React.FC = () => {
   };
 
   const containerStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
+    backgroundColor: THEME.colors.primary,
     padding: window.innerWidth <= 768 ? '30px' : '40px',
     borderRadius: '12px',
     width: '100%',
     maxWidth: window.innerWidth <= 768 ? '350px' : '400px',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
   };
 
   const titleStyle: React.CSSProperties = {
@@ -58,7 +59,7 @@ const LoginPage: React.FC = () => {
     borderRadius: '8px',
     border: '1px solid rgba(252, 251, 250, 0.3)',
     backgroundColor: 'rgba(252, 251, 250, 0.1)',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
     fontSize: '16px',
     minHeight: '44px',
     boxSizing: 'border-box',
@@ -66,8 +67,8 @@ const LoginPage: React.FC = () => {
 
   const buttonStyle: React.CSSProperties = {
     padding: window.innerWidth <= 768 ? '16px 24px' : '12px 24px',
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
+    backgroundColor: THEME.colors.background,
+    color: THEME.colors.primary,
     border: 'none',
     borderRadius: '8px',
     fontSize: '16px',
@@ -177,7 +178,7 @@ const LoginPage: React.FC = () => {
             }}
             onMouseLeave={(e) => {
               if (!loading) {
-                e.currentTarget.style.backgroundColor = '#fcfbfa';
+                e.currentTarget.style.backgroundColor = THEME.colors.background;
               }
             }}
           >

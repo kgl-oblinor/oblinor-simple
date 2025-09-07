@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Emission, APIError } from '../types';
 import api from '../api';
+import { THEME } from '../constants/theme';
 
 interface SubscriptionFormProps {
   emission: Emission;
@@ -45,7 +46,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
   };
 
   const formStyle: React.CSSProperties = {
-    backgroundColor: '#fcfbfa',
+    backgroundColor: THEME.colors.background,
     padding: window.innerWidth <= 768 ? '20px' : '30px',
     borderRadius: '12px',
     maxWidth: '500px',
@@ -53,15 +54,15 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
   };
 
   const titleStyle: React.CSSProperties = {
-    color: '#123543',
+    color: THEME.colors.primary,
     fontSize: window.innerWidth <= 768 ? '20px' : '24px',
     fontWeight: 'bold',
     marginBottom: '20px',
   };
 
   const emissionInfoStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     padding: '15px',
     borderRadius: '8px',
     marginBottom: '20px',
@@ -69,7 +70,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
 
   const labelStyle: React.CSSProperties = {
     display: 'block',
-    color: '#123543',
+    color: THEME.colors.primary,
     fontSize: '14px',
     fontWeight: 'bold',
     marginBottom: '5px',
@@ -78,11 +79,11 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
   const inputStyle: React.CSSProperties = {
     width: '100%',
     padding: window.innerWidth <= 768 ? '14px 12px' : '12px',
-    border: '2px solid #123543',
+    border: `2px solid ${THEME.colors.primary}`,
     borderRadius: '6px',
     fontSize: '18px',
     marginBottom: '15px',
-    backgroundColor: '#fcfbfa',
+    backgroundColor: THEME.colors.background,
     minHeight: '44px',
     boxSizing: 'border-box',
   };
@@ -98,7 +99,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
     display: 'flex',
     justifyContent: 'space-between',
     marginBottom: '10px',
-    color: '#123543',
+    color: THEME.colors.primary,
     fontSize: window.innerWidth <= 768 ? '14px' : '16px',
   };
 
@@ -106,7 +107,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
     ...summaryRowStyle,
     fontWeight: 'bold',
     fontSize: window.innerWidth <= 768 ? '16px' : '18px',
-    borderTop: '2px solid #123543',
+    borderTop: `2px solid ${THEME.colors.primary}`,
     paddingTop: '10px',
   };
 
@@ -131,20 +132,20 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
 
   const subscribeButtonStyle: React.CSSProperties = {
     ...buttonStyle,
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
   };
 
   const cancelButtonStyle: React.CSSProperties = {
     ...buttonStyle,
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
-    border: '2px solid #123543',
+    backgroundColor: THEME.colors.background,
+    color: THEME.colors.primary,
+    border: `2px solid ${THEME.colors.primary}`,
   };
 
   const errorStyle: React.CSSProperties = {
-    color: '#fcfbfa',
-    backgroundColor: '#123543',
+    color: THEME.colors.background,
+    backgroundColor: THEME.colors.primary,
     padding: '10px',
     borderRadius: '6px',
     marginBottom: '15px',
@@ -152,7 +153,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
   };
 
   const infoTextStyle: React.CSSProperties = {
-    color: '#123543',
+    color: THEME.colors.primary,
     fontSize: window.innerWidth <= 768 ? '12px' : '14px',
     marginTop: '10px',
     fontStyle: 'italic',
@@ -198,7 +199,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
       {sharesRequested > 0 && (
         <div style={summaryBoxStyle}>
           <h3 style={{ 
-            color: '#123543', 
+            color: THEME.colors.primary, 
             marginBottom: '15px',
             fontSize: window.innerWidth <= 768 ? '16px' : '18px'
           }}>
@@ -254,7 +255,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
           }}
           onMouseLeave={(e) => {
             if (!loading) {
-              e.currentTarget.style.backgroundColor = '#fcfbfa';
+              e.currentTarget.style.backgroundColor = THEME.colors.background;
             }
           }}
         >

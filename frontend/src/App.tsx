@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { THEME } from './constants/theme';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import UserDashboard from './pages/UserDashboard';
@@ -16,8 +17,8 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
       alignItems: 'center',
       justifyContent: 'center',
       minHeight: '100vh',
-      backgroundColor: '#fcfbfa',
-      color: '#123543',
+      backgroundColor: THEME.colors.background,
+      color: THEME.colors.primary,
       fontSize: '18px',
     };
 

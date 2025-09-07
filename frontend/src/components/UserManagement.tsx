@@ -13,10 +13,10 @@ const UserManagement: React.FC = () => {
   const { user: currentUser } = useAuth();
 
   const containerStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
+    backgroundColor: THEME.colors.primary,
     padding: '20px',
     borderRadius: '12px',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
   };
 
   const titleStyle: React.CSSProperties = {
@@ -57,14 +57,14 @@ const UserManagement: React.FC = () => {
     backgroundColor: 'rgba(252, 251, 250, 0.1)',
     border: '1px solid rgba(252, 251, 250, 0.3)',
     borderRadius: '4px',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
     fontSize: '14px',
   };
 
   const buttonStyle: React.CSSProperties = {
     padding: '6px 12px',
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
+    backgroundColor: THEME.colors.background,
+    color: THEME.colors.primary,
     border: 'none',
     borderRadius: '4px',
     fontSize: '12px',
@@ -85,7 +85,7 @@ const UserManagement: React.FC = () => {
     textAlign: 'center',
     padding: '20px',
     backgroundColor: 'rgba(255, 107, 107, 0.1)',
-    borderRadius: '8px',
+    borderRadius: THEME.spacing.borderRadius,
   };
 
   // Mobile card styles
@@ -95,7 +95,7 @@ const UserManagement: React.FC = () => {
 
   const mobileCardStyle: React.CSSProperties = {
     backgroundColor: 'rgba(252, 251, 250, 0.1)',
-    borderRadius: '8px',
+    borderRadius: THEME.spacing.borderRadius,
     padding: '15px',
     marginBottom: '15px',
     border: '1px solid rgba(252, 251, 250, 0.2)',
@@ -112,13 +112,13 @@ const UserManagement: React.FC = () => {
     fontSize: '18px',
     fontWeight: 'bold',
     marginBottom: '4px',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
   };
 
   const mobileCardEmailStyle: React.CSSProperties = {
     fontSize: '14px',
     opacity: 0.8,
-    color: '#fcfbfa',
+    color: THEME.colors.background,
   };
 
   const mobileCardDetailsStyle: React.CSSProperties = {
@@ -141,15 +141,15 @@ const UserManagement: React.FC = () => {
     backgroundColor: 'rgba(252, 251, 250, 0.2)',
     border: '1px solid rgba(252, 251, 250, 0.3)',
     borderRadius: '6px',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
     fontSize: '14px',
     minHeight: '40px',
   };
 
   const mobileActionButtonStyle: React.CSSProperties = {
     padding: '8px 12px',
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
+    backgroundColor: THEME.colors.background,
+    color: THEME.colors.primary,
     border: 'none',
     borderRadius: '6px',
     fontSize: '14px',
@@ -235,7 +235,7 @@ const UserManagement: React.FC = () => {
                     <span style={{
                       padding: '6px 10px',
                       backgroundColor: user.role === 'ADMIN' ? THEME.colors.success : THEME.colors.info,
-                      color: '#fcfbfa',
+                      color: THEME.colors.background,
                       borderRadius: '12px',
                       fontSize: '12px',
                       fontWeight: 'bold'
@@ -275,7 +275,7 @@ const UserManagement: React.FC = () => {
                           e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.9)';
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = '#fcfbfa';
+                          e.currentTarget.style.backgroundColor = THEME.colors.background;
                         }}
                       >
                         Edit
@@ -308,7 +308,7 @@ const UserManagement: React.FC = () => {
                         <span style={{
                           padding: '4px 8px',
                           backgroundColor: user.role === 'ADMIN' ? THEME.colors.success : THEME.colors.info,
-                          color: '#fcfbfa',
+                          color: THEME.colors.background,
                           borderRadius: '12px',
                           fontSize: '12px',
                           fontWeight: 'bold'
@@ -349,7 +349,7 @@ const UserManagement: React.FC = () => {
                               e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.9)';
                             }}
                             onMouseLeave={(e) => {
-                              e.currentTarget.style.backgroundColor = '#fcfbfa';
+                              e.currentTarget.style.backgroundColor = THEME.colors.background;
                             }}
                           >
                             Edit

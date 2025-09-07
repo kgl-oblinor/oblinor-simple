@@ -85,23 +85,45 @@ Visit: **https://oblinoremisjonrailway-production.up.railway.app/**
 
 ## 🎨 Design System
 
-**Strict Color Palette:**
-- Primary: `#123543` (Dark Teal)
-- Background: `#fcfbfa` (Off-White)
-- **Note:** Only these two colors are used throughout the entire system
+**🎨 THEME Constants System (MANDATORY for New Components):**
+All new components MUST use the centralized THEME constants from `frontend/src/constants/theme.ts`:
 
-**Mobile Responsive Design:**
-- **Mobile Breakpoint:** `window.innerWidth <= 768px` used consistently
-- **Dual-Layout Pattern:** Tables on desktop, premium cards on mobile
-- **Touch Optimization:** 44px minimum touch targets throughout
-- **Collapsible Sidebar:** Hamburger menu on mobile, fixed sidebar on desktop
-- **Premium Mobile Cards:** Avatars, ownership bars, enhanced mobile UX
+```typescript
+import { THEME } from '../constants/theme';
 
-**Accessibility Features:**
+// ✅ Correct - Use THEME constants
+backgroundColor: THEME.colors.primary,
+color: THEME.colors.background,
+padding: window.innerWidth <= THEME.breakpoints.mobile ? '15px' : '20px'
+
+// ❌ Wrong - Never hardcode colors
+backgroundColor: '#123543',
+color: '#fcfbfa'
+```
+
+**Expanded Color Palette:**
+- **Primary:** `THEME.colors.primary` (#123543 - Dark Teal)
+- **Background:** `THEME.colors.background` (#fcfbfa - Off-White)
+- **Semantic Colors:** error, success, info, warning (for status badges)
+
+**📱 Mobile-First Responsive Design (MANDATORY):**
+- **Mobile Breakpoint:** `window.innerWidth <= 768px` - use THEME.breakpoints.mobile
+- **Touch Targets:** Minimum 44px for all interactive elements (iOS/Android standards)
+- **Reference Pattern:** `SubscriptionForm.tsx` - perfect mobile responsive implementation
+- **Dual-Layout Pattern:** Tables convert to premium cards on mobile
+- **Mobile Navigation:** Collapsible sidebar with hamburger menu
+
+**🏆 Reference Components for Future AI Agents:**
+- **SubscriptionForm.tsx** - Mobile form pattern with responsive grid layouts
+- **Sidebar.tsx** - Mobile hamburger navigation pattern  
+- **ShareholderList.tsx** - Table-to-cards responsive transformation
+- **THEME constants** - Centralized design system
+
+**Accessibility & UX Features:**
 - 5px blur effect for restricted content
-- Clear access level indicators
-- Consistent navigation and layout
-- Mobile-first responsive design
+- 44px minimum touch targets (mandatory)
+- Responsive typography scaling
+- Mobile-first component design
 
 ## 🏗️ Technical Architecture
 

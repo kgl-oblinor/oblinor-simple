@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { THEME } from '../constants/theme';
 import Layout from '../components/Layout';
 import ShareholderList from '../components/ShareholderList';
 import ShareholderForm from '../components/ShareholderForm';
@@ -24,8 +25,8 @@ const AdminDashboard: React.FC = () => {
   const headerStyle: React.CSSProperties = {
     marginBottom: '30px',
     padding: '20px',
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     borderRadius: '12px',
   };
 
@@ -112,8 +113,8 @@ const AdminDashboard: React.FC = () => {
               <button
                 style={{
                   padding: '10px 20px',
-                  backgroundColor: '#123543',
-                  color: '#fcfbfa',
+                  backgroundColor: THEME.colors.primary,
+                  color: THEME.colors.background,
                   border: 'none',
                   borderRadius: '6px',
                   fontSize: '16px',
@@ -136,8 +137,8 @@ const AdminDashboard: React.FC = () => {
               <button
                 style={{
                   padding: '10px 20px',
-                  backgroundColor: '#123543',
-                  color: '#fcfbfa',
+                  backgroundColor: THEME.colors.primary,
+                  color: THEME.colors.background,
                   border: 'none',
                   borderRadius: '6px',
                   fontSize: '16px',
@@ -158,13 +159,13 @@ const AdminDashboard: React.FC = () => {
           return (
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <h2 style={{ color: '#123543', margin: 0 }}>Subscription Management</h2>
+                <h2 style={{ color: THEME.colors.primary, margin: 0 }}>Subscription Management</h2>
                 <button
                   style={{
                     padding: '8px 16px',
-                    backgroundColor: '#fcfbfa',
-                    color: '#123543',
-                    border: '2px solid #123543',
+                    backgroundColor: THEME.colors.background,
+                    color: THEME.colors.primary,
+                    border: `2px solid ${THEME.colors.primary}`,
                     borderRadius: '6px',
                     fontSize: '14px',
                     fontWeight: 'bold',
@@ -182,9 +183,9 @@ const AdminDashboard: React.FC = () => {
         
         return (
           <div>
-            <h2 style={{ color: '#123543', marginBottom: '20px' }}>Subscription Management</h2>
+            <h2 style={{ color: THEME.colors.primary, marginBottom: '20px' }}>Subscription Management</h2>
             <div style={{ marginBottom: '15px', padding: '15px', backgroundColor: 'rgba(18, 53, 67, 0.05)', borderRadius: '8px' }}>
-              <p style={{ color: '#123543', margin: 0, fontSize: '16px' }}>
+              <p style={{ color: THEME.colors.primary, margin: 0, fontSize: '16px' }}>
                 Select an emission below to view and manage its subscriptions.
               </p>
             </div>

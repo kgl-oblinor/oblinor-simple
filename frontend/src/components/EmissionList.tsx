@@ -17,10 +17,10 @@ const EmissionList: React.FC<EmissionListProps> = ({ onSelectEmission, onViewEmi
   const { user } = useAuth();
 
   const containerStyle: React.CSSProperties = {
-    backgroundColor: '#123543',
+    backgroundColor: THEME.colors.primary,
     padding: '20px',
     borderRadius: '12px',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
     marginBottom: '20px',
   };
 
@@ -52,7 +52,7 @@ const EmissionList: React.FC<EmissionListProps> = ({ onSelectEmission, onViewEmi
       status === 'ACTIVE' ? THEME.colors.success :
       status === 'COMPLETED' ? THEME.colors.info :
       THEME.colors.warning,
-    color: '#fcfbfa',
+    color: THEME.colors.background,
   });
 
   const loadingStyle: React.CSSProperties = {
@@ -191,8 +191,8 @@ const EmissionList: React.FC<EmissionListProps> = ({ onSelectEmission, onViewEmi
                     style={{
                       marginTop: '15px',
                       padding: '10px 20px',
-                      backgroundColor: '#fcfbfa',
-                      color: '#123543',
+                      backgroundColor: THEME.colors.background,
+                      color: THEME.colors.primary,
                       border: 'none',
                       borderRadius: '6px',
                       fontSize: '14px',
