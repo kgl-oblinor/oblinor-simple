@@ -5,8 +5,7 @@ import ShareholderList from '../components/ShareholderList';
 import EmissionList from '../components/EmissionList';
 import EmissionView from '../components/EmissionView';
 import BlurredContent from '../components/BlurredContent';
-
-type UserTab = 'overview' | 'shareholders' | 'emissions';
+import { UserTab } from '../types/navigation';
 
 const UserDashboard: React.FC = () => {
   const { user } = useAuth();

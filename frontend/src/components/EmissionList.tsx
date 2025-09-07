@@ -3,6 +3,7 @@ import { Emission } from '../types';
 import { emissionsAPI } from '../api';
 import BlurredContent from './BlurredContent';
 import { useAuth } from '../context/AuthContext';
+import { THEME } from '../constants/theme';
 
 interface EmissionListProps {
   onSelectEmission?: (emission: Emission) => void;
@@ -48,9 +49,9 @@ const EmissionList: React.FC<EmissionListProps> = ({ onSelectEmission, onViewEmi
     fontSize: '12px',
     fontWeight: 'bold',
     backgroundColor: 
-      status === 'ACTIVE' ? '#4CAF50' :
-      status === 'COMPLETED' ? '#2196F3' :
-      '#FF9800',
+      status === 'ACTIVE' ? THEME.colors.success :
+      status === 'COMPLETED' ? THEME.colors.info :
+      THEME.colors.warning,
     color: '#fcfbfa',
   });
 

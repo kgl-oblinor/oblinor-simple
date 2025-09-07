@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-
-// Navigation types for User and Admin dashboards
-type UserTab = 'overview' | 'shareholders' | 'emissions';
-type AdminTab = 'users' | 'shareholders' | 'emissions' | 'subscriptions';
+import { THEME, isMobile } from '../constants/theme';
+import { NavigationTab, NavigationTabChangeHandler, UserTab, AdminTab } from '../types/navigation';
 
 interface SidebarProps {
-  activeTab?: UserTab | AdminTab;
-  onTabChange?: (tab: UserTab | AdminTab) => void;
+  activeTab?: NavigationTab;
+  onTabChange?: NavigationTabChangeHandler;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
@@ -29,11 +27,11 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
 
   // Mobile header styles
   const mobileHeaderStyle: React.CSSProperties = {
-    display: window.innerWidth <= 768 ? 'flex' : 'none',
+    display: isMobile() ? 'flex' : 'none',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     padding: '15px 20px',
     position: 'fixed',
     top: 0,
@@ -46,7 +44,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   const hamburgerButtonStyle: React.CSSProperties = {
     background: 'none',
     border: 'none',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
     fontSize: '24px',
     cursor: 'pointer',
     padding: '8px',
@@ -55,7 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   };
 
   const overlayStyle: React.CSSProperties = {
-    display: window.innerWidth <= 768 ? 'block' : 'none',
+    display: isMobile() ? 'block' : 'none',
     position: 'fixed',
     top: 0,
     left: 0,
@@ -70,19 +68,19 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
 
   // Desktop sidebar styles (original)
   const sidebarStyle: React.CSSProperties = {
-    width: window.innerWidth <= 768 ? '280px' : '250px',
+    width: isMobile() ? '280px' : THEME.spacing.sidebarWidth,
     height: '100vh',
-    backgroundColor: '#123543',
-    color: '#fcfbfa',
+    backgroundColor: THEME.colors.primary,
+    color: THEME.colors.background,
     padding: '20px',
     position: 'fixed',
-    left: window.innerWidth <= 768 ? (isOpen ? 0 : '-280px') : 0,
-    top: window.innerWidth <= 768 ? 0 : 0,
+    left: isMobile() ? (isOpen ? 0 : '-280px') : 0,
+    top: isMobile() ? 0 : 0,
     display: 'flex',
     flexDirection: 'column',
     borderRight: '1px solid rgba(252, 251, 250, 0.3)',
     zIndex: 999,
-    transition: window.innerWidth <= 768 ? 'left 0.3s ease' : 'none',
+    transition: isMobile() ? THEME.transitions.sidebar : 'none',
   };
 
   const headerStyle: React.CSSProperties = {
@@ -97,10 +95,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   };
 
   const closeButtonStyle: React.CSSProperties = {
-    display: window.innerWidth <= 768 ? 'block' : 'none',
+    display: isMobile() ? 'block' : 'none',
     background: 'none',
     border: 'none',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
     fontSize: '24px',
     cursor: 'pointer',
     padding: '4px',
@@ -137,7 +135,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     fontSize: '16px',
     fontWeight: isActive ? 'bold' : 'normal',
     backgroundColor: isActive ? 'rgba(252, 251, 250, 0.2)' : 'transparent',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
     border: 'none',
     borderRadius: '8px',
     cursor: 'pointer',
@@ -153,7 +151,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     backgroundColor: 'rgba(252, 251, 250, 0.2)',
     border: '1px solid rgba(252, 251, 250, 0.3)',
     borderRadius: '8px',
-    color: '#fcfbfa',
+    color: THEME.colors.background,
     cursor: 'pointer',
     fontSize: '16px',
     fontWeight: 'bold',

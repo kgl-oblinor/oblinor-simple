@@ -3,6 +3,7 @@ import { User } from '../types';
 import { usersAPI } from '../api';
 import BlurredContent from './BlurredContent';
 import { useAuth } from '../context/AuthContext';
+import { THEME } from '../constants/theme';
 
 const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -233,7 +234,7 @@ const UserManagement: React.FC = () => {
                     </div>
                     <span style={{
                       padding: '6px 10px',
-                      backgroundColor: user.role === 'ADMIN' ? '#4CAF50' : '#2196F3',
+                      backgroundColor: user.role === 'ADMIN' ? THEME.colors.success : THEME.colors.info,
                       color: '#fcfbfa',
                       borderRadius: '12px',
                       fontSize: '12px',
@@ -306,7 +307,7 @@ const UserManagement: React.FC = () => {
                       <td style={tdStyle}>
                         <span style={{
                           padding: '4px 8px',
-                          backgroundColor: user.role === 'ADMIN' ? '#4CAF50' : '#2196F3',
+                          backgroundColor: user.role === 'ADMIN' ? THEME.colors.success : THEME.colors.info,
                           color: '#fcfbfa',
                           borderRadius: '12px',
                           fontSize: '12px',

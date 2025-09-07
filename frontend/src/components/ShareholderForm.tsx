@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shareholder } from '../types';
+import { Shareholder, APIError } from '../types';
 import api from '../api';
 
 interface ShareholderFormProps {
@@ -40,8 +40,9 @@ const ShareholderForm: React.FC<ShareholderFormProps> = ({ shareholder, onClose,
       }
       onSave();
       onClose();
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to save shareholder');
+    } catch (err) {
+      const apiError = err as APIError;
+      setError(apiError.response?.data?.error || apiError.message || 'Failed to save shareholder');
     } finally {
       setLoading(false);
     }
@@ -49,17 +50,17 @@ const ShareholderForm: React.FC<ShareholderFormProps> = ({ shareholder, onClose,
 
   const formStyle: React.CSSProperties = {
     backgroundColor: '#fcfbfa',
-    padding: '30px',
+    padding: window.innerWidth <= 768 ? '20px' : '30px',
     borderRadius: '12px',
-    maxWidth: '500px',
+    maxWidth: window.innerWidth <= 768 ? '100%' : '500px',
     margin: '0 auto',
   };
 
   const titleStyle: React.CSSProperties = {
     color: '#123543',
-    fontSize: '24px',
+    fontSize: window.innerWidth <= 768 ? '20px' : '24px',
     fontWeight: 'bold',
-    marginBottom: '20px',
+    marginBottom: window.innerWidth <= 768 ? '15px' : '20px',
   };
 
   const labelStyle: React.CSSProperties = {
@@ -72,13 +73,15 @@ const ShareholderForm: React.FC<ShareholderFormProps> = ({ shareholder, onClose,
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    padding: '10px',
+    padding: window.innerWidth <= 768 ? '12px 16px' : '10px',
     border: '2px solid #123543',
     borderRadius: '6px',
     fontSize: '16px',
-    marginBottom: '15px',
+    marginBottom: window.innerWidth <= 768 ? '12px' : '15px',
     backgroundColor: '#fcfbfa',
     color: '#123543',
+    minHeight: window.innerWidth <= 768 ? '44px' : 'auto',
+    boxSizing: 'border-box',
   };
 
   const buttonContainerStyle: React.CSSProperties = {
@@ -89,13 +92,14 @@ const ShareholderForm: React.FC<ShareholderFormProps> = ({ shareholder, onClose,
 
   const buttonStyle: React.CSSProperties = {
     flex: 1,
-    padding: '12px',
+    padding: window.innerWidth <= 768 ? '12px 16px' : '12px',
     fontSize: '16px',
     fontWeight: 'bold',
     borderRadius: '6px',
     border: 'none',
     cursor: 'pointer',
     transition: 'opacity 0.2s',
+    minHeight: window.innerWidth <= 768 ? '44px' : 'auto',
   };
 
   const saveButtonStyle: React.CSSProperties = {
@@ -142,6 +146,7 @@ const ShareholderForm: React.FC<ShareholderFormProps> = ({ shareholder, onClose,
         <label style={labelStyle}>Email</label>
         <input
           type="email"
+          inputMode="email"
           style={inputStyle}
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -153,6 +158,7 @@ const ShareholderForm: React.FC<ShareholderFormProps> = ({ shareholder, onClose,
         <label style={labelStyle}>Shares Owned</label>
         <input
           type="number"
+          inputMode="numeric"
           style={inputStyle}
           value={formData.shares_owned}
           onChange={(e) => setFormData({ ...formData, shares_owned: parseInt(e.target.value) || 0 })}

@@ -1,21 +1,23 @@
 import React from 'react';
 import Sidebar from './Sidebar';
+import { THEME, isMobile } from '../constants/theme';
+import { NavigationTab, NavigationTabChangeHandler } from '../types/navigation';
 
 interface LayoutProps {
   children: React.ReactNode;
-  activeTab?: any;
-  onTabChange?: (tab: any) => void;
+  activeTab?: NavigationTab;
+  onTabChange?: NavigationTabChangeHandler;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange }) => {
   const contentStyle: React.CSSProperties = {
-    marginLeft: window.innerWidth <= 768 ? '0' : '250px',
-    marginTop: window.innerWidth <= 768 ? '60px' : '0',
+    marginLeft: isMobile() ? '0' : THEME.spacing.sidebarWidth,
+    marginTop: isMobile() ? '60px' : '0',
     padding: '20px',
-    backgroundColor: '#fcfbfa',
+    backgroundColor: THEME.colors.background,
     minHeight: '100vh',
-    color: '#123543',
-    transition: window.innerWidth <= 768 ? 'none' : 'margin-left 0.3s ease',
+    color: THEME.colors.primary,
+    transition: isMobile() ? 'none' : THEME.transitions.sidebar,
   };
 
   return (

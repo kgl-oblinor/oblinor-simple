@@ -8,8 +8,7 @@ import EmissionForm from '../components/EmissionForm';
 import EmissionView from '../components/EmissionView';
 import UserManagement from '../components/UserManagement';
 import SubscriptionList from '../components/SubscriptionList';
-
-type AdminTab = 'users' | 'shareholders' | 'emissions' | 'subscriptions';
+import { AdminTab } from '../types/navigation';
 
 const AdminDashboard: React.FC = () => {
   const { user } = useAuth();
@@ -204,7 +203,11 @@ const AdminDashboard: React.FC = () => {
   return (
     <Layout 
       activeTab={activeTab}
-      onTabChange={(tab) => setActiveTab(tab as AdminTab)}
+      onTabChange={(tab) => {
+        if (tab === 'users' || tab === 'shareholders' || tab === 'emissions' || tab === 'subscriptions') {
+          setActiveTab(tab);
+        }
+      }}
     >
       <div style={headerStyle}>
         <h1 style={titleStyle}>Admin Dashboard</h1>

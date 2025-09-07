@@ -20,3 +20,14 @@ export interface BlurredContentProps {
   userRole?: 'USER' | 'ADMIN';
   adminOnly?: boolean;
 }
+
+export interface APIError {
+  response?: {
+    data?: {
+      error?: string;
+      message?: string;
+    };
+    status?: number;
+  };
+  message?: string;
+}

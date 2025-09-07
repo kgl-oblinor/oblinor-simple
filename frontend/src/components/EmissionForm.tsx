@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Emission } from '../types';
+import { Emission, APIError } from '../types';
 import api from '../api';
 
 interface EmissionFormProps {
@@ -52,8 +52,9 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
       }
       onSave();
       onClose();
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to save emission');
+    } catch (err) {
+      const apiError = err as APIError;
+      setError(apiError.response?.data?.error || apiError.message || 'Failed to save emission');
     } finally {
       setLoading(false);
     }
@@ -61,9 +62,9 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const formStyle: React.CSSProperties = {
     backgroundColor: '#fcfbfa',
-    padding: '30px',
+    padding: window.innerWidth <= 768 ? '20px' : '30px',
     borderRadius: '12px',
-    maxWidth: '600px',
+    maxWidth: window.innerWidth <= 768 ? '100%' : '600px',
     margin: '0 auto',
     maxHeight: '80vh',
     overflowY: 'auto',
@@ -71,9 +72,9 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const titleStyle: React.CSSProperties = {
     color: '#123543',
-    fontSize: '24px',
+    fontSize: window.innerWidth <= 768 ? '20px' : '24px',
     fontWeight: 'bold',
-    marginBottom: '20px',
+    marginBottom: window.innerWidth <= 768 ? '15px' : '20px',
   };
 
   const labelStyle: React.CSSProperties = {
@@ -86,12 +87,14 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    padding: '10px',
+    padding: window.innerWidth <= 768 ? '12px 16px' : '10px',
     border: '2px solid #123543',
     borderRadius: '6px',
     fontSize: '16px',
-    marginBottom: '15px',
+    marginBottom: window.innerWidth <= 768 ? '12px' : '15px',
     backgroundColor: '#fcfbfa',
+    minHeight: window.innerWidth <= 768 ? '44px' : 'auto',
+    boxSizing: 'border-box',
   };
 
   const textareaStyle: React.CSSProperties = {
@@ -106,8 +109,8 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const rowStyle: React.CSSProperties = {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gap: '15px',
+    gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : '1fr 1fr',
+    gap: window.innerWidth <= 768 ? '0' : '15px',
   };
 
   const infoBoxStyle: React.CSSProperties = {
@@ -126,13 +129,14 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const buttonStyle: React.CSSProperties = {
     flex: 1,
-    padding: '12px',
+    padding: window.innerWidth <= 768 ? '12px 16px' : '12px',
     fontSize: '16px',
     fontWeight: 'bold',
     borderRadius: '6px',
     border: 'none',
     cursor: 'pointer',
     transition: 'opacity 0.2s',
+    minHeight: window.innerWidth <= 768 ? '44px' : 'auto',
   };
 
   const saveButtonStyle: React.CSSProperties = {
@@ -208,6 +212,7 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
         <label style={labelStyle}>Number of New Shares</label>
         <input
           type="number"
+          inputMode="numeric"
           style={inputStyle}
           value={formData.new_shares_offered}
           onChange={(e) => setFormData({ ...formData, new_shares_offered: parseInt(e.target.value) || 0 })}
@@ -220,6 +225,7 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
         <label style={labelStyle}>Price per Share (NOK)</label>
         <input
           type="number"
+          inputMode="decimal"
           style={inputStyle}
           value={formData.price_per_share}
           onChange={(e) => setFormData({ ...formData, price_per_share: parseFloat(e.target.value) || 0 })}

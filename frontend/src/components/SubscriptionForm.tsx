@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Emission } from '../types';
+import { Emission, APIError } from '../types';
 import api from '../api';
 
 interface SubscriptionFormProps {
@@ -36,8 +36,9 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
         shares_requested: sharesRequested,
       });
       onSuccess();
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to submit subscription');
+    } catch (err) {
+      const apiError = err as APIError;
+      setError(apiError.response?.data?.error || apiError.message || 'Failed to submit subscription');
     } finally {
       setLoading(false);
     }
