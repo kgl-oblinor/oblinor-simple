@@ -90,10 +90,18 @@ Visit: **https://oblinoremisjonrailway-production.up.railway.app/**
 - Background: `#fcfbfa` (Off-White)
 - **Note:** Only these two colors are used throughout the entire system
 
+**Mobile Responsive Design:**
+- **Mobile Breakpoint:** `window.innerWidth <= 768px` used consistently
+- **Dual-Layout Pattern:** Tables on desktop, premium cards on mobile
+- **Touch Optimization:** 44px minimum touch targets throughout
+- **Collapsible Sidebar:** Hamburger menu on mobile, fixed sidebar on desktop
+- **Premium Mobile Cards:** Avatars, ownership bars, enhanced mobile UX
+
 **Accessibility Features:**
 - 5px blur effect for restricted content
 - Clear access level indicators
 - Consistent navigation and layout
+- Mobile-first responsive design
 
 ## 🏗️ Technical Architecture
 
@@ -131,20 +139,37 @@ Visit: **https://oblinoremisjonrailway-production.up.railway.app/**
 - Frontend: `localhost:5174`
 - For testing and developing new features
 
+### 🔄 Local Development Setup
+
+**REQUIRED: Create Environment Files**
+```bash
+# 1. Backend environment file
+# Create: backend/.env
+DATABASE_URL=postgresql://postgres:iuzakIAZhFviojhSMiTFfbgdnIAFRWGJ@hopper.proxy.rlwy.net:42209/railway
+JWT_SECRET=oblinor-local-dev-jwt-secret-change-in-production
+NODE_ENV=development
+PORT=4001
+
+# 2. Frontend environment file  
+# Create: frontend/.env
+VITE_API_URL=http://localhost:4001
+```
+
 ### 🔄 Typical Development Workflow
 
 ```bash
-# 1. Develop locally on your machine
+# 1. Ensure environment files exist (see above)
+# 2. Develop locally on your machine
 cd backend && npm run dev    # Local backend
 cd frontend && npm run dev   # Local frontend
 
-# 2. Test changes on localhost
-open http://localhost:5174
+# 3. Test changes on localhost
+open http://localhost:5175
 
-# 3. Push to GitHub when satisfied
+# 4. Push to GitHub when satisfied
 git push
 
-# 4. Railway automatically updates production
+# 5. Railway automatically updates production
 # Users see changes on https://oblinoremisjonrailway-production.up.railway.app/
 ```
 
@@ -163,6 +188,10 @@ The platform successfully demonstrates:
 - ✅ Responsive blur effects for access control
 - ✅ Production-ready Railway deployment
 - ✅ Consistent two-color design system
+- ✅ **Full mobile responsiveness** with 768px breakpoint
+- ✅ **Premium mobile experience** with avatar cards and ownership bars
+- ✅ **TypeScript type safety** throughout the application
+- ✅ **Local development setup** documented and working
 
 ## 📞 Support & Contact
 
