@@ -123,14 +123,14 @@ const ShareholderList: React.FC = () => {
     marginTop: '8px',
   };
 
-  const mobileCardOwnershipBarStyle = (percentage: number): React.CSSProperties => ({
+  const mobileCardOwnershipBarStyle: React.CSSProperties = {
     width: '100%',
     height: '6px',
     backgroundColor: 'rgba(252, 251, 250, 0.2)',
     borderRadius: '3px',
     overflow: 'hidden',
     position: 'relative',
-  });
+  };
 
   const mobileCardOwnershipBarFillStyle = (percentage: number): React.CSSProperties => ({
     width: `${percentage}%`,
@@ -278,7 +278,7 @@ const ShareholderList: React.FC = () => {
                       </div>
                       
                       <div style={mobileCardOwnershipBarContainerStyle}>
-                        <div style={mobileCardOwnershipBarStyle(percentage)}>
+                        <div style={mobileCardOwnershipBarStyle}>
                           <div style={mobileCardOwnershipBarFillStyle(percentage)}></div>
                         </div>
                       </div>
