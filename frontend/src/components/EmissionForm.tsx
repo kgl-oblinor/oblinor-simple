@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Emission, APIError } from '../types';
 import api from '../api';
-import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
+import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS } from '../constants/theme';
 
 interface EmissionFormProps {
   emission?: Emission | null;

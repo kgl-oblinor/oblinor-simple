@@ -105,8 +105,8 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
 
   const totalRowStyle: React.CSSProperties = {
     ...summaryRowStyle,
-    fontWeight: 'bold',
     ...getResponsiveTypography('body'),
+    fontWeight: 'bold',
     borderTop: `2px solid ${THEME.colors.primary}`,
     paddingTop: '10px',
   };
