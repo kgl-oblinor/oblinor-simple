@@ -54,36 +54,102 @@ const ShareholderList: React.FC = () => {
     border: '1px solid rgba(252, 251, 250, 0.2)',
   };
 
-  const mobileCardNameStyle: React.CSSProperties = {
+  const mobileCardHeaderStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: '12px',
+    gap: '12px',
+  };
+
+  const mobileCardAvatarStyle: React.CSSProperties = {
+    width: '45px',
+    height: '45px',
+    backgroundColor: '#fcfbfa',
+    color: '#123543',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     fontSize: '18px',
     fontWeight: 'bold',
-    marginBottom: '5px',
+    flexShrink: 0,
+  };
+
+  const mobileCardInfoStyle: React.CSSProperties = {
+    flex: 1,
+  };
+
+  const mobileCardNameStyle: React.CSSProperties = {
+    fontSize: '20px',
+    fontWeight: 'bold',
+    marginBottom: '2px',
+    color: '#fcfbfa',
   };
 
   const mobileCardEmailStyle: React.CSSProperties = {
     fontSize: '14px',
     opacity: 0.8,
-    marginBottom: '10px',
+    marginBottom: '12px',
+    color: '#fcfbfa',
   };
 
-  const mobileCardStatsStyle: React.CSSProperties = {
+  const mobileCardStatsContainerStyle: React.CSSProperties = {
+    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    borderRadius: '8px',
+    padding: '12px',
+    marginTop: '12px',
+  };
+
+  const mobileCardStatsRowStyle: React.CSSProperties = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: '8px',
   };
 
-  const mobileCardSharesStyle: React.CSSProperties = {
+  const mobileCardStatsLabelStyle: React.CSSProperties = {
+    fontSize: '14px',
+    opacity: 0.8,
+    color: '#fcfbfa',
+  };
+
+  const mobileCardStatsValueStyle: React.CSSProperties = {
     fontSize: '16px',
     fontWeight: 'bold',
+    color: '#fcfbfa',
   };
 
+  const mobileCardOwnershipBarContainerStyle: React.CSSProperties = {
+    marginTop: '8px',
+  };
+
+  const mobileCardOwnershipBarStyle = (percentage: number): React.CSSProperties => ({
+    width: '100%',
+    height: '6px',
+    backgroundColor: 'rgba(252, 251, 250, 0.2)',
+    borderRadius: '3px',
+    overflow: 'hidden',
+    position: 'relative',
+  });
+
+  const mobileCardOwnershipBarFillStyle = (percentage: number): React.CSSProperties => ({
+    width: `${percentage}%`,
+    height: '100%',
+    backgroundColor: '#fcfbfa',
+    borderRadius: '3px',
+    transition: 'width 0.3s ease',
+  });
+
   const mobileCardPercentageStyle: React.CSSProperties = {
-    fontSize: '16px',
+    fontSize: '18px',
     fontWeight: 'bold',
     backgroundColor: '#fcfbfa',
     color: '#123543',
-    padding: '4px 8px',
+    padding: '6px 12px',
     borderRadius: '12px',
+    textAlign: 'center',
+    marginTop: '8px',
+    display: 'inline-block',
   };
 
   // Desktop table styles
@@ -172,23 +238,54 @@ const ShareholderList: React.FC = () => {
           <>
             {/* Mobile Card Layout */}
             <div style={mobileCardContainerStyle}>
-              {shareholders.map((shareholder) => (
-                <div key={shareholder.id} style={mobileCardStyle}>
-                  <div style={mobileCardNameStyle}>{shareholder.name}</div>
-                  <div style={mobileCardEmailStyle}>{shareholder.email}</div>
-                  <div style={mobileCardStatsStyle}>
-                    <span style={mobileCardSharesStyle}>
-                      {formatNumber(shareholder.shares_owned)} shares
-                    </span>
-                    <span style={mobileCardPercentageStyle}>
-                      {totalShares > 0 
-                        ? ((shareholder.shares_owned / totalShares) * 100).toFixed(2)
-                        : '0.00'
-                      }%
-                    </span>
+              {shareholders.map((shareholder) => {
+                const percentage = totalShares > 0 
+                  ? (shareholder.shares_owned / totalShares) * 100 
+                  : 0;
+                
+                const initials = shareholder.name
+                  .split(' ')
+                  .map(n => n[0])
+                  .join('')
+                  .substring(0, 2)
+                  .toUpperCase();
+
+                return (
+                  <div key={shareholder.id} style={mobileCardStyle}>
+                    <div style={mobileCardHeaderStyle}>
+                      <div style={mobileCardAvatarStyle}>
+                        {initials}
+                      </div>
+                      <div style={mobileCardInfoStyle}>
+                        <div style={mobileCardNameStyle}>{shareholder.name}</div>
+                        <div style={mobileCardEmailStyle}>{shareholder.email}</div>
+                      </div>
+                    </div>
+                    
+                    <div style={mobileCardStatsContainerStyle}>
+                      <div style={mobileCardStatsRowStyle}>
+                        <span style={mobileCardStatsLabelStyle}>Shares Owned</span>
+                        <span style={mobileCardStatsValueStyle}>
+                          {formatNumber(shareholder.shares_owned)}
+                        </span>
+                      </div>
+                      
+                      <div style={mobileCardStatsRowStyle}>
+                        <span style={mobileCardStatsLabelStyle}>Ownership</span>
+                        <span style={mobileCardPercentageStyle}>
+                          {percentage.toFixed(2)}%
+                        </span>
+                      </div>
+                      
+                      <div style={mobileCardOwnershipBarContainerStyle}>
+                        <div style={mobileCardOwnershipBarStyle(percentage)}>
+                          <div style={mobileCardOwnershipBarFillStyle(percentage)}></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Desktop Table Layout */}

@@ -7,6 +7,7 @@ import EmissionList from '../components/EmissionList';
 import EmissionForm from '../components/EmissionForm';
 import EmissionView from '../components/EmissionView';
 import UserManagement from '../components/UserManagement';
+import SubscriptionList from '../components/SubscriptionList';
 
 type AdminTab = 'users' | 'shareholders' | 'emissions' | 'subscriptions';
 
@@ -18,6 +19,7 @@ const AdminDashboard: React.FC = () => {
   const [showEmissionForm, setShowEmissionForm] = useState(false);
   const [editingEmission, setEditingEmission] = useState(null);
   const [viewingEmission, setViewingEmission] = useState<number | null>(null);
+  const [selectedEmissionForSubscriptions, setSelectedEmissionForSubscriptions] = useState<number | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
 
   const headerStyle: React.CSSProperties = {
@@ -51,25 +53,6 @@ const AdminDashboard: React.FC = () => {
   }
 
 
-  const tabStyle: React.CSSProperties = {
-    display: 'flex',
-    gap: '10px',
-    marginBottom: '20px',
-    borderBottom: '2px solid #123543',
-    paddingBottom: '10px',
-  };
-
-  const tabButtonStyle = (isActive: boolean): React.CSSProperties => ({
-    padding: '10px 20px',
-    fontSize: '16px',
-    fontWeight: isActive ? 'bold' : 'normal',
-    backgroundColor: isActive ? '#123543' : '#fcfbfa',
-    color: isActive ? '#fcfbfa' : '#123543',
-    border: `2px solid #123543`,
-    borderRadius: '8px 8px 0 0',
-    cursor: 'pointer',
-    transition: 'all 0.2s',
-  });
 
   const handleRefresh = () => {
     setRefreshKey(prev => prev + 1);
@@ -172,13 +155,44 @@ const AdminDashboard: React.FC = () => {
         );
       
       case 'subscriptions':
+        if (selectedEmissionForSubscriptions) {
+          return (
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <h2 style={{ color: '#123543', margin: 0 }}>Subscription Management</h2>
+                <button
+                  style={{
+                    padding: '8px 16px',
+                    backgroundColor: '#fcfbfa',
+                    color: '#123543',
+                    border: '2px solid #123543',
+                    borderRadius: '6px',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => setSelectedEmissionForSubscriptions(null)}
+                >
+                  ← Back to Emissions
+                </button>
+              </div>
+              <SubscriptionList emissionId={selectedEmissionForSubscriptions} />
+            </div>
+          );
+        }
+        
         return (
           <div>
-            <h2 style={{ color: '#123543', marginBottom: '20px' }}>Manage Subscriptions</h2>
-            <EmissionList key={refreshKey} />
-            <div style={{ marginTop: '20px', padding: '20px', backgroundColor: 'rgba(18, 53, 67, 0.05)', borderRadius: '8px' }}>
-              <p style={{ color: '#123543' }}>Select an emission above to view and manage its subscriptions.</p>
+            <h2 style={{ color: '#123543', marginBottom: '20px' }}>Subscription Management</h2>
+            <div style={{ marginBottom: '15px', padding: '15px', backgroundColor: 'rgba(18, 53, 67, 0.05)', borderRadius: '8px' }}>
+              <p style={{ color: '#123543', margin: 0, fontSize: '16px' }}>
+                Select an emission below to view and manage its subscriptions.
+              </p>
             </div>
+            <EmissionList 
+              key={refreshKey} 
+              onSelectEmission={(emission) => setSelectedEmissionForSubscriptions(emission.id)}
+            />
           </div>
         );
       
@@ -188,39 +202,15 @@ const AdminDashboard: React.FC = () => {
   };
 
   return (
-    <Layout>
+    <Layout 
+      activeTab={activeTab}
+      onTabChange={(tab) => setActiveTab(tab as AdminTab)}
+    >
       <div style={headerStyle}>
         <h1 style={titleStyle}>Admin Dashboard</h1>
         <p style={subtitleStyle}>
           Welcome, {user.name} - {user.role} Level {user.level}
         </p>
-      </div>
-
-      <div style={tabStyle}>
-        <button
-          style={tabButtonStyle(activeTab === 'users')}
-          onClick={() => setActiveTab('users')}
-        >
-          Users
-        </button>
-        <button
-          style={tabButtonStyle(activeTab === 'shareholders')}
-          onClick={() => setActiveTab('shareholders')}
-        >
-          Shareholders
-        </button>
-        <button
-          style={tabButtonStyle(activeTab === 'emissions')}
-          onClick={() => setActiveTab('emissions')}
-        >
-          Emissions
-        </button>
-        <button
-          style={tabButtonStyle(activeTab === 'subscriptions')}
-          onClick={() => setActiveTab('subscriptions')}
-        >
-          Subscriptions
-        </button>
       </div>
 
       <div style={sectionStyle}>

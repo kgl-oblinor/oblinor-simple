@@ -70,27 +70,6 @@ const UserDashboard: React.FC = () => {
     }
   };
 
-  const tabStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
-    gap: '10px',
-    marginBottom: '20px',
-    borderBottom: '2px solid #123543',
-    paddingBottom: '10px',
-  };
-
-  const tabButtonStyle = (isActive: boolean): React.CSSProperties => ({
-    padding: window.innerWidth <= 768 ? '12px 16px' : '10px 20px',
-    fontSize: '16px',
-    fontWeight: isActive ? 'bold' : 'normal',
-    backgroundColor: isActive ? '#123543' : '#fcfbfa',
-    color: isActive ? '#fcfbfa' : '#123543',
-    border: `2px solid #123543`,
-    borderRadius: window.innerWidth <= 768 ? '8px' : '8px 8px 0 0',
-    cursor: 'pointer',
-    transition: 'all 0.2s',
-    minHeight: '44px',
-  });
 
   const renderTabContent = () => {
     if (viewingEmission) {
@@ -182,33 +161,15 @@ const UserDashboard: React.FC = () => {
   };
 
   return (
-    <Layout>
+    <Layout 
+      activeTab={activeTab}
+      onTabChange={(tab) => setActiveTab(tab as UserTab)}
+    >
       <div style={headerStyle}>
         <h1 style={titleStyle}>Welcome, {user.name}</h1>
         <p style={subtitleStyle}>
           {user.role} - Level {user.level}
         </p>
-      </div>
-
-      <div style={tabStyle}>
-        <button
-          style={tabButtonStyle(activeTab === 'overview')}
-          onClick={() => setActiveTab('overview')}
-        >
-          Overview
-        </button>
-        <button
-          style={tabButtonStyle(activeTab === 'shareholders')}
-          onClick={() => setActiveTab('shareholders')}
-        >
-          Shareholders
-        </button>
-        <button
-          style={tabButtonStyle(activeTab === 'emissions')}
-          onClick={() => setActiveTab('emissions')}
-        >
-          Emissions
-        </button>
       </div>
 
       <div style={sectionStyle}>

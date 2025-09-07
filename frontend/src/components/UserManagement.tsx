@@ -26,6 +26,12 @@ const UserManagement: React.FC = () => {
     paddingBottom: '10px',
   };
 
+  // Desktop table styles
+  const tableContainerStyle: React.CSSProperties = {
+    display: window.innerWidth <= 768 ? 'none' : 'block',
+    overflowX: 'auto',
+  };
+
   const tableStyle: React.CSSProperties = {
     width: '100%',
     borderCollapse: 'collapse',
@@ -79,6 +85,76 @@ const UserManagement: React.FC = () => {
     padding: '20px',
     backgroundColor: 'rgba(255, 107, 107, 0.1)',
     borderRadius: '8px',
+  };
+
+  // Mobile card styles
+  const mobileCardContainerStyle: React.CSSProperties = {
+    display: window.innerWidth <= 768 ? 'block' : 'none',
+  };
+
+  const mobileCardStyle: React.CSSProperties = {
+    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    borderRadius: '8px',
+    padding: '15px',
+    marginBottom: '15px',
+    border: '1px solid rgba(252, 251, 250, 0.2)',
+  };
+
+  const mobileCardHeaderStyle: React.CSSProperties = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: '10px',
+  };
+
+  const mobileCardNameStyle: React.CSSProperties = {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    marginBottom: '4px',
+    color: '#fcfbfa',
+  };
+
+  const mobileCardEmailStyle: React.CSSProperties = {
+    fontSize: '14px',
+    opacity: 0.8,
+    color: '#fcfbfa',
+  };
+
+  const mobileCardDetailsStyle: React.CSSProperties = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: '12px',
+    gap: '10px',
+  };
+
+  const mobileCardLevelContainerStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    flex: '1',
+  };
+
+  const mobileSelectStyle: React.CSSProperties = {
+    padding: '8px 12px',
+    backgroundColor: 'rgba(252, 251, 250, 0.2)',
+    border: '1px solid rgba(252, 251, 250, 0.3)',
+    borderRadius: '6px',
+    color: '#fcfbfa',
+    fontSize: '14px',
+    minHeight: '40px',
+  };
+
+  const mobileActionButtonStyle: React.CSSProperties = {
+    padding: '8px 12px',
+    backgroundColor: '#fcfbfa',
+    color: '#123543',
+    border: 'none',
+    borderRadius: '6px',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    minHeight: '40px',
   };
 
   useEffect(() => {
@@ -145,25 +221,18 @@ const UserManagement: React.FC = () => {
         )}
 
         {!loading && !error && users.length > 0 && (
-          <table style={tableStyle}>
-            <thead>
-              <tr>
-                <th style={thStyle}>Name</th>
-                <th style={thStyle}>Email</th>
-                <th style={thStyle}>Role</th>
-                <th style={thStyle}>Level</th>
-                <th style={thStyle}>Created</th>
-                <th style={thStyle}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
+          <>
+            {/* Mobile Card Layout */}
+            <div style={mobileCardContainerStyle}>
               {users.map((user) => (
-                <tr key={user.id}>
-                  <td style={tdStyle}>{user.name}</td>
-                  <td style={tdStyle}>{user.email}</td>
-                  <td style={tdStyle}>
+                <div key={user.id} style={mobileCardStyle}>
+                  <div style={mobileCardHeaderStyle}>
+                    <div>
+                      <div style={mobileCardNameStyle}>{user.name}</div>
+                      <div style={mobileCardEmailStyle}>{user.email}</div>
+                    </div>
                     <span style={{
-                      padding: '4px 8px',
+                      padding: '6px 10px',
                       backgroundColor: user.role === 'ADMIN' ? '#4CAF50' : '#2196F3',
                       color: '#fcfbfa',
                       borderRadius: '12px',
@@ -172,33 +241,32 @@ const UserManagement: React.FC = () => {
                     }}>
                       {user.role}
                     </span>
-                  </td>
-                  <td style={tdStyle}>
-                    <select
-                      value={user.level}
-                      onChange={(e) => handleLevelChange(user.id, parseInt(e.target.value))}
-                      style={selectStyle}
-                      disabled={updatingUser === user.id || user.id === currentUser.id}
-                    >
-                      {getValidLevels(user.role).map(level => (
-                        <option key={level} value={level}>
-                          Level {level}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                  <td style={tdStyle}>
-                    {/* Created date not available in User type */}
-                    -
-                  </td>
-                  <td style={tdStyle}>
+                  </div>
+                  
+                  <div style={mobileCardDetailsStyle}>
+                    <div style={mobileCardLevelContainerStyle}>
+                      <span style={{ fontSize: '14px', fontWeight: 'bold' }}>Level:</span>
+                      <select
+                        value={user.level}
+                        onChange={(e) => handleLevelChange(user.id, parseInt(e.target.value))}
+                        style={mobileSelectStyle}
+                        disabled={updatingUser === user.id || user.id === currentUser.id}
+                      >
+                        {getValidLevels(user.role).map(level => (
+                          <option key={level} value={level}>
+                            Level {level}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    
                     {updatingUser === user.id ? (
                       <span style={{ fontSize: '12px', opacity: 0.7 }}>Updating...</span>
                     ) : user.id === currentUser.id ? (
                       <span style={{ fontSize: '12px', opacity: 0.7 }}>Current User</span>
                     ) : (
                       <button
-                        style={buttonStyle}
+                        style={mobileActionButtonStyle}
                         onClick={() => {
                           // Could add more actions here like delete, etc.
                         }}
@@ -212,11 +280,87 @@ const UserManagement: React.FC = () => {
                         Edit
                       </button>
                     )}
-                  </td>
-                </tr>
+                  </div>
+                </div>
               ))}
-            </tbody>
-          </table>
+            </div>
+
+            {/* Desktop Table Layout */}
+            <div style={tableContainerStyle}>
+              <table style={tableStyle}>
+                <thead>
+                  <tr>
+                    <th style={thStyle}>Name</th>
+                    <th style={thStyle}>Email</th>
+                    <th style={thStyle}>Role</th>
+                    <th style={thStyle}>Level</th>
+                    <th style={thStyle}>Created</th>
+                    <th style={thStyle}>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((user) => (
+                    <tr key={user.id}>
+                      <td style={tdStyle}>{user.name}</td>
+                      <td style={tdStyle}>{user.email}</td>
+                      <td style={tdStyle}>
+                        <span style={{
+                          padding: '4px 8px',
+                          backgroundColor: user.role === 'ADMIN' ? '#4CAF50' : '#2196F3',
+                          color: '#fcfbfa',
+                          borderRadius: '12px',
+                          fontSize: '12px',
+                          fontWeight: 'bold'
+                        }}>
+                          {user.role}
+                        </span>
+                      </td>
+                      <td style={tdStyle}>
+                        <select
+                          value={user.level}
+                          onChange={(e) => handleLevelChange(user.id, parseInt(e.target.value))}
+                          style={selectStyle}
+                          disabled={updatingUser === user.id || user.id === currentUser.id}
+                        >
+                          {getValidLevels(user.role).map(level => (
+                            <option key={level} value={level}>
+                              Level {level}
+                            </option>
+                          ))}
+                        </select>
+                      </td>
+                      <td style={tdStyle}>
+                        {/* Created date not available in User type */}
+                        -
+                      </td>
+                      <td style={tdStyle}>
+                        {updatingUser === user.id ? (
+                          <span style={{ fontSize: '12px', opacity: 0.7 }}>Updating...</span>
+                        ) : user.id === currentUser.id ? (
+                          <span style={{ fontSize: '12px', opacity: 0.7 }}>Current User</span>
+                        ) : (
+                          <button
+                            style={buttonStyle}
+                            onClick={() => {
+                              // Could add more actions here like delete, etc.
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.9)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = '#fcfbfa';
+                            }}
+                          >
+                            Edit
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
 
         {!loading && !error && users.length === 0 && (

@@ -31,8 +31,6 @@ pids
 # Coverage directory used by tools like istanbul
 coverage/
 
-# Docker
-.dockerignore
 
 # IDE files
 .vscode/

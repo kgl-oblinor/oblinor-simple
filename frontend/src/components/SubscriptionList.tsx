@@ -172,6 +172,100 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
     fontWeight: 'bold',
   };
 
+  // Mobile card styles
+  const mobileCardContainerStyle: React.CSSProperties = {
+    display: window.innerWidth <= 768 ? 'block' : 'none',
+  };
+
+  const mobileCardStyle: React.CSSProperties = {
+    backgroundColor: 'rgba(18, 53, 67, 0.05)',
+    borderRadius: '8px',
+    padding: '15px',
+    marginBottom: '15px',
+    border: '1px solid rgba(18, 53, 67, 0.2)',
+  };
+
+  const mobileCardHeaderStyle: React.CSSProperties = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: '12px',
+  };
+
+  const mobileCardInvestorInfoStyle: React.CSSProperties = {
+    flex: 1,
+  };
+
+  const mobileCardInvestorNameStyle: React.CSSProperties = {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    marginBottom: '4px',
+    color: '#123543',
+  };
+
+  const mobileCardInvestorEmailStyle: React.CSSProperties = {
+    fontSize: '14px',
+    opacity: 0.7,
+    color: '#123543',
+  };
+
+  const mobileCardStatsContainerStyle: React.CSSProperties = {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '12px',
+    marginBottom: '12px',
+  };
+
+  const mobileCardStatItemStyle: React.CSSProperties = {
+    textAlign: 'center',
+    padding: '8px',
+    backgroundColor: 'rgba(252, 251, 250, 0.8)',
+    borderRadius: '6px',
+  };
+
+  const mobileCardStatLabelStyle: React.CSSProperties = {
+    fontSize: '12px',
+    opacity: 0.7,
+    marginBottom: '4px',
+    color: '#123543',
+  };
+
+  const mobileCardStatValueStyle: React.CSSProperties = {
+    fontSize: '16px',
+    fontWeight: 'bold',
+    color: '#123543',
+  };
+
+  const mobileCardActionsStyle: React.CSSProperties = {
+    display: 'flex',
+    gap: '8px',
+    marginTop: '12px',
+  };
+
+  const mobileInputStyle: React.CSSProperties = {
+    width: '100px',
+    padding: '8px',
+    border: '1px solid #123543',
+    borderRadius: '4px',
+    fontSize: '14px',
+  };
+
+  const mobileButtonStyle: React.CSSProperties = {
+    padding: '8px 12px',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    borderRadius: '4px',
+    border: 'none',
+    cursor: 'pointer',
+    minHeight: '40px',
+  };
+
+  // Desktop table styles
+  const tableContainerStyle: React.CSSProperties = {
+    display: window.innerWidth <= 768 ? 'none' : 'block',
+    overflowX: 'auto',
+  };
+
   if (loading) {
     return <div style={containerStyle}>Loading subscriptions...</div>;
   }
@@ -212,89 +306,176 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
         </div>
       </div>
 
-      <table style={tableStyle}>
-        <thead>
-          <tr>
-            <th style={thStyle}>Investor</th>
-            <th style={thStyle}>Email</th>
-            <th style={thStyle}>Requested</th>
-            <th style={thStyle}>Allocated</th>
-            <th style={thStyle}>Status</th>
-            <th style={thStyle}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {subscriptions.map((sub) => (
-            <tr key={sub.id}>
-              <td style={tdStyle}>{sub.user?.name || 'Unknown'}</td>
-              <td style={tdStyle}>{sub.user?.email || '-'}</td>
-              <td style={tdStyle}>{sub.shares_requested.toLocaleString()}</td>
-              <td style={tdStyle}>
-                {editingId === sub.id && sub.status === 'PENDING' ? (
-                  <input
-                    type="number"
-                    style={inputStyle}
-                    value={allocatedShares[sub.id] || ''}
-                    onChange={(e) => setAllocatedShares({
-                      ...allocatedShares,
-                      [sub.id]: parseInt(e.target.value) || 0
-                    })}
-                    min="0"
-                    max={sub.shares_requested}
-                  />
-                ) : (
-                  sub.shares_allocated?.toLocaleString() || '-'
-                )}
-              </td>
-              <td style={tdStyle}>
-                <span style={statusBadgeStyle(sub.status)}>{sub.status}</span>
-              </td>
-              <td style={tdStyle}>
-                {sub.status === 'PENDING' && (
+      {/* Mobile Card Layout */}
+      <div style={mobileCardContainerStyle}>
+        {subscriptions.map((sub) => (
+          <div key={sub.id} style={mobileCardStyle}>
+            <div style={mobileCardHeaderStyle}>
+              <div style={mobileCardInvestorInfoStyle}>
+                <div style={mobileCardInvestorNameStyle}>{sub.user?.name || 'Unknown'}</div>
+                <div style={mobileCardInvestorEmailStyle}>{sub.user?.email || '-'}</div>
+              </div>
+              <span style={statusBadgeStyle(sub.status)}>{sub.status}</span>
+            </div>
+
+            <div style={mobileCardStatsContainerStyle}>
+              <div style={mobileCardStatItemStyle}>
+                <div style={mobileCardStatLabelStyle}>Requested</div>
+                <div style={mobileCardStatValueStyle}>{sub.shares_requested.toLocaleString()}</div>
+              </div>
+              <div style={mobileCardStatItemStyle}>
+                <div style={mobileCardStatLabelStyle}>Allocated</div>
+                <div style={mobileCardStatValueStyle}>
+                  {editingId === sub.id && sub.status === 'PENDING' ? (
+                    <input
+                      type="number"
+                      style={mobileInputStyle}
+                      value={allocatedShares[sub.id] || ''}
+                      onChange={(e) => setAllocatedShares({
+                        ...allocatedShares,
+                        [sub.id]: parseInt(e.target.value) || 0
+                      })}
+                      min="0"
+                      max={sub.shares_requested}
+                    />
+                  ) : (
+                    sub.shares_allocated?.toLocaleString() || '-'
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {sub.status === 'PENDING' && (
+              <div style={mobileCardActionsStyle}>
+                {editingId === sub.id ? (
                   <>
-                    {editingId === sub.id ? (
-                      <>
-                        <button
-                          style={approveButtonStyle}
-                          onClick={() => handleApprove(sub.id)}
-                        >
-                          Confirm
-                        </button>
-                        <button
-                          style={rejectButtonStyle}
-                          onClick={() => setEditingId(null)}
-                        >
-                          Cancel
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button
-                          style={approveButtonStyle}
-                          onClick={() => setEditingId(sub.id)}
-                        >
-                          Approve
-                        </button>
-                        <button
-                          style={rejectButtonStyle}
-                          onClick={() => handleReject(sub.id)}
-                        >
-                          Reject
-                        </button>
-                      </>
-                    )}
+                    <button
+                      style={{ ...mobileButtonStyle, backgroundColor: '#123543', color: '#fcfbfa', flex: 1 }}
+                      onClick={() => handleApprove(sub.id)}
+                    >
+                      Confirm
+                    </button>
+                    <button
+                      style={{ ...mobileButtonStyle, backgroundColor: '#fcfbfa', color: '#123543', border: '1px solid #123543', flex: 1 }}
+                      onClick={() => setEditingId(null)}
+                    >
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      style={{ ...mobileButtonStyle, backgroundColor: '#123543', color: '#fcfbfa', flex: 1 }}
+                      onClick={() => setEditingId(sub.id)}
+                    >
+                      Approve
+                    </button>
+                    <button
+                      style={{ ...mobileButtonStyle, backgroundColor: '#fcfbfa', color: '#123543', border: '1px solid #123543', flex: 1 }}
+                      onClick={() => handleReject(sub.id)}
+                    >
+                      Reject
+                    </button>
                   </>
                 )}
-                {sub.status === 'APPROVED' && sub.approved_at && (
-                  <span style={{ color: '#123543', fontSize: '12px' }}>
-                    Approved {new Date(sub.approved_at).toLocaleDateString()}
-                  </span>
-                )}
-              </td>
+              </div>
+            )}
+
+            {sub.status === 'APPROVED' && sub.approved_at && (
+              <div style={{ marginTop: '8px', fontSize: '12px', color: '#123543', opacity: 0.7 }}>
+                Approved {new Date(sub.approved_at).toLocaleDateString()}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop Table Layout */}
+      <div style={tableContainerStyle}>
+        <table style={tableStyle}>
+          <thead>
+            <tr>
+              <th style={thStyle}>Investor</th>
+              <th style={thStyle}>Email</th>
+              <th style={thStyle}>Requested</th>
+              <th style={thStyle}>Allocated</th>
+              <th style={thStyle}>Status</th>
+              <th style={thStyle}>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {subscriptions.map((sub) => (
+              <tr key={sub.id}>
+                <td style={tdStyle}>{sub.user?.name || 'Unknown'}</td>
+                <td style={tdStyle}>{sub.user?.email || '-'}</td>
+                <td style={tdStyle}>{sub.shares_requested.toLocaleString()}</td>
+                <td style={tdStyle}>
+                  {editingId === sub.id && sub.status === 'PENDING' ? (
+                    <input
+                      type="number"
+                      style={inputStyle}
+                      value={allocatedShares[sub.id] || ''}
+                      onChange={(e) => setAllocatedShares({
+                        ...allocatedShares,
+                        [sub.id]: parseInt(e.target.value) || 0
+                      })}
+                      min="0"
+                      max={sub.shares_requested}
+                    />
+                  ) : (
+                    sub.shares_allocated?.toLocaleString() || '-'
+                  )}
+                </td>
+                <td style={tdStyle}>
+                  <span style={statusBadgeStyle(sub.status)}>{sub.status}</span>
+                </td>
+                <td style={tdStyle}>
+                  {sub.status === 'PENDING' && (
+                    <>
+                      {editingId === sub.id ? (
+                        <>
+                          <button
+                            style={approveButtonStyle}
+                            onClick={() => handleApprove(sub.id)}
+                          >
+                            Confirm
+                          </button>
+                          <button
+                            style={rejectButtonStyle}
+                            onClick={() => setEditingId(null)}
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            style={approveButtonStyle}
+                            onClick={() => setEditingId(sub.id)}
+                          >
+                            Approve
+                          </button>
+                          <button
+                            style={rejectButtonStyle}
+                            onClick={() => handleReject(sub.id)}
+                          >
+                            Reject
+                          </button>
+                        </>
+                      )}
+                    </>
+                  )}
+                  {sub.status === 'APPROVED' && sub.approved_at && (
+                    <span style={{ color: '#123543', fontSize: '12px' }}>
+                      Approved {new Date(sub.approved_at).toLocaleDateString()}
+                    </span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {subscriptions.length === 0 && (
         <div style={{ textAlign: 'center', padding: '40px', color: '#123543' }}>

@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
-const Sidebar: React.FC = () => {
+// Navigation types for User and Admin dashboards
+type UserTab = 'overview' | 'shareholders' | 'emissions';
+type AdminTab = 'users' | 'shareholders' | 'emissions' | 'subscriptions';
+
+interface SidebarProps {
+  activeTab?: UserTab | AdminTab;
+  onTabChange?: (tab: UserTab | AdminTab) => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   const { user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -116,6 +125,28 @@ const Sidebar: React.FC = () => {
     marginTop: '8px',
   };
 
+  const navigationStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    marginBottom: '20px',
+  };
+
+  const navButtonStyle = (isActive: boolean): React.CSSProperties => ({
+    padding: '12px 16px',
+    fontSize: '16px',
+    fontWeight: isActive ? 'bold' : 'normal',
+    backgroundColor: isActive ? 'rgba(252, 251, 250, 0.2)' : 'transparent',
+    color: '#fcfbfa',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    textAlign: 'left',
+    transition: 'all 0.2s ease',
+    minHeight: '44px',
+    borderLeft: isActive ? '3px solid #fcfbfa' : '3px solid transparent',
+  });
+
   const logoutButtonStyle: React.CSSProperties = {
     marginTop: 'auto',
     padding: '12px 16px',
@@ -183,7 +214,131 @@ const Sidebar: React.FC = () => {
         )}
 
         <div style={{ flex: 1 }}>
-          {/* Navigation items would go here if needed */}
+          {user && (
+            <nav style={navigationStyle}>
+              {user.role === 'ADMIN' ? (
+                // Admin Navigation
+                <>
+                  <button
+                    style={navButtonStyle(activeTab === 'users')}
+                    onClick={() => onTabChange?.('users' as AdminTab)}
+                    onMouseEnter={(e) => {
+                      if (activeTab !== 'users') {
+                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeTab !== 'users') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                  >
+                    Users
+                  </button>
+                  <button
+                    style={navButtonStyle(activeTab === 'shareholders')}
+                    onClick={() => onTabChange?.('shareholders' as AdminTab)}
+                    onMouseEnter={(e) => {
+                      if (activeTab !== 'shareholders') {
+                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeTab !== 'shareholders') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                  >
+                    Shareholders
+                  </button>
+                  <button
+                    style={navButtonStyle(activeTab === 'emissions')}
+                    onClick={() => onTabChange?.('emissions' as AdminTab)}
+                    onMouseEnter={(e) => {
+                      if (activeTab !== 'emissions') {
+                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeTab !== 'emissions') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                  >
+                    Emissions
+                  </button>
+                  <button
+                    style={navButtonStyle(activeTab === 'subscriptions')}
+                    onClick={() => onTabChange?.('subscriptions' as AdminTab)}
+                    onMouseEnter={(e) => {
+                      if (activeTab !== 'subscriptions') {
+                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeTab !== 'subscriptions') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                  >
+                    Subscriptions
+                  </button>
+                </>
+              ) : (
+                // User Navigation
+                <>
+                  <button
+                    style={navButtonStyle(activeTab === 'overview')}
+                    onClick={() => onTabChange?.('overview' as UserTab)}
+                    onMouseEnter={(e) => {
+                      if (activeTab !== 'overview') {
+                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeTab !== 'overview') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                  >
+                    Overview
+                  </button>
+                  <button
+                    style={navButtonStyle(activeTab === 'shareholders')}
+                    onClick={() => onTabChange?.('shareholders' as UserTab)}
+                    onMouseEnter={(e) => {
+                      if (activeTab !== 'shareholders') {
+                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeTab !== 'shareholders') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                  >
+                    Shareholders
+                  </button>
+                  <button
+                    style={navButtonStyle(activeTab === 'emissions')}
+                    onClick={() => onTabChange?.('emissions' as UserTab)}
+                    onMouseEnter={(e) => {
+                      if (activeTab !== 'emissions') {
+                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeTab !== 'emissions') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                  >
+                    Emissions
+                  </button>
+                </>
+              )}
+            </nav>
+          )}
         </div>
 
         <button

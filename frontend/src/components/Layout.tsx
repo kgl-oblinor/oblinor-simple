@@ -3,9 +3,11 @@ import Sidebar from './Sidebar';
 
 interface LayoutProps {
   children: React.ReactNode;
+  activeTab?: any;
+  onTabChange?: (tab: any) => void;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange }) => {
   const contentStyle: React.CSSProperties = {
     marginLeft: window.innerWidth <= 768 ? '0' : '250px',
     marginTop: window.innerWidth <= 768 ? '60px' : '0',
@@ -18,7 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar activeTab={activeTab} onTabChange={onTabChange} />
       <div style={contentStyle}>
         {children}
       </div>
