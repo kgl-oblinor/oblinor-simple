@@ -101,6 +101,9 @@ export const emissionsAPI = {
     
   updateSubscription: (emissionId: number, subId: number, data: { status: string; shares_allocated?: number }): Promise<{ subscription: EmissionSubscription }> =>
     api.patch(`/emissions/${emissionId}/subscriptions/${subId}`, data).then(res => res.data),
+    
+  getMySubscription: (id: number): Promise<EmissionSubscription> =>
+    api.get(`/emissions/${id}/my-subscription`).then(res => res.data),
 };
 
 export default api;

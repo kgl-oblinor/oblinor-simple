@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Emission } from '../types';
 import { useAuth } from '../context/AuthContext';
 import { THEME, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
-import api from '../api';
+import { emissionsAPI } from '../api';
 import BlurredContent from './BlurredContent';
 import SubscriptionForm from './SubscriptionForm';
 
@@ -26,8 +26,8 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
 
   const fetchEmission = async () => {
     try {
-      const response = await api.get(`/emissions/${emissionId}`);
-      setEmission(response.data);
+      const response = await emissionsAPI.get(emissionId);
+      setEmission(response.emission);
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to load emission');
     } finally {
@@ -38,8 +38,8 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
   const checkExistingSubscription = async () => {
     if (user?.role === 'USER') {
       try {
-        const response = await api.get(`/emissions/${emissionId}/my-subscription`);
-        setHasSubscribed(!!response.data);
+        const subscription = await emissionsAPI.getMySubscription(emissionId);
+        setHasSubscribed(!!subscription);
       } catch (err) {
         // No subscription exists
         setHasSubscribed(false);

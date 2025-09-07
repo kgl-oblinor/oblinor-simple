@@ -9,6 +9,7 @@ import authRoutes from './routes/auth';
 import userRoutes from './routes/users';
 import shareholderRoutes from './routes/shareholders';
 import emissionRoutes from './routes/emissions';
+import debugRoutes from './routes/debug';
 
 // Load environment variables
 dotenv.config();
@@ -35,6 +36,7 @@ app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/shareholders', shareholderRoutes);
 app.use('/emissions', emissionRoutes);
+app.use('/debug', debugRoutes);
 
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
