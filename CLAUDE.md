@@ -181,17 +181,17 @@ All data is already migrated and live on Railway. No local database files needed
 
 ## 📱 MOBILE RESPONSIVE SYSTEM
 
-**CRITICAL: Platform is now fully mobile-optimized using CSS Modules**
+**CRITICAL: Platform is now fully mobile-optimized using Inline React Styles**
 
 **Responsive Breakpoints:**
 - **Mobile:** < 768px (Mobile-first design)
 - **Tablet:** 768px - 1024px
 - **Desktop:** > 1024px
 
-**CSS Architecture:**
-- **Global CSS Variables:** `frontend/src/styles/globals.module.css`
-- **Component CSS Modules:** Each component has `.module.css` file
-- **Mobile-First Approach:** All styles start mobile, scale up
+**Inline Styles Architecture:**
+- **Dynamic React Styles:** All styling done with React CSSProperties objects
+- **Responsive Breakpoints:** Using `window.innerWidth <= 768px` conditionals
+- **Mobile-First Approach:** Styles adapt dynamically based on screen width
 
 **Key Mobile Features:**
 - **Collapsible Sidebar:** Hamburger menu on mobile, fixed sidebar on desktop
@@ -207,25 +207,28 @@ All data is already migrated and live on Railway. No local database files needed
 - Forms: Single column, full-width inputs with proper touch targets
 - Buttons: Stack vertically on mobile, inline on desktop
 
-**CSS Variables (Global):**
-```css
-:root {
-  --color-primary: #123543;
-  --color-background: #fcfbfa;
-  --sidebar-width: 250px; /* Desktop only */
-  --touch-target-min: 44px;
-  --spacing-xs: 4px to --spacing-xxl: 40px;
-  --border-radius: 8px;
-  --transition: all 0.2s ease;
-}
+**Color Constants (Inline Styles):**
+```typescript
+const COLORS = {
+  primary: '#123543',
+  background: '#fcfbfa'
+};
+
+const RESPONSIVE = {
+  sidebarWidth: '250px', // Desktop only
+  touchTarget: '44px',
+  borderRadius: '8px',
+  transition: 'all 0.2s ease'
+};
 ```
 
 **MANDATORY for NEW Components:**
-1. Create `.module.css` file with mobile-first breakpoints
-2. Use global CSS variables for colors/spacing
-3. Implement minimum 44px touch targets
-4. Test on mobile viewport (< 768px)
-5. Ensure table data converts to cards on mobile
+1. Use inline React styles with CSSProperties typing
+2. Implement `window.innerWidth <= 768px` breakpoint checks
+3. Use COLORS constants for consistent theming
+4. Implement minimum 44px touch targets
+5. Test responsive behavior on mobile viewport (< 768px)
+6. Ensure table data converts to cards on mobile using conditional rendering
 
 **Component Mobile Status:**
 - ✅ Layout.tsx - Responsive with sidebar toggle
