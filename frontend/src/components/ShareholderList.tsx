@@ -3,9 +3,10 @@ import { Shareholder } from '../types';
 import { shareholdersAPI } from '../api';
 import BlurredContent from './BlurredContent';
 import { useAuth } from '../context/AuthContext';
-import { THEME } from '../constants/theme';
+import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS } from '../constants/theme';
 
 const ShareholderList: React.FC = () => {
+  const { isMobile } = getResponsive(); // Agent 4's responsive system
   const [shareholders, setShareholders] = useState<Shareholder[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -13,16 +14,16 @@ const ShareholderList: React.FC = () => {
 
   const containerStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.primary,
-    padding: window.innerWidth <= 768 ? '15px' : '20px',
+    padding: getResponsiveSpacing('15px', '20px'),
     borderRadius: '12px',
     color: THEME.colors.background,
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '20px' : '24px',
+    fontSize: isMobile ? '20px' : '24px',
     fontWeight: 'bold',
     marginBottom: '20px',
-    borderBottom: '2px solid rgba(252, 251, 250, 0.3)',
+    borderBottom: `2px solid ${ALPHA_COLORS.background.strong}`,
     paddingBottom: '10px',
   };
 
@@ -34,25 +35,25 @@ const ShareholderList: React.FC = () => {
   };
 
   const errorStyle: React.CSSProperties = {
-    color: '#ff6b6b',
+    color: THEME.colors.error,
     textAlign: 'center',
     padding: '20px',
-    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+    backgroundColor: ALPHA_COLORS.error.light,
     borderRadius: '8px',
     marginTop: '20px',
   };
 
   // Mobile card styles
   const mobileCardContainerStyle: React.CSSProperties = {
-    display: window.innerWidth <= 768 ? 'block' : 'none',
+    display: isMobile ? 'block' : 'none',
   };
 
   const mobileCardStyle: React.CSSProperties = {
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    backgroundColor: ALPHA_COLORS.background.light,
     borderRadius: '8px',
     padding: '15px',
     marginBottom: '15px',
-    border: '1px solid rgba(252, 251, 250, 0.2)',
+    border: `1px solid ${ALPHA_COLORS.background.medium}`,
   };
 
   const mobileCardHeaderStyle: React.CSSProperties = {
@@ -95,7 +96,7 @@ const ShareholderList: React.FC = () => {
   };
 
   const mobileCardStatsContainerStyle: React.CSSProperties = {
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    backgroundColor: ALPHA_COLORS.background.light,
     borderRadius: '8px',
     padding: '12px',
     marginTop: '12px',
@@ -127,7 +128,7 @@ const ShareholderList: React.FC = () => {
   const mobileCardOwnershipBarStyle: React.CSSProperties = {
     width: '100%',
     height: '6px',
-    backgroundColor: 'rgba(252, 251, 250, 0.2)',
+    backgroundColor: ALPHA_COLORS.background.medium,
     borderRadius: '3px',
     overflow: 'hidden',
     position: 'relative',
@@ -155,7 +156,7 @@ const ShareholderList: React.FC = () => {
 
   // Desktop table styles
   const tableContainerStyle: React.CSSProperties = {
-    display: window.innerWidth <= 768 ? 'none' : 'block',
+    display: isMobile ? 'none' : 'block',
     overflowX: 'auto',
   };
 
@@ -168,22 +169,22 @@ const ShareholderList: React.FC = () => {
   const thStyle: React.CSSProperties = {
     padding: '12px',
     textAlign: 'left',
-    borderBottom: '1px solid rgba(252, 251, 250, 0.3)',
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    borderBottom: `1px solid ${ALPHA_COLORS.background.strong}`,
+    backgroundColor: ALPHA_COLORS.background.light,
     fontWeight: 'bold',
   };
 
   const tdStyle: React.CSSProperties = {
     padding: '12px',
-    borderBottom: '1px solid rgba(252, 251, 250, 0.2)',
+    borderBottom: `1px solid ${ALPHA_COLORS.background.medium}`,
   };
 
   const totalSharesStyle: React.CSSProperties = {
     marginTop: '20px',
     padding: '15px',
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    backgroundColor: ALPHA_COLORS.background.light,
     borderRadius: '8px',
-    fontSize: window.innerWidth <= 768 ? '16px' : '18px',
+    fontSize: isMobile ? '16px' : '18px',
     fontWeight: 'bold',
     textAlign: 'center',
   };

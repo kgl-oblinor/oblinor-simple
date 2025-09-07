@@ -3,7 +3,7 @@ import { Emission } from '../types';
 import { emissionsAPI } from '../api';
 import BlurredContent from './BlurredContent';
 import { useAuth } from '../context/AuthContext';
-import { THEME } from '../constants/theme';
+import { THEME, ALPHA_COLORS } from '../constants/theme';
 
 interface EmissionListProps {
   onSelectEmission?: (emission: Emission) => void;
@@ -28,18 +28,18 @@ const EmissionList: React.FC<EmissionListProps> = ({ onSelectEmission, onViewEmi
     fontSize: '24px',
     fontWeight: 'bold',
     marginBottom: '20px',
-    borderBottom: '2px solid rgba(252, 251, 250, 0.3)',
+    borderBottom: `2px solid ${ALPHA_COLORS.background.strong}`,
     paddingBottom: '10px',
   };
 
   const emissionCardStyle: React.CSSProperties = {
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    backgroundColor: ALPHA_COLORS.background.light,
     padding: '15px',
     borderRadius: '8px',
     marginBottom: '15px',
     cursor: onSelectEmission ? 'pointer' : 'default',
     transition: 'all 0.3s ease',
-    border: '1px solid rgba(252, 251, 250, 0.2)',
+    border: `1px solid ${ALPHA_COLORS.background.medium}`,
   };
 
   const statusBadgeStyle = (status: string): React.CSSProperties => ({
@@ -63,10 +63,10 @@ const EmissionList: React.FC<EmissionListProps> = ({ onSelectEmission, onViewEmi
   };
 
   const errorStyle: React.CSSProperties = {
-    color: '#ff6b6b',
+    color: THEME.colors.error,
     textAlign: 'center',
     padding: '20px',
-    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+    backgroundColor: ALPHA_COLORS.error.light,
     borderRadius: '8px',
   };
 
@@ -131,12 +131,12 @@ const EmissionList: React.FC<EmissionListProps> = ({ onSelectEmission, onViewEmi
                 onClick={() => onSelectEmission?.(emission)}
                 onMouseEnter={(e) => {
                   if (onSelectEmission) {
-                    e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.15)';
+                    e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (onSelectEmission) {
-                    e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                    e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
                   }
                 }}
               >
@@ -173,7 +173,7 @@ const EmissionList: React.FC<EmissionListProps> = ({ onSelectEmission, onViewEmi
                 </div>
 
                 {(user.level >= 3 || user.role === 'ADMIN') && (
-                  <div style={{ marginTop: '15px', padding: '10px', backgroundColor: 'rgba(252, 251, 250, 0.1)', borderRadius: '6px' }}>
+                  <div style={{ marginTop: '15px', padding: '10px', backgroundColor: ALPHA_COLORS.background.light, borderRadius: '6px' }}>
                     <div style={{ fontSize: '14px' }}>
                       <strong>Total Value:</strong> {emission.new_shares_offered && emission.price_per_share 
                         ? formatCurrency(emission.new_shares_offered * emission.price_per_share)

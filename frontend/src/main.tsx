@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { THEME } from './constants/theme';
+import { THEME, ALPHA_COLORS } from './constants/theme';
 import App from './App';
 
 // Global styles
@@ -30,20 +30,20 @@ const globalStyles = `
   }
 
   input::placeholder {
-    color: rgba(252, 251, 250, 0.6);
+    color: ${ALPHA_COLORS.background.medium};
   }
 
   /* Ensure proper styling for form elements on dark backgrounds */
   input[type="email"], input[type="password"], input[type="text"], input[type="number"], select, textarea {
-    background-color: rgba(252, 251, 250, 0.1);
-    border: 1px solid rgba(252, 251, 250, 0.3);
+    background-color: ${ALPHA_COLORS.background.light};
+    border: 1px solid ${ALPHA_COLORS.background.strong};
     color: ${THEME.colors.background};
   }
 
   input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
     outline: none;
-    border-color: rgba(252, 251, 250, 0.6);
-    box-shadow: 0 0 0 2px rgba(252, 251, 250, 0.2);
+    border-color: ${ALPHA_COLORS.background.medium};
+    box-shadow: 0 0 0 2px ${ALPHA_COLORS.background.light};
   }
 
   /* Scrollbar styling */
@@ -61,7 +61,7 @@ const globalStyles = `
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #0a2330;
+    background: ${ALPHA_COLORS.primary.strong};
   }
 `;
 

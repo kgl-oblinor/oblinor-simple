@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { THEME, getAdminTypography } from '../constants/theme';
+import { THEME, getAdminTypography, ALPHA_COLORS } from '../constants/theme';
 import Layout from '../components/Layout';
 import ShareholderList from '../components/ShareholderList';
 import ShareholderForm from '../components/ShareholderForm';
@@ -183,7 +183,7 @@ const AdminDashboard: React.FC = () => {
         return (
           <div>
             <h2 style={{ color: THEME.colors.primary, marginBottom: '20px' }}>Subscription Management</h2>
-            <div style={{ marginBottom: '15px', padding: '15px', backgroundColor: 'rgba(18, 53, 67, 0.05)', borderRadius: '8px' }}>
+            <div style={{ marginBottom: '15px', padding: '15px', backgroundColor: ALPHA_COLORS.primary.subtle, borderRadius: '8px' }}>
               <p style={{ color: THEME.colors.primary, margin: 0, fontSize: '16px' }}>
                 Select an emission below to view and manage its subscriptions.
               </p>

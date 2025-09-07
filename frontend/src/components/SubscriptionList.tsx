@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { EmissionSubscription, User } from '../types';
 import { emissionsAPI } from '../api';
-import { THEME, isMobile } from '../constants/theme';
+import { THEME, isMobile, ALPHA_COLORS } from '../constants/theme';
 
 interface SubscriptionListProps {
   emissionId: number;
@@ -98,7 +98,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
 
   const tdStyle: React.CSSProperties = {
     padding: '12px',
-    borderBottom: '1px solid rgba(18, 53, 67, 0.1)',
+    borderBottom: `1px solid ${ALPHA_COLORS.primary.light}`,
     color: THEME.colors.primary,
   };
 
@@ -110,8 +110,8 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
     fontWeight: 'bold',
     backgroundColor: 
       status === 'APPROVED' ? THEME.colors.primary : 
-      status === 'REJECTED' ? 'rgba(18, 53, 67, 0.3)' : 
-      'rgba(18, 53, 67, 0.1)',
+      status === 'REJECTED' ? ALPHA_COLORS.primary.strong : 
+      ALPHA_COLORS.primary.light,
     color: 
       status === 'APPROVED' ? THEME.colors.background : 
       THEME.colors.primary,
@@ -179,11 +179,11 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
   };
 
   const mobileCardStyle: React.CSSProperties = {
-    backgroundColor: 'rgba(18, 53, 67, 0.05)',
+    backgroundColor: ALPHA_COLORS.primary.subtle,
     borderRadius: '8px',
     padding: '15px',
     marginBottom: '15px',
-    border: '1px solid rgba(18, 53, 67, 0.2)',
+    border: `1px solid ${ALPHA_COLORS.primary.medium}`,
   };
 
   const mobileCardHeaderStyle: React.CSSProperties = {
@@ -220,7 +220,7 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({ emissionId }) => {
   const mobileCardStatItemStyle: React.CSSProperties = {
     textAlign: 'center',
     padding: '8px',
-    backgroundColor: 'rgba(252, 251, 250, 0.8)',
+    backgroundColor: ALPHA_COLORS.background.medium,
     borderRadius: '6px',
   };
 

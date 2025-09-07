@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Emission } from '../types';
 import { useAuth } from '../context/AuthContext';
-import { THEME } from '../constants/theme';
+import { THEME, ALPHA_COLORS } from '../constants/theme';
 import api from '../api';
 import BlurredContent from './BlurredContent';
 import SubscriptionForm from './SubscriptionForm';
@@ -74,7 +74,7 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
     borderRadius: '20px',
     fontSize: '14px',
     fontWeight: 'bold',
-    backgroundColor: status === 'ACTIVE' ? THEME.colors.primary : 'rgba(18, 53, 67, 0.3)',
+    backgroundColor: status === 'ACTIVE' ? THEME.colors.primary : ALPHA_COLORS.primary.strong,
     color: status === 'ACTIVE' ? THEME.colors.background : THEME.colors.primary,
   });
 
@@ -111,7 +111,7 @@ const EmissionView: React.FC<EmissionViewProps> = ({ emissionId, onClose }) => {
   };
 
   const presentationBoxStyle: React.CSSProperties = {
-    backgroundColor: 'rgba(18, 53, 67, 0.05)',
+    backgroundColor: ALPHA_COLORS.primary.subtle,
     padding: '20px',
     borderRadius: THEME.spacing.borderRadius,
     marginBottom: '20px',

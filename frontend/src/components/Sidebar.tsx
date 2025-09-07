@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { THEME, isMobile } from '../constants/theme';
+import { THEME, getResponsive, ALPHA_COLORS } from '../constants/theme';
 import { NavigationTab, NavigationTabChangeHandler, UserTab, AdminTab } from '../types/navigation';
 
 interface SidebarProps {
@@ -10,6 +10,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   const { user, logout } = useAuth();
+  const { isMobile } = getResponsive(); // Agent 4's responsive system
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
@@ -27,7 +28,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
 
   // Mobile header styles
   const mobileHeaderStyle: React.CSSProperties = {
-    display: isMobile() ? 'flex' : 'none',
+    display: isMobile ? 'flex' : 'none',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: THEME.colors.primary,
@@ -38,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     left: 0,
     right: 0,
     zIndex: 1000,
-    borderBottom: '1px solid rgba(252, 251, 250, 0.3)',
+    borderBottom: `1px solid ${ALPHA_COLORS.background.strong}`,
   };
 
   const hamburgerButtonStyle: React.CSSProperties = {
@@ -53,13 +54,13 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   };
 
   const overlayStyle: React.CSSProperties = {
-    display: isMobile() ? 'block' : 'none',
+    display: isMobile ? 'block' : 'none',
     position: 'fixed',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: ALPHA_COLORS.primary.strong,
     zIndex: 998,
     opacity: isOpen ? 1 : 0,
     visibility: isOpen ? 'visible' : 'hidden',
@@ -68,26 +69,26 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
 
   // Desktop sidebar styles (original)
   const sidebarStyle: React.CSSProperties = {
-    width: isMobile() ? '280px' : THEME.spacing.sidebarWidth,
+    width: isMobile ? '280px' : THEME.spacing.sidebarWidth,
     height: '100vh',
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
     padding: '20px',
     position: 'fixed',
-    left: isMobile() ? (isOpen ? 0 : '-280px') : 0,
-    top: isMobile() ? 0 : 0,
+    left: isMobile ? (isOpen ? 0 : '-280px') : 0,
+    top: isMobile ? 0 : 0,
     display: 'flex',
     flexDirection: 'column',
-    borderRight: '1px solid rgba(252, 251, 250, 0.3)',
+    borderRight: `1px solid ${ALPHA_COLORS.background.strong}`,
     zIndex: 999,
-    transition: isMobile() ? THEME.transitions.sidebar : 'none',
+    transition: isMobile ? THEME.transitions.sidebar : 'none',
   };
 
   const headerStyle: React.CSSProperties = {
     fontSize: '24px',
     fontWeight: 'bold',
     marginBottom: '30px',
-    borderBottom: '2px solid rgba(252, 251, 250, 0.3)',
+    borderBottom: `2px solid ${ALPHA_COLORS.background.strong}`,
     paddingBottom: '15px',
     display: 'flex',
     justifyContent: 'space-between',
@@ -95,7 +96,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   };
 
   const closeButtonStyle: React.CSSProperties = {
-    display: isMobile() ? 'block' : 'none',
+    display: isMobile ? 'block' : 'none',
     background: 'none',
     border: 'none',
     color: THEME.colors.background,
@@ -107,15 +108,15 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   const userInfoStyle: React.CSSProperties = {
     marginBottom: '30px',
     padding: '15px',
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    backgroundColor: ALPHA_COLORS.background.light,
     borderRadius: '8px',
     fontSize: '14px',
   };
 
   const levelBadgeStyle: React.CSSProperties = {
     display: 'inline-block',
-    backgroundColor: '#fcfbfa',
-    color: '#123543',
+    backgroundColor: THEME.colors.background,
+    color: THEME.colors.primary,
     padding: '4px 8px',
     borderRadius: '12px',
     fontSize: '12px',
@@ -134,7 +135,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     padding: '12px 16px',
     fontSize: '16px',
     fontWeight: isActive ? 'bold' : 'normal',
-    backgroundColor: isActive ? 'rgba(252, 251, 250, 0.2)' : 'transparent',
+    backgroundColor: isActive ? ALPHA_COLORS.background.medium : 'transparent',
     color: THEME.colors.background,
     border: 'none',
     borderRadius: '8px',
@@ -142,14 +143,14 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     textAlign: 'left',
     transition: 'all 0.2s ease',
     minHeight: '44px',
-    borderLeft: isActive ? '3px solid #fcfbfa' : '3px solid transparent',
+    borderLeft: isActive ? `3px solid ${THEME.colors.background}` : '3px solid transparent',
   });
 
   const logoutButtonStyle: React.CSSProperties = {
     marginTop: 'auto',
     padding: '12px 16px',
-    backgroundColor: 'rgba(252, 251, 250, 0.2)',
-    border: '1px solid rgba(252, 251, 250, 0.3)',
+    backgroundColor: ALPHA_COLORS.background.medium,
+    border: `1px solid ${ALPHA_COLORS.background.strong}`,
     borderRadius: '8px',
     color: THEME.colors.background,
     cursor: 'pointer',
@@ -168,7 +169,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
           onClick={toggleSidebar}
           aria-label="Open menu"
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+            e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.backgroundColor = 'transparent';
@@ -222,7 +223,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                     onClick={() => onTabChange?.('users' as AdminTab)}
                     onMouseEnter={(e) => {
                       if (activeTab !== 'users') {
-                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                        e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
                       }
                     }}
                     onMouseLeave={(e) => {
@@ -238,7 +239,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                     onClick={() => onTabChange?.('shareholders' as AdminTab)}
                     onMouseEnter={(e) => {
                       if (activeTab !== 'shareholders') {
-                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                        e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
                       }
                     }}
                     onMouseLeave={(e) => {
@@ -254,7 +255,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                     onClick={() => onTabChange?.('emissions' as AdminTab)}
                     onMouseEnter={(e) => {
                       if (activeTab !== 'emissions') {
-                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                        e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
                       }
                     }}
                     onMouseLeave={(e) => {
@@ -270,7 +271,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                     onClick={() => onTabChange?.('subscriptions' as AdminTab)}
                     onMouseEnter={(e) => {
                       if (activeTab !== 'subscriptions') {
-                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                        e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
                       }
                     }}
                     onMouseLeave={(e) => {
@@ -290,7 +291,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                     onClick={() => onTabChange?.('overview' as UserTab)}
                     onMouseEnter={(e) => {
                       if (activeTab !== 'overview') {
-                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                        e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
                       }
                     }}
                     onMouseLeave={(e) => {
@@ -306,7 +307,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                     onClick={() => onTabChange?.('shareholders' as UserTab)}
                     onMouseEnter={(e) => {
                       if (activeTab !== 'shareholders') {
-                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                        e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
                       }
                     }}
                     onMouseLeave={(e) => {
@@ -322,7 +323,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                     onClick={() => onTabChange?.('emissions' as UserTab)}
                     onMouseEnter={(e) => {
                       if (activeTab !== 'emissions') {
-                        e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+                        e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
                       }
                     }}
                     onMouseLeave={(e) => {
@@ -343,10 +344,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
           style={logoutButtonStyle}
           onClick={handleLogout}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.3)';
+            e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.strong;
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.2)';
+            e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.medium;
           }}
         >
           Logout

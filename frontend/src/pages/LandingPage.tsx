@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { THEME } from '../constants/theme';
+import { THEME, isMobile, ALPHA_COLORS } from '../constants/theme';
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,31 +15,31 @@ const LandingPage: React.FC = () => {
   const headerStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
-    padding: window.innerWidth <= 768 ? '15px 20px' : '20px 40px',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    padding: isMobile() ? '15px 20px' : '20px 40px',
+    boxShadow: `0 2px 4px ${ALPHA_COLORS.primary.subtle}`,
   };
 
   const headerTitleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '20px' : '24px',
+    fontSize: isMobile() ? '20px' : '24px',
     fontWeight: 'bold',
     margin: 0,
   };
 
   const heroStyle: React.CSSProperties = {
     textAlign: 'center',
-    padding: window.innerWidth <= 768 ? '60px 20px' : '80px 40px',
+    padding: isMobile() ? '60px 20px' : '80px 40px',
     backgroundColor: THEME.colors.background,
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '32px' : '48px',
+    fontSize: isMobile() ? '32px' : '48px',
     fontWeight: 'bold',
     margin: '0 0 20px 0',
     color: THEME.colors.primary,
   };
 
   const subtitleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '18px' : '24px',
+    fontSize: isMobile() ? '18px' : '24px',
     margin: '0 0 40px 0',
     color: THEME.colors.primary,
     opacity: 0.8,
@@ -49,8 +49,8 @@ const LandingPage: React.FC = () => {
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
     border: 'none',
-    padding: window.innerWidth <= 768 ? '16px 32px' : '20px 40px',
-    fontSize: window.innerWidth <= 768 ? '16px' : '18px',
+    padding: isMobile() ? '16px 32px' : '20px 40px',
+    fontSize: isMobile() ? '16px' : '18px',
     fontWeight: 'bold',
     borderRadius: '8px',
     cursor: 'pointer',
@@ -61,7 +61,7 @@ const LandingPage: React.FC = () => {
   const emissionHighlightStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
-    padding: window.innerWidth <= 768 ? '40px 20px' : '60px 40px',
+    padding: isMobile() ? '40px 20px' : '60px 40px',
     textAlign: 'center',
   };
 
@@ -75,15 +75,15 @@ const LandingPage: React.FC = () => {
   };
 
   const highlightTitleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '24px' : '32px',
+    fontSize: isMobile() ? '24px' : '32px',
     fontWeight: 'bold',
     margin: '0 0 20px 0',
   };
 
   const highlightTextStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '16px' : '18px',
+    fontSize: isMobile() ? '16px' : '18px',
     margin: '5px 0',
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    backgroundColor: ALPHA_COLORS.background.light,
     padding: '10px 20px',
     borderRadius: '8px',
     width: '100%',
@@ -91,19 +91,19 @@ const LandingPage: React.FC = () => {
   };
 
   const sectionStyle: React.CSSProperties = {
-    padding: window.innerWidth <= 768 ? '60px 20px' : '80px 40px',
+    padding: isMobile() ? '60px 20px' : '80px 40px',
     textAlign: 'center',
   };
 
   const sectionTitleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '28px' : '36px',
+    fontSize: isMobile() ? '28px' : '36px',
     fontWeight: 'bold',
     margin: '0 0 15px 0',
     color: THEME.colors.primary,
   };
 
   const sectionSubtitleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '16px' : '18px',
+    fontSize: isMobile() ? '16px' : '18px',
     margin: '0 0 50px 0',
     color: THEME.colors.primary,
     opacity: 0.8,
@@ -111,7 +111,7 @@ const LandingPage: React.FC = () => {
 
   const cardContainerStyle: React.CSSProperties = {
     display: 'grid',
-    gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+    gridTemplateColumns: isMobile() ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
     gap: '30px',
     maxWidth: '1200px',
     margin: '0 auto',
@@ -127,13 +127,13 @@ const LandingPage: React.FC = () => {
   };
 
   const cardTitleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '18px' : '20px',
+    fontSize: isMobile() ? '18px' : '20px',
     fontWeight: 'bold',
     margin: '0 0 15px 0',
   };
 
   const cardTextStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '14px' : '16px',
+    fontSize: isMobile() ? '14px' : '16px',
     lineHeight: '1.6',
     margin: 0,
     opacity: 0.9,
@@ -142,18 +142,18 @@ const LandingPage: React.FC = () => {
   const callToActionStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
-    padding: window.innerWidth <= 768 ? '60px 20px' : '80px 40px',
+    padding: isMobile() ? '60px 20px' : '80px 40px',
     textAlign: 'center',
   };
 
   const callToActionTitleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '28px' : '36px',
+    fontSize: isMobile() ? '28px' : '36px',
     fontWeight: 'bold',
     margin: '0 0 20px 0',
   };
 
   const callToActionTextStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '16px' : '18px',
+    fontSize: isMobile() ? '16px' : '18px',
     margin: '0 0 40px 0',
     opacity: 0.9,
   };
@@ -161,25 +161,25 @@ const LandingPage: React.FC = () => {
   const footerStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.background,
     color: THEME.colors.primary,
-    padding: window.innerWidth <= 768 ? '40px 20px' : '60px 40px',
+    padding: isMobile() ? '40px 20px' : '60px 40px',
     textAlign: 'center',
     borderTop: `2px solid ${THEME.colors.primary}`,
   };
 
   const footerTitleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '20px' : '24px',
+    fontSize: isMobile() ? '20px' : '24px',
     fontWeight: 'bold',
     margin: '0 0 15px 0',
   };
 
   const footerTextStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '14px' : '16px',
+    fontSize: isMobile() ? '14px' : '16px',
     margin: '0 0 10px 0',
     opacity: 0.8,
   };
 
   const footerSmallTextStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '12px' : '14px',
+    fontSize: isMobile() ? '12px' : '14px',
     margin: '0 0 10px 0',
     opacity: 0.6,
   };
@@ -207,7 +207,7 @@ const LandingPage: React.FC = () => {
           style={ctaButtonStyle}
           onClick={() => navigate('/login')}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgba(18, 53, 67, 0.9)';
+            e.currentTarget.style.backgroundColor = ALPHA_COLORS.primary.strong;
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.backgroundColor = THEME.colors.primary;
@@ -342,7 +342,7 @@ const LandingPage: React.FC = () => {
           style={ctaButtonStyle}
           onClick={() => navigate('/login')}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.9)';
+            e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.strong;
             e.currentTarget.style.color = THEME.colors.primary;
           }}
           onMouseLeave={(e) => {

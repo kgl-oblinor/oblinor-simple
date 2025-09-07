@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { THEME } from '../constants/theme';
+import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS } from '../constants/theme';
 import { APIError } from '../types';
 
 const LoginPage: React.FC = () => {
+  const { isMobile } = getResponsive(); // Agent 4's responsive system
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -18,20 +19,20 @@ const LoginPage: React.FC = () => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: window.innerWidth <= 768 ? '15px' : '20px',
+    padding: getResponsiveSpacing('15px', '20px'),
   };
 
   const containerStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.primary,
-    padding: window.innerWidth <= 768 ? '30px' : '40px',
+    padding: getResponsiveSpacing('30px', '40px'),
     borderRadius: '12px',
     width: '100%',
-    maxWidth: window.innerWidth <= 768 ? '350px' : '400px',
+    maxWidth: isMobile ? '350px' : '400px',
     color: THEME.colors.background,
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '24px' : '28px',
+    fontSize: isMobile ? '24px' : '28px',
     fontWeight: 'bold',
     marginBottom: '30px',
     textAlign: 'center',
@@ -55,10 +56,10 @@ const LoginPage: React.FC = () => {
   };
 
   const inputStyle: React.CSSProperties = {
-    padding: window.innerWidth <= 768 ? '14px' : '12px',
+    padding: isMobile ? '14px' : '12px',
     borderRadius: '8px',
-    border: '1px solid rgba(252, 251, 250, 0.3)',
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    border: `1px solid ${ALPHA_COLORS.background.strong}`,
+    backgroundColor: ALPHA_COLORS.background.light,
     color: THEME.colors.background,
     fontSize: '16px',
     minHeight: '44px',
@@ -66,7 +67,7 @@ const LoginPage: React.FC = () => {
   };
 
   const buttonStyle: React.CSSProperties = {
-    padding: window.innerWidth <= 768 ? '16px 24px' : '12px 24px',
+    padding: isMobile ? '16px 24px' : '12px 24px',
     backgroundColor: THEME.colors.background,
     color: THEME.colors.primary,
     border: 'none',
@@ -80,26 +81,26 @@ const LoginPage: React.FC = () => {
   };
 
   const errorStyle: React.CSSProperties = {
-    color: '#ff6b6b',
+    color: THEME.colors.error,
     fontSize: '14px',
     textAlign: 'center',
     padding: '10px',
-    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+    backgroundColor: ALPHA_COLORS.error.light,
     borderRadius: '8px',
   };
 
   const testAccountsStyle: React.CSSProperties = {
     marginTop: '30px',
-    padding: window.innerWidth <= 768 ? '15px' : '20px',
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    padding: getResponsiveSpacing('15px', '20px'),
+    backgroundColor: ALPHA_COLORS.background.light,
     borderRadius: '8px',
-    fontSize: window.innerWidth <= 768 ? '13px' : '14px',
+    fontSize: isMobile ? '13px' : '14px',
   };
 
   const accountStyle: React.CSSProperties = {
     margin: '8px 0',
-    padding: window.innerWidth <= 768 ? '12px' : '8px',
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    padding: isMobile ? '12px' : '8px',
+    backgroundColor: ALPHA_COLORS.background.light,
     borderRadius: '4px',
     cursor: 'pointer',
     transition: 'background-color 0.3s ease',
@@ -173,7 +174,7 @@ const LoginPage: React.FC = () => {
             disabled={loading}
             onMouseEnter={(e) => {
               if (!loading) {
-                e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.9)';
+                e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.strong;
               }
             }}
             onMouseLeave={(e) => {
@@ -195,10 +196,10 @@ const LoginPage: React.FC = () => {
             style={accountStyle}
             onClick={() => fillTestAccount('admin@oblinor.no', 'Admin123!')}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.2)';
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.medium;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
             }}
           >
             <strong>Admin (Level 2):</strong><br />
@@ -209,10 +210,10 @@ const LoginPage: React.FC = () => {
             style={accountStyle}
             onClick={() => fillTestAccount('admin1@oblinor.no', 'Admin123!')}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.2)';
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.medium;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
             }}
           >
             <strong>Admin (Level 1):</strong><br />
@@ -223,10 +224,10 @@ const LoginPage: React.FC = () => {
             style={accountStyle}
             onClick={() => fillTestAccount('user3@oblinor.no', 'Pass123!')}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.2)';
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.medium;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
             }}
           >
             <strong>User (Level 3 - Can Subscribe):</strong><br />
@@ -237,10 +238,10 @@ const LoginPage: React.FC = () => {
             style={accountStyle}
             onClick={() => fillTestAccount('user2@oblinor.no', 'Pass123!')}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.2)';
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.medium;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.1)';
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
             }}
           >
             <strong>User (Level 2 - View Only):</strong><br />

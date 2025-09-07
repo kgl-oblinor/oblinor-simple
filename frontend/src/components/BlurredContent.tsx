@@ -1,6 +1,6 @@
 import React from 'react';
 import { BlurredContentProps } from '../types';
-import { THEME } from '../constants/theme';
+import { THEME, ALPHA_COLORS } from '../constants/theme';
 
 const BlurredContent: React.FC<BlurredContentProps> = ({
   children,
@@ -46,7 +46,7 @@ const BlurredContent: React.FC<BlurredContentProps> = ({
     display: shouldBlur ? 'flex' : 'none',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: `rgba(252, 251, 250, 0.8)`,
+    backgroundColor: ALPHA_COLORS.background.medium,
     color: THEME.colors.primary,
     fontSize: '16px',
     fontWeight: 'bold',

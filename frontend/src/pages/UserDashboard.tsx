@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { THEME } from '../constants/theme';
+import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS } from '../constants/theme';
 import Layout from '../components/Layout';
 import ShareholderList from '../components/ShareholderList';
 import EmissionList from '../components/EmissionList';
@@ -10,26 +10,27 @@ import { UserTab } from '../types/navigation';
 
 const UserDashboard: React.FC = () => {
   const { user } = useAuth();
+  const { isMobile } = getResponsive(); // Agent 4's responsive system
   const [activeTab, setActiveTab] = useState<UserTab>('overview');
   const [viewingEmission, setViewingEmission] = useState<number | null>(null);
 
   const headerStyle: React.CSSProperties = {
     marginBottom: '30px',
-    padding: window.innerWidth <= 768 ? '15px' : '20px',
+    padding: getResponsiveSpacing('15px', '20px'),
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
     borderRadius: '12px',
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '24px' : '32px',
+    fontSize: isMobile ? '24px' : '32px',
     fontWeight: 'bold',
     margin: 0,
     marginBottom: '10px',
   };
 
   const subtitleStyle: React.CSSProperties = {
-    fontSize: window.innerWidth <= 768 ? '16px' : '18px',
+    fontSize: isMobile ? '16px' : '18px',
     opacity: 0.8,
     margin: 0,
   };
@@ -41,7 +42,7 @@ const UserDashboard: React.FC = () => {
   const accessInfoStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
-    padding: window.innerWidth <= 768 ? '15px' : '20px',
+    padding: getResponsiveSpacing('15px', '20px'),
     borderRadius: '12px',
     marginBottom: '20px',
   };
@@ -49,8 +50,8 @@ const UserDashboard: React.FC = () => {
   const accessItemStyle: React.CSSProperties = {
     margin: '8px 0',
     padding: '8px 0',
-    borderBottom: '1px solid rgba(252, 251, 250, 0.2)',
-    fontSize: window.innerWidth <= 768 ? '14px' : '16px',
+    borderBottom: `1px solid ${ALPHA_COLORS.background.light}`,
+    fontSize: isMobile ? '14px' : '16px',
   };
 
   if (!user) {
@@ -88,7 +89,7 @@ const UserDashboard: React.FC = () => {
             <div style={accessInfoStyle}>
               <h3 style={{ 
                 margin: '0 0 15px 0', 
-                fontSize: window.innerWidth <= 768 ? '18px' : '20px', 
+                fontSize: isMobile ? '18px' : '20px', 
                 fontWeight: 'bold' 
               }}>
                 Your Access Level: {user.level}
@@ -110,19 +111,19 @@ const UserDashboard: React.FC = () => {
             {user.level === 1 && (
               <div style={{ 
                 marginTop: '30px', 
-                padding: window.innerWidth <= 768 ? '20px' : '30px',
-                backgroundColor: 'rgba(18, 53, 67, 0.05)', 
+                padding: getResponsiveSpacing('20px', '30px'),
+                backgroundColor: ALPHA_COLORS.primary.subtle, 
                 borderRadius: '12px',
                 textAlign: 'center'
               }}>
                 <h3 style={{ 
                   color: THEME.colors.primary, 
                   marginBottom: '10px',
-                  fontSize: window.innerWidth <= 768 ? '18px' : '20px'
+                  fontSize: isMobile ? '18px' : '20px'
                 }}>Limited Access</h3>
                 <p style={{ 
                   color: THEME.colors.primary,
-                  fontSize: window.innerWidth <= 768 ? '14px' : '16px'
+                  fontSize: isMobile ? '14px' : '16px'
                 }}>
                   Your account has Level 1 access. Content is restricted until an administrator upgrades your access level.
                 </p>

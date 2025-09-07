@@ -3,9 +3,10 @@ import { User } from '../types';
 import { usersAPI } from '../api';
 import BlurredContent from './BlurredContent';
 import { useAuth } from '../context/AuthContext';
-import { THEME } from '../constants/theme';
+import { THEME, getResponsive, ALPHA_COLORS } from '../constants/theme';
 
 const UserManagement: React.FC = () => {
+  const { isMobile } = getResponsive(); // Agent 4's responsive system
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -23,13 +24,13 @@ const UserManagement: React.FC = () => {
     fontSize: '24px',
     fontWeight: 'bold',
     marginBottom: '20px',
-    borderBottom: '2px solid rgba(252, 251, 250, 0.3)',
+    borderBottom: `2px solid ${ALPHA_COLORS.background.strong}`,
     paddingBottom: '10px',
   };
 
   // Desktop table styles
   const tableContainerStyle: React.CSSProperties = {
-    display: window.innerWidth <= 768 ? 'none' : 'block',
+    display: isMobile ? 'none' : 'block',
     overflowX: 'auto',
   };
 
@@ -42,20 +43,20 @@ const UserManagement: React.FC = () => {
   const thStyle: React.CSSProperties = {
     padding: '12px',
     textAlign: 'left',
-    borderBottom: '1px solid rgba(252, 251, 250, 0.3)',
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    borderBottom: `1px solid ${ALPHA_COLORS.background.strong}`,
+    backgroundColor: ALPHA_COLORS.background.light,
     fontWeight: 'bold',
   };
 
   const tdStyle: React.CSSProperties = {
     padding: '12px',
-    borderBottom: '1px solid rgba(252, 251, 250, 0.2)',
+    borderBottom: `1px solid ${ALPHA_COLORS.background.medium}`,
   };
 
   const selectStyle: React.CSSProperties = {
     padding: '6px 10px',
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
-    border: '1px solid rgba(252, 251, 250, 0.3)',
+    backgroundColor: ALPHA_COLORS.background.light,
+    border: `1px solid ${ALPHA_COLORS.background.strong}`,
     borderRadius: '4px',
     color: THEME.colors.background,
     fontSize: '14px',
@@ -81,24 +82,24 @@ const UserManagement: React.FC = () => {
   };
 
   const errorStyle: React.CSSProperties = {
-    color: '#ff6b6b',
+    color: THEME.colors.error,
     textAlign: 'center',
     padding: '20px',
-    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+    backgroundColor: ALPHA_COLORS.error.light,
     borderRadius: THEME.spacing.borderRadius,
   };
 
   // Mobile card styles
   const mobileCardContainerStyle: React.CSSProperties = {
-    display: window.innerWidth <= 768 ? 'block' : 'none',
+    display: isMobile ? 'block' : 'none',
   };
 
   const mobileCardStyle: React.CSSProperties = {
-    backgroundColor: 'rgba(252, 251, 250, 0.1)',
+    backgroundColor: ALPHA_COLORS.background.light,
     borderRadius: THEME.spacing.borderRadius,
     padding: '15px',
     marginBottom: '15px',
-    border: '1px solid rgba(252, 251, 250, 0.2)',
+    border: `1px solid ${ALPHA_COLORS.background.medium}`,
   };
 
   const mobileCardHeaderStyle: React.CSSProperties = {
@@ -138,8 +139,8 @@ const UserManagement: React.FC = () => {
 
   const mobileSelectStyle: React.CSSProperties = {
     padding: '8px 12px',
-    backgroundColor: 'rgba(252, 251, 250, 0.2)',
-    border: '1px solid rgba(252, 251, 250, 0.3)',
+    backgroundColor: ALPHA_COLORS.background.medium,
+    border: `1px solid ${ALPHA_COLORS.background.strong}`,
     borderRadius: '6px',
     color: THEME.colors.background,
     fontSize: '14px',
@@ -272,7 +273,7 @@ const UserManagement: React.FC = () => {
                           // Could add more actions here like delete, etc.
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.9)';
+                          e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.strong;
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = THEME.colors.background;
@@ -346,7 +347,7 @@ const UserManagement: React.FC = () => {
                               // Could add more actions here like delete, etc.
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.backgroundColor = 'rgba(252, 251, 250, 0.9)';
+                              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.strong;
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.backgroundColor = THEME.colors.background;

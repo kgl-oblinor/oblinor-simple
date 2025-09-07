@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Emission, APIError } from '../types';
 import api from '../api';
-import { THEME } from '../constants/theme';
+import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS } from '../constants/theme';
 
 interface SubscriptionFormProps {
   emission: Emission;
@@ -10,6 +10,7 @@ interface SubscriptionFormProps {
 }
 
 const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, onSuccess }) => {
+  const { isMobile } = getResponsive(); // Agent 4's responsive system
   const [sharesRequested, setSharesRequested] = useState<number>(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -47,7 +48,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
 
   const formStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.background,
-    padding: window.innerWidth <= 768 ? '20px' : '30px',
+    padding: getResponsiveSpacing('20px', '30px'),
     borderRadius: '12px',
     maxWidth: '500px',
     margin: '0 auto',
@@ -55,7 +56,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
 
   const titleStyle: React.CSSProperties = {
     color: THEME.colors.primary,
-    fontSize: window.innerWidth <= 768 ? '20px' : '24px',
+    fontSize: isMobile ? '20px' : '24px',
     fontWeight: 'bold',
     marginBottom: '20px',
   };
@@ -78,7 +79,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    padding: window.innerWidth <= 768 ? '14px 12px' : '12px',
+    padding: isMobile ? '14px 12px' : '12px',
     border: `2px solid ${THEME.colors.primary}`,
     borderRadius: '6px',
     fontSize: '18px',
@@ -89,8 +90,8 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
   };
 
   const summaryBoxStyle: React.CSSProperties = {
-    backgroundColor: 'rgba(18, 53, 67, 0.05)',
-    padding: window.innerWidth <= 768 ? '15px' : '20px',
+    backgroundColor: ALPHA_COLORS.primary.subtle,
+    padding: getResponsiveSpacing('15px', '20px'),
     borderRadius: '8px',
     marginBottom: '20px',
   };
@@ -100,27 +101,27 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
     justifyContent: 'space-between',
     marginBottom: '10px',
     color: THEME.colors.primary,
-    fontSize: window.innerWidth <= 768 ? '14px' : '16px',
+    fontSize: isMobile ? '14px' : '16px',
   };
 
   const totalRowStyle: React.CSSProperties = {
     ...summaryRowStyle,
     fontWeight: 'bold',
-    fontSize: window.innerWidth <= 768 ? '16px' : '18px',
+    fontSize: isMobile ? '16px' : '18px',
     borderTop: `2px solid ${THEME.colors.primary}`,
     paddingTop: '10px',
   };
 
   const buttonContainerStyle: React.CSSProperties = {
     display: 'flex',
-    flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
+    flexDirection: isMobile ? 'column' : 'row',
     gap: '10px',
     marginTop: '20px',
   };
 
   const buttonStyle: React.CSSProperties = {
     flex: 1,
-    padding: window.innerWidth <= 768 ? '16px 12px' : '12px',
+    padding: isMobile ? '16px 12px' : '12px',
     fontSize: '16px',
     fontWeight: 'bold',
     borderRadius: '6px',
@@ -149,12 +150,12 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
     padding: '10px',
     borderRadius: '6px',
     marginBottom: '15px',
-    fontSize: window.innerWidth <= 768 ? '14px' : '16px',
+    fontSize: isMobile ? '14px' : '16px',
   };
 
   const infoTextStyle: React.CSSProperties = {
     color: THEME.colors.primary,
-    fontSize: window.innerWidth <= 768 ? '12px' : '14px',
+    fontSize: isMobile ? '12px' : '14px',
     marginTop: '10px',
     fontStyle: 'italic',
     lineHeight: '1.4',
@@ -166,15 +167,15 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
 
       <div style={emissionInfoStyle}>
         <div style={{ 
-          fontSize: window.innerWidth <= 768 ? '16px' : '18px', 
+          fontSize: isMobile ? '16px' : '18px', 
           marginBottom: '5px' 
         }}>
           {emission.title}
         </div>
-        <div style={{ fontSize: window.innerWidth <= 768 ? '14px' : '16px' }}>
+        <div style={{ fontSize: isMobile ? '14px' : '16px' }}>
           Price per share: {emission.price_per_share} NOK
         </div>
-        <div style={{ fontSize: window.innerWidth <= 768 ? '14px' : '16px' }}>
+        <div style={{ fontSize: isMobile ? '14px' : '16px' }}>
           Available shares: {emission.new_shares_offered.toLocaleString()}
         </div>
       </div>
@@ -201,7 +202,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
           <h3 style={{ 
             color: THEME.colors.primary, 
             marginBottom: '15px',
-            fontSize: window.innerWidth <= 768 ? '16px' : '18px'
+            fontSize: isMobile ? '16px' : '18px'
           }}>
             Subscription Summary
           </h3>
@@ -250,7 +251,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ emission, onClose, 
           disabled={loading}
           onMouseEnter={(e) => {
             if (!loading) {
-              e.currentTarget.style.backgroundColor = 'rgba(18, 53, 67, 0.05)';
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.primary.subtle;
             }
           }}
           onMouseLeave={(e) => {

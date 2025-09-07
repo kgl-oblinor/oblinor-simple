@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Emission, APIError } from '../types';
 import api from '../api';
-import { THEME } from '../constants/theme';
+import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS } from '../constants/theme';
 
 interface EmissionFormProps {
   emission?: Emission | null;
@@ -10,6 +10,7 @@ interface EmissionFormProps {
 }
 
 const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }) => {
+  const { isMobile } = getResponsive(); // Agent 4's responsive system
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -63,9 +64,9 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const formStyle: React.CSSProperties = {
     backgroundColor: THEME.colors.background,
-    padding: window.innerWidth <= 768 ? '20px' : '30px',
+    padding: getResponsiveSpacing('20px', '30px'),
     borderRadius: '12px',
-    maxWidth: window.innerWidth <= 768 ? '100%' : '600px',
+    maxWidth: isMobile ? '100%' : '600px',
     margin: '0 auto',
     maxHeight: '80vh',
     overflowY: 'auto',
@@ -73,9 +74,9 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const titleStyle: React.CSSProperties = {
     color: THEME.colors.primary,
-    fontSize: window.innerWidth <= 768 ? '20px' : '24px',
+    fontSize: isMobile ? '20px' : '24px',
     fontWeight: 'bold',
-    marginBottom: window.innerWidth <= 768 ? '15px' : '20px',
+    marginBottom: isMobile ? '15px' : '20px',
   };
 
   const labelStyle: React.CSSProperties = {
@@ -88,13 +89,13 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    padding: window.innerWidth <= 768 ? '12px 16px' : '10px',
+    padding: isMobile ? '12px 16px' : '10px',
     border: `2px solid ${THEME.colors.primary}`,
     borderRadius: '6px',
     fontSize: '16px',
-    marginBottom: window.innerWidth <= 768 ? '12px' : '15px',
+    marginBottom: isMobile ? '12px' : '15px',
     backgroundColor: THEME.colors.background,
-    minHeight: window.innerWidth <= 768 ? '44px' : 'auto',
+    minHeight: isMobile ? '44px' : 'auto',
     boxSizing: 'border-box',
   };
 
@@ -110,8 +111,8 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const rowStyle: React.CSSProperties = {
     display: 'grid',
-    gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : '1fr 1fr',
-    gap: window.innerWidth <= 768 ? '0' : '15px',
+    gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+    gap: isMobile ? '0' : '15px',
   };
 
   const infoBoxStyle: React.CSSProperties = {
@@ -130,14 +131,14 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const buttonStyle: React.CSSProperties = {
     flex: 1,
-    padding: window.innerWidth <= 768 ? '12px 16px' : '12px',
+    padding: isMobile ? '12px 16px' : '12px',
     fontSize: '16px',
     fontWeight: 'bold',
     borderRadius: '6px',
     border: 'none',
     cursor: 'pointer',
     transition: 'opacity 0.2s',
-    minHeight: window.innerWidth <= 768 ? '44px' : 'auto',
+    minHeight: isMobile ? '44px' : 'auto',
   };
 
   const saveButtonStyle: React.CSSProperties = {
@@ -155,7 +156,7 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
 
   const errorStyle: React.CSSProperties = {
     color: THEME.colors.primary,
-    backgroundColor: 'rgba(18, 53, 67, 0.1)',
+    backgroundColor: ALPHA_COLORS.primary.light,
     padding: '10px',
     borderRadius: '6px',
     marginBottom: '15px',
