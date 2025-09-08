@@ -96,11 +96,9 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
 
   const headerStyle: React.CSSProperties = {
     ...getResponsiveTypography('h2'),
-    marginBottom: '30px',
-    borderBottom: `2px solid ${ALPHA_COLORS.background.strong}`,
-    paddingBottom: '15px',
+    marginBottom: '20px',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   };
 
@@ -189,7 +187,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     <>
       {/* Mobile Header */}
       <div style={mobileHeaderStyle}>
-        <h1 style={{ margin: 0, fontSize: '20px' }}>Oblinor</h1>
+        <div style={{ width: '44px' }}></div>
         <button 
           style={hamburgerButtonStyle}
           onClick={toggleSidebar}
@@ -214,9 +212,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
       {/* Sidebar */}
       <div style={sidebarStyle}>
         <div style={headerStyle}>
-          {/* Hide title text when collapsed on desktop/tablet */}
-          {(isOpen || isMobile) && <span>Oblinor Simple</span>}
-          
           {/* Mobile close button */}
           <button 
             style={closeButtonStyle}

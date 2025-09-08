@@ -141,14 +141,14 @@ git push
 
 ### Desktop Testing (>1024px)
 - [ ] Sidebar opens by default (250px width)
-- [ ] Toggle button (‹/›) visible in sidebar header  
+- [ ] Toggle button (‹/›) visible in top right of sidebar  
 - [ ] Click ‹ → Sidebar collapses to 60px width
 - [ ] Content shifts smoothly to accommodate width change
 - [ ] Click › → Sidebar expands back to 250px
-- [ ] All content (title, user info, navigation) shows when expanded
+- [ ] All content (user info, navigation) shows when expanded
 
 ### Mobile Testing (<768px)  
-- [ ] Hamburger menu (☰) visible in header
+- [ ] Clean header with hamburger menu (☰) on right side
 - [ ] Sidebar closed by default
 - [ ] Click ☰ → Sidebar slides in from left with backdrop
 - [ ] Click ✕ or backdrop → Sidebar slides out
