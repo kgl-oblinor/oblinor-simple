@@ -2,7 +2,7 @@
 
 **📍 SINGLE SOURCE OF TRUTH FOR ALL AI AGENTS**  
 **⚡ STATUS:** Production Live on Railway | **🎯 TARGET:** Norwegian share emission platform  
-**🔗 LIVE:** https://oblinoremisjonrailway-production.up.railway.app  
+**🔗 LIVE:** https://oblinor-simple.up.railway.app  
 **Last Updated:** 2025-09-08 Complete Frontend & Backend Structure Optimization
 
 ---
@@ -12,7 +12,7 @@
 **Railway Production:**
 - **Frontend/Backend:** Single service on Railway (monorepo)
 - **Database:** PostgreSQL on Railway (external connection allowed)
-- **Domain:** oblinoremisjonrailway-production.up.railway.app
+- **Domain:** oblinor-simple.up.railway.app
 - **SSL:** Automatic HTTPS via Railway
 
 ---
@@ -220,13 +220,19 @@ const { isMobile, isTablet, isDesktop } = getResponsive();
 
 ## 🛠️ DEVELOPMENT WORKFLOW
 
-**Local Development:**
+**⚠️ RAILWAY PRODUCTION ONLY - NO LOCAL DEVELOPMENT:**
 ```bash
-# Backend
-cd backend && npm run dev    # Starts on localhost:4001
+# ❌ DO NOT RUN LOCAL SERVERS:
+# - No npm run dev commands
+# - No localhost development
+# - All work done on Railway live production
 
-# Frontend  
-cd frontend && npm run dev   # Starts on localhost:5174
+# ✅ CORRECT WORKFLOW:
+# 1. Make code changes
+# 2. Push to GitHub
+git push
+# 3. Railway automatically deploys
+# 4. Test on: https://oblinor-simple.up.railway.app
 ```
 
 **Build Process:**
@@ -263,6 +269,16 @@ npm run build  # Builds both and copies frontend to backend/dist
 ---
 
 ## 🔄 RECENT UPDATES
+
+**2025-09-08 - Railway Production-Only & Professional Standards:**
+1. ✅ **Railway Production Setup** - Eliminated all localhost development code and references
+2. ✅ **Sidebar Functionality Complete** - Working hamburger menu, responsive design, desktop toggle
+3. ✅ **SSR-Safe Responsive System** - Production-safe window access with server-side rendering compatibility
+4. ✅ **Professional Standards** - Railway-first development approach, zero local testing tolerance
+5. ✅ **TypeScript Build Fixed** - Resolved EmissionForm and api.ts type errors for production build
+6. ✅ **Git Deploy Success** - Commit 9e44049 pushed to Railway production live
+7. ✅ **Cleanup Complete** - Removed entire Outdated-files directory and all legacy code
+8. ✅ **Production Ready** - Live at https://oblinor-simple.up.railway.app
 
 **2025-09-08 - Complete Structure Optimization:**
 1. ✅ **Frontend Enterprise Structure** - Perfect folder organization with assets/, hooks/, utils/, services/
