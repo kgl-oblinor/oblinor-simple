@@ -106,17 +106,21 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     padding: '4px',
   };
 
-  // 🎯 CLAUDE-STYLE DESKTOP TOGGLE BUTTON
+  // 🎯 CLAUDE-STYLE DESKTOP TOGGLE BUTTON - Enhanced visibility
   const toggleButtonStyle: React.CSSProperties = {
-    display: isMobile ? 'none' : 'block',
-    background: 'none',
-    border: 'none',
+    display: isMobile ? 'none' : 'flex',
+    background: ALPHA_COLORS.background.light,
+    border: `1px solid ${ALPHA_COLORS.background.medium}`,
     color: THEME.colors.background,
     ...getResponsiveTypography('h2'),
     cursor: 'pointer',
-    padding: '4px',
-    borderRadius: '4px',
-    transition: 'background-color 0.2s',
+    padding: '8px 12px',
+    borderRadius: '6px',
+    transition: 'all 0.2s ease',
+    minWidth: '40px',
+    minHeight: '40px',
+    alignItems: 'center',
+    justifyContent: 'center',
   };
 
   const userInfoStyle: React.CSSProperties = {
@@ -216,13 +220,17 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
           {/* Desktop/tablet toggle button */}
           <button 
             style={toggleButtonStyle}
-            onClick={toggleSidebar}
+            onClick={(e) => {
+              e.preventDefault();
+              console.log('🎯 Desktop toggle clicked! Current state:', isOpen);
+              toggleSidebar();
+            }}
             aria-label={isOpen ? "Collapse sidebar" : "Expand sidebar"}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.medium;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
             }}
           >
             {isOpen ? '‹' : '›'}
