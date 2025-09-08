@@ -94,6 +94,7 @@ const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`📊 Environment: ${process.env.NODE_ENV}`);
   console.log(`🏥 Health check: http://localhost:${PORT}/health`);
   console.log(`🗄️ Database: ${pool ? 'Connected' : 'Disabled'}`);
+  console.log(`🔗 DATABASE_URL: ${process.env.DATABASE_URL ? process.env.DATABASE_URL.substring(0, 50) + '...' : 'Not set'}`);
 }).on('error', (err: any) => {
   console.error('❌ Server failed to start:', err);
   console.error('💡 Check if port is available or environment variables are set');

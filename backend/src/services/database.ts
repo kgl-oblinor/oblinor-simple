@@ -11,9 +11,19 @@ if (!process.env.DATABASE_URL) {
   console.log('💡 Add PostgreSQL plugin to Railway service or set DATABASE_URL');
   console.log('🚀 App will start anyway - database features disabled');
 } else {
+  // Fix Railway database URL - use proxy for better connection
+  let databaseUrl = process.env.DATABASE_URL;
+  if (databaseUrl.includes('postgres-production-bae3f.up.railway.app')) {
+    databaseUrl = databaseUrl.replace(
+      'postgres-production-bae3f.up.railway.app:5432',
+      'hopper.proxy.rlwy.net:42209'
+    );
+    console.log('🔧 Fixed Railway database URL to use proxy');
+  }
+  
   pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: process.env.DATABASE_URL?.includes('railway.app') || process.env.DATABASE_URL?.includes('railway.net') 
+    connectionString: databaseUrl,
+    ssl: databaseUrl?.includes('railway.app') || databaseUrl?.includes('railway.net') 
       ? { rejectUnauthorized: false } 
       : false
   });
