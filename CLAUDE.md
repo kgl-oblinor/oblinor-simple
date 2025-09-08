@@ -15,6 +15,24 @@
 - **Domain:** oblinoremisjonrailway-production.up.railway.app
 - **SSL:** Automatic HTTPS via Railway
 
+## ⚠️ IMPORTANT: CORRECT PRODUCTION URL
+
+**🎯 ALWAYS USE THIS URL FOR PRODUCTION:**
+```
+https://oblinoremisjonrailway-production.up.railway.app
+```
+
+**❌ DO NOT USE (502 error):**
+```
+https://oblinor-simple-production.up.railway.app  ← This URL does not work!
+```
+
+**📍 URL CONFUSION PREVENTION:**
+- Only ONE Railway service is active and working
+- Always refer to CLAUDE.md or README.md for correct URL
+- If you see 502 Bad Gateway, you're using the wrong URL
+- Test collapsed sidebar on the CORRECT URL above
+
 ---
 
 ## 📊 CURRENT DATABASE STATE
