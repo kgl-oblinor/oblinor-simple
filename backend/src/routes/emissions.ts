@@ -319,6 +319,25 @@ router.patch('/:id/subscriptions/:subId', auth({ adminOnly: true }), async (req:
       return res.status(404).json({ error: 'Subscription not found' });
     }
 
+    // CRITICAL: Update shareholder shares when approved
+    if (status === 'APPROVED' && shares_allocated > 0) {
+      await query(`
+        UPDATE shareholders 
+        SET shares_owned = shares_owned + $1, updated_at = CURRENT_TIMESTAMP
+        WHERE user_id = $2
+      `, [shares_allocated, updatedSubscription.user_id]);
+
+      // Record historical entry for the allocation
+      await query(`
+        INSERT INTO shareholder_history 
+        (shareholder_id, emission_id, shares_owned, change_type, change_reason)
+        SELECT s.id, $1, s.shares_owned, 'EMISSION', 
+               'Shares allocated: ' || $2 || ' from emission approval'
+        FROM shareholders s
+        WHERE s.user_id = $3
+      `, [updatedSubscription.emission_id, shares_allocated, updatedSubscription.user_id]);
+    }
+
     res.json({ 
       message: `Subscription ${status.toLowerCase()} successfully`,
       subscription: updatedSubscription 
