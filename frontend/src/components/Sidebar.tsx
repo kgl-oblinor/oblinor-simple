@@ -65,41 +65,45 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     transition: `opacity ${THEME.animations.duration.standard}, visibility ${THEME.animations.duration.standard}`,
   };
 
-  // 🎨 CLAUDE-STYLE SIDEBAR WITH AGENT 4's RESPONSIVE SYSTEM
+  // 🎨 PREMIUM SIDEBAR WITH SOPHISTICATED DESIGN
   const sidebarStyle: React.CSSProperties = {
     width: sidebarWidth,
     height: '100vh',
-    backgroundColor: THEME.colors.primary,
+    background: `linear-gradient(180deg, ${THEME.colors.primary} 0%, rgba(18, 53, 67, 0.95) 100%)`,
     color: THEME.colors.background,
-    padding: isOpen || !isMobile ? '20px' : '10px', // Less padding when collapsed
+    padding: isOpen || !isMobile ? '20px 16px' : '10px 6px', // Reduced padding for thinner sidebar
     position: 'fixed',
     left: 0,
     top: 0,
     display: 'flex',
     flexDirection: 'column',
-    borderRight: `1px solid ${ALPHA_COLORS.background.strong}`,
+    borderRight: `2px solid ${ALPHA_COLORS.background.medium}`,
+    boxShadow: `4px 0 24px ${ALPHA_COLORS.primary.strong}, inset -1px 0 0 rgba(255,255,255,0.1)`,
     zIndex: THEME.sidebar.zIndices.sidebar,
+    backdropFilter: 'blur(10px)',
     
     // 🚀 DIFFERENT ANIMATION FOR MOBILE VS DESKTOP
     ...(isMobile ? {
       // Mobile: Use transform for overlay behavior
       transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
-      transition: THEME.transitions.sidebar,
+      transition: `transform ${THEME.animations.duration.standard} ${THEME.animations.easing.materialStandard}`,
       willChange: 'transform'
     } : {
       // Desktop/Tablet: Use width animation for collapsed state
-      transition: `width ${THEME.animations.duration.standard} ${THEME.animations.easing.materialStandard}`,
+      transition: `width ${THEME.animations.duration.standard} ${THEME.animations.easing.materialStandard}, padding ${THEME.animations.duration.standard} ease`,
       willChange: 'width',
       overflow: 'hidden'
     })
   };
 
+  // 🎨 PREMIUM HEADER WITH SOPHISTICATED SPACING
   const headerStyle: React.CSSProperties = {
-    ...getResponsiveTypography('h2'),
-    marginBottom: '20px',
+    marginBottom: '32px', // More breathing room
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
+    paddingTop: '8px', // Subtle top padding
+    minHeight: '48px', // Consistent touch target zone
   };
 
   const closeButtonStyle: React.CSSProperties = {
@@ -112,41 +116,32 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     padding: '4px',
   };
 
-  // 🎯 CLAUDE-STYLE DESKTOP TOGGLE BUTTON - Enhanced visibility
+  // 🎨 CLEAN HAMBURGER TOGGLE BUTTON
   const toggleButtonStyle: React.CSSProperties = {
     display: isMobile ? 'none' : 'flex',
-    background: ALPHA_COLORS.background.light,
-    border: `1px solid ${ALPHA_COLORS.background.medium}`,
+    background: 'transparent',
+    border: 'none',
     color: THEME.colors.background,
-    ...getResponsiveTypography('h2'),
+    fontSize: '16px',
+    fontWeight: '400',
     cursor: 'pointer',
-    padding: '8px 12px',
-    borderRadius: '6px',
+    padding: '8px',
+    borderRadius: '4px',
     transition: 'all 0.2s ease',
-    minWidth: '40px',
-    minHeight: '40px',
+    width: '32px',
+    height: '32px',
     alignItems: 'center',
     justifyContent: 'center',
+    opacity: 0.8,
   };
 
+  // 🎨 CLEAN USER INFO WITHOUT BOXES
   const userInfoStyle: React.CSSProperties = {
-    marginBottom: '30px',
-    padding: '15px',
-    backgroundColor: ALPHA_COLORS.background.light,
-    borderRadius: '8px',
-    ...getResponsiveTypography('caption'),
+    marginBottom: '24px', // Clean spacing
+    padding: '0', // No padding - no box
+    background: 'transparent', // No background
   };
 
-  const levelBadgeStyle: React.CSSProperties = {
-    display: 'inline-block',
-    backgroundColor: THEME.colors.background,
-    color: THEME.colors.primary,
-    padding: '4px 8px',
-    borderRadius: '12px',
-    ...getResponsiveTypography('small'),
-    fontWeight: 'bold',
-    marginTop: '8px',
-  };
 
   const navigationStyle: React.CSSProperties = {
     display: 'flex',
@@ -156,31 +151,43 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   };
 
   const navButtonStyle = (isActive: boolean): React.CSSProperties => ({
-    padding: '12px 16px',
-    ...getResponsiveTypography('body'),
-    fontWeight: isActive ? 'bold' : 'normal',
-    backgroundColor: isActive ? ALPHA_COLORS.background.medium : 'transparent',
+    padding: '8px 16px', // Symmetric padding
+    fontSize: '12px',
+    fontWeight: isActive ? '600' : '500',
+    backgroundColor: 'transparent', // No background boxes
     color: THEME.colors.background,
     border: 'none',
-    borderRadius: '8px',
     cursor: 'pointer',
-    textAlign: 'left',
+    textAlign: 'center', // Perfect center alignment
     transition: 'all 0.2s ease',
-    minHeight: '44px',
-    borderLeft: isActive ? `3px solid ${THEME.colors.background}` : '3px solid transparent',
+    minHeight: '32px', // Consistent height
+    opacity: isActive ? 1 : 0.8,
+    // No border line - removed completely
+    letterSpacing: '0.1px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
   });
 
   const logoutButtonStyle: React.CSSProperties = {
     marginTop: 'auto',
-    padding: '12px 16px',
-    backgroundColor: ALPHA_COLORS.background.medium,
-    border: `1px solid ${ALPHA_COLORS.background.strong}`,
-    borderRadius: '8px',
+    padding: '8px 16px', // Symmetric padding matching nav buttons
+    backgroundColor: 'transparent', // No background box
+    border: 'none',
     color: THEME.colors.background,
     cursor: 'pointer',
-    ...getResponsiveTypography('body'),
-    fontWeight: 'bold',
+    fontSize: '12px',
+    fontWeight: '500',
     transition: 'all 0.3s ease',
+    opacity: 0.8,
+    letterSpacing: '0.1px',
+    textAlign: 'center', // Perfect center alignment
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    minHeight: '32px', // Same height as nav buttons
   };
 
   return (
@@ -231,26 +238,41 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
             }}
             aria-label={isOpen ? "Collapse sidebar" : "Expand sidebar"}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.medium;
+              // 🎨 SIMPLE HOVER - JUST OPACITY
+              e.currentTarget.style.opacity = '1';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
+              e.currentTarget.style.opacity = '0.8';
             }}
           >
-            {isOpen ? '‹' : '›'}
+            ☰
           </button>
         </div>
         
         {user && (isOpen || isMobile) && (
           <div style={userInfoStyle}>
-            <div style={{ fontWeight: 'bold', marginBottom: '8px' }}>
+            {/* 🎨 PERFECT SYMMETRIC TYPOGRAPHY */}
+            <div style={{ 
+              fontSize: '12px', 
+              fontWeight: '600', 
+              marginBottom: '4px',
+              color: THEME.colors.background,
+              letterSpacing: '0.2px',
+              textAlign: 'center', // Perfect center alignment
+              width: '100%'
+            }}>
               {user.name}
             </div>
-            <div style={{ fontSize: '12px', opacity: 0.8, marginBottom: '8px' }}>
+            <div style={{ 
+              fontSize: '11px', 
+              opacity: 0.85, 
+              marginBottom: '0',
+              color: THEME.colors.background,
+              letterSpacing: '0.1px',
+              textAlign: 'center', // Perfect center alignment
+              width: '100%'
+            }}>
               {user.email}
-            </div>
-            <div style={levelBadgeStyle}>
-              {user.role} Level {user.level}
             </div>
           </div>
         )}
@@ -266,16 +288,16 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                     onClick={() => onTabChange?.('users' as AdminTab)}
                     onMouseEnter={(e) => {
                       if (activeTab !== 'users') {
-                        e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
+                        e.currentTarget.style.opacity = '1';
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (activeTab !== 'users') {
-                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.opacity = '0.8';
                       }
                     }}
                   >
-                    Users
+                    ◉ Users
                   </button>
                   <button
                     style={navButtonStyle(activeTab === 'shareholders')}
@@ -291,7 +313,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                       }
                     }}
                   >
-                    Shareholders
+                    ▣ Shareholders
                   </button>
                   <button
                     style={navButtonStyle(activeTab === 'emissions')}
@@ -307,7 +329,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                       }
                     }}
                   >
-                    Emissions
+                    ◆ Emissions
                   </button>
                   <button
                     style={navButtonStyle(activeTab === 'subscriptions')}
@@ -323,7 +345,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                       }
                     }}
                   >
-                    Subscriptions
+                    ▤ Subscriptions
                   </button>
                 </>
               ) : (
@@ -343,7 +365,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                       }
                     }}
                   >
-                    Overview
+                    ◈ Overview
                   </button>
                   <button
                     style={navButtonStyle(activeTab === 'shareholders')}
@@ -359,7 +381,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                       }
                     }}
                   >
-                    Shareholders
+                    ▣ Shareholders
                   </button>
                   <button
                     style={navButtonStyle(activeTab === 'emissions')}
@@ -375,7 +397,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                       }
                     }}
                   >
-                    Emissions
+                    ◆ Emissions
                   </button>
                 </>
               )}
@@ -388,13 +410,13 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
             style={logoutButtonStyle}
             onClick={handleLogout}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.strong;
+              e.currentTarget.style.opacity = '1';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.medium;
+              e.currentTarget.style.opacity = '0.8';
             }}
           >
-            Logout
+            ◁ Logout
           </button>
         )}
       </div>

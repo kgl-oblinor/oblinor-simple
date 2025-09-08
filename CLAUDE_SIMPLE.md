@@ -1,7 +1,11 @@
 # CLAUDE_SIMPLE.md - Oblinor Simple Emisjon Platform
 
 **📍 SINGLE SOURCE OF TRUTH FOR ALL AI AGENTS**  
-**⚡ STATUS:** 100% Complete | **🎯 TARGET:** Fully functional emission platform | **Last Updated:** 2025-09-05 18:00  
+**⚡ STATUS:** 100% Complete | **🎯 TARGET:** Fully functional emission platform | **Last Updated:** 2025-09-08  
+
+**🎯 PRODUCTION URL:** https://oblinor-simple.up.railway.app/  
+**⚠️ IMPORTANT:** Always use oblinor-simple.up.railway.app - NOT oblinoremisjonrailway-production!  
+
 **📚 DETAILED REFERENCE:** [CLAUDE_SIMPLE_DETAILED.md](./CLAUDE_SIMPLE_DETAILED.md) - Full technical documentation  
 **🚂 DEPLOYMENT GUIDE:** [RAILWAY_DEPLOYMENT_GUIDE.md](./RAILWAY_DEPLOYMENT_GUIDE.md) - Complete Railway setup
 
@@ -378,9 +382,22 @@ curl http://localhost:4001/health
 # Frontend
 open http://localhost:5174
 
-# Live production system
-open https://oblinoremisjonrailway-production.up.railway.app/
+# Live production system - CORRECTED URL
+open https://oblinor-simple.up.railway.app/
+
+# Database structure & functions
+node check_db.js           # Live database overview
+node debug_tables.js        # Detailed schema
 ```
+
+### 🗄️ DATABASE QUICK REFERENCE
+
+**12 tables:** users, shareholders, emissions, trades, holdings, audit  
+**24 functions:** apply_emission(), cap_table_at(), request_trade(), assert_is_admin()  
+**Live data:** 30 shareholders, 127,640 shares, active Serie B emission  
+**Connection:** Same PostgreSQL database for local dev and production  
+
+*Full database documentation in Agent-backend.md section "KOMPLETT DATABASE STRUKTUR & FUNKSJONALITET"*
 
 ---
 

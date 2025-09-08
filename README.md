@@ -197,6 +197,29 @@ git push
 # Users see changes on https://oblinor-simple.up.railway.app/
 ```
 
+## 🗄️ Database Structure & Functions
+
+**Live Database Connection:**
+```bash
+# Get complete database structure and live data
+node check_db.js           # Quick overview of tables and data
+node debug_tables.js        # Detailed schema information
+```
+
+**Database Features:**
+- **12 tables:** users, shareholders, emissions, trades, holdings, audit logs
+- **24 business functions:** Complete emission & trading logic in PostgreSQL
+- **4 triggers:** Automatic share allocation and timestamp updates
+- **Live data:** 30 shareholders, 127,640 shares, active Serie B emission
+
+**Key Functions:**
+- `apply_emission()` - Execute share emissions
+- `cap_table_at()` - Generate cap table at any point in time
+- `request_trade()` - Handle share trading between investors
+- `assert_is_admin()` - Role-based access control
+
+*This is a sophisticated financial system with full business logic implemented at the database level.*
+
 ### AI Agent Documentation
 - [CLAUDE.md](./CLAUDE.md) - Primary AI agent instructions
 - [CLAUDE_SIMPLE.md](./CLAUDE_SIMPLE.md) - Compact AI reference  

@@ -354,11 +354,40 @@ SELECT * FROM emissions WHERE status = 'ACTIVE';
 - Share allocation happens automatically via database triggers
 - Emission subscriptions require admin approval
 
+---
+
+## 🗄️ DATABASE STRUKTUR & FUNKSJONALITET
+
+**🎯 PRODUKSJONS-URL:** https://oblinor-simple.up.railway.app/  
+**🔍 TILKOBLING:** `node check_db.js` for live databasestruktur
+
+### 📊 LIVE DATA (oppdatert daglig)
+- **12 tabeller** - bruker, aksjonærer, emisjoner, handel, audit
+- **24 business functions** - emisjonstyring, handel, cap table, sikkerhet
+- **4 triggers** - auto-allokering, timestamp updates
+- **30 aksjonærer** - 127,640 totale aksjer
+- **Aktiv emisjon** - Serie B (20,000 nye aksjer)
+
+### 🔧 KRITISKE FUNKSJONER
+```bash
+# Database struktur og funksjoner
+node check_db.js           # Live tabellstruktur 
+node debug_tables.js        # Detaljert schema
+node create_history_table.js # Historikk-setup
+```
+
+### 📋 BUSINESS LOGIC OVERSIKT
+- **Emisjoner:** `apply_emission()`, `approve_emission()`, `ui_create_emission_draft()`
+- **Handel:** `request_trade()`, `apply_trade()`, `approve_trade_request()`  
+- **Cap Table:** `cap_table_at()`, `apply_share_transfer()`, `apply_stock_split()`
+- **Sikkerhet:** `assert_is_admin()`, `assert_level_at_least()`
+
+*For komplett database-dokumentasjon, se [Agent-backend.md](./Agent-backend.md) seksjon "KOMPLETT DATABASE STRUKTUR & FUNKSJONALITET"*
+
 **Known Issues:**
 - No email notifications (manual process)
 - No payment integration (manual verification)
 - No bulk operations for subscriptions
-- No audit logging
 
 ---
 

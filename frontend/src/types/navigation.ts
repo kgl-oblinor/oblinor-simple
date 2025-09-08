@@ -1,4 +1,4 @@
-/**
+1/**
  * Navigation Types for Oblinor Simple Platform
  * 
  * Shared type definitions for tab navigation across User and Admin dashboards
