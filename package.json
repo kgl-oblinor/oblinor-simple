@@ -1,0 +1,33 @@
+{
+  "name": "oblinor-simple",
+  "version": "1.0.0",
+  "description": "Oblinor Simple - Norwegian Share Emission Platform",
+  "private": true,
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd backend && npm run build && cd ../frontend && VITE_API_URL='' npm run build && cp -r dist ../backend/",
+    "start": "cd backend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kgl-oblinor/oblinor-simple.git"
+  },
+  "keywords": [
+    "share-emission",
+    "norwegian",
+    "railway",
+    "monorepo"
+  ],
+  "author": "Oblinor",
+  "license": "UNLICENSED"
+}
