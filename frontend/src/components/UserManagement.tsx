@@ -236,7 +236,7 @@ const UserManagement: React.FC = () => {
                       backgroundColor: user.role === 'ADMIN' ? THEME.colors.success : THEME.colors.info,
                       color: THEME.colors.background,
                       borderRadius: '12px',
-                      fontSize: '12px',
+                      ...getResponsiveTypography('small'),
                       fontWeight: 'bold'
                     }}>
                       {user.role}
@@ -245,7 +245,7 @@ const UserManagement: React.FC = () => {
                   
                   <div style={mobileCardDetailsStyle}>
                     <div style={mobileCardLevelContainerStyle}>
-                      <span style={{ fontSize: '14px', fontWeight: 'bold' }}>Level:</span>
+                      <span style={{ ...getResponsiveTypography('caption'), fontWeight: 'bold' }}>Level:</span>
                       <select
                         value={user.level}
                         onChange={(e) => handleLevelChange(user.id, parseInt(e.target.value))}
