@@ -76,8 +76,9 @@ export const getSidebarContentMargin = (sidebarOpen: boolean) => {
   const { isMobile } = getResponsive();
   if (isMobile) return '0px'; // Mobile: sidebar overlay, no margin needed
   
-  // Desktop: Add buffer space to prevent overlap
-  return sidebarOpen ? '270px' : '60px'; // 250px + 20px buffer | 50px + 10px buffer
+  // Desktop: CORRECT LOGIC - when sidebar OPEN (250px), content needs 270px margin (250+20 buffer)
+  // When sidebar CLOSED (50px), content needs 70px margin (50+20 buffer)
+  return sidebarOpen ? '270px' : '70px';
 };
 
 // ALPHA_COLORS for transparent backgrounds
