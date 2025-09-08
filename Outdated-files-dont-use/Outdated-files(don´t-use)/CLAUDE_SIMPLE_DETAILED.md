@@ -1,6 +1,7 @@
 # CLAUDE_SIMPLE_DETAILED.md - Komplett Teknisk Dokumentasjon
 
 **📚 DETALJERT REFERANSEDOKUMENT FOR OBLINOR SIMPLE EMISJON**  
+**🚨 CRITICAL:** LIVE-ONLY PRODUCTION SYSTEM - NO LOCAL DEVELOPMENT  
 **🔗 Main Guide:** [CLAUDE_SIMPLE.md](./CLAUDE_SIMPLE.md) - Compact AI instructions  
 **🏠 Master File:** [CLAUDE.md](./CLAUDE.md) - Primary AI documentation  
 **🚂 Deployment:** [RAILWAY_DEPLOYMENT_GUIDE.md](./RAILWAY_DEPLOYMENT_GUIDE.md) - Railway setup  
@@ -142,7 +143,7 @@ graph TD
 ┌─────────────────────────────────────────────────────────────┐
 │                         FRONTEND                             │
 │                    React + TypeScript + Vite                 │
-│                        Port: 5174                            │
+│                    LIVE-ONLY PRODUCTION                      │
 ├─────────────────────────────────────────────────────────────┤
 │                      Components Layer                        │
 │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐      │
@@ -161,7 +162,7 @@ graph TD
 ┌─────────────────────────────────────────────────────────────┐
 │                         BACKEND                              │
 │                   Express + TypeScript                       │
-│                        Port: 4001                            │
+│                    LIVE-ONLY RAILWAY                        │
 ├─────────────────────────────────────────────────────────────┤
 │                      Middleware Layer                        │
 │     CORS │ Body Parser │ JWT Auth │ Error Handler           │
@@ -1141,13 +1142,12 @@ Documentation:
 ### Production Environment Variables:
 
 ```bash
-# Production .env
+# LIVE-ONLY Production System - No local .env needed
+# All configuration managed by Railway environment variables
+LIVE_URL=https://oblinor-simple.up.railway.app/
+DATABASE_URL=[Railway manages this]
+JWT_SECRET=[Railway environment variable]
 NODE_ENV=production
-DATABASE_URL=postgresql://prod_user:prod_pass@prod_host:5432/oblinor
-JWT_SECRET=[32+ character random string]
-CORS_ORIGIN=https://oblinor-simple.com
-PORT=4001
-VITE_API_URL=https://api.oblinor-simple.com
 ```
 
 ---
@@ -1156,21 +1156,23 @@ VITE_API_URL=https://api.oblinor-simple.com
 
 ### Start Commands:
 ```bash
-# Production System (Live)
-https://oblinoremisjonrailway-production.up.railway.app/
+# LIVE-ONLY Production System
+https://oblinor-simple.up.railway.app/
 
-# Local Development
-cd backend && npm run dev    # Port 4001
-cd frontend && npm run dev   # Port 5174
+# NO LOCAL DEVELOPMENT - Live deployment only
+git add .
+git commit -m "Your changes"
+git push
+# → Railway deploys immediately to live system
 ```
 
-### Common Issues:
+### Live System Information:
 
-| Problem | Solution |
-|---------|----------|
-| Port 4001 in use | `lsof -i :4001` → `kill -9 [PID]` |
-| Database connection failed | Check DATABASE_URL in .env |
-| JWT error | Verify JWT_SECRET is set |
+| Info | Details |
+|------|---------|
+| Live URL | https://oblinor-simple.up.railway.app/ |
+| Database | Live PostgreSQL with 30 shareholders |
+| Users | Real Norwegian investors |
 | Blur not showing | Check user level in AuthContext |
 | Shares not updating | Verify transaction in approval |
 

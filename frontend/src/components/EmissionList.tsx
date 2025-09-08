@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Emission } from '../types';
-import { emissionsAPI } from '../api';
+import { emissionsAPI } from '@/services';
 import BlurredContent from './BlurredContent';
 import { useAuth } from '../context/AuthContext';
 import { THEME, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';

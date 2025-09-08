@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Emission } from '../types';
 import { useAuth } from '../context/AuthContext';
 import { THEME, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
-import { emissionsAPI } from '../api';
+import { emissionsAPI } from '@/services';
 import BlurredContent from './BlurredContent';
 import SubscriptionForm from './SubscriptionForm';
 

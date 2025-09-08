@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { User } from '../types';
-import { usersAPI } from '../api';
-import BlurredContent from './BlurredContent';
-import { useAuth } from '../context/AuthContext';
-import { THEME, getResponsive, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
+import { User } from '@/types';
+import { usersAPI } from '@/services';
+import BlurredContent from '@/components/BlurredContent';
+import { useAuth } from '@/context/AuthContext';
+import { THEME, getResponsive, ALPHA_COLORS, getResponsiveTypography } from '@/constants/theme';
 
 const UserManagement: React.FC = () => {
   const { isMobile } = getResponsive(); // Agent 4's responsive system

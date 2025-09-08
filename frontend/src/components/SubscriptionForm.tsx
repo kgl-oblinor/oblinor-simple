@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Emission, APIError } from '../types';
-import api from '../api';
+import api from '@/services/api';
 import { THEME, getResponsive, getResponsiveSpacing, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 
 interface SubscriptionFormProps {

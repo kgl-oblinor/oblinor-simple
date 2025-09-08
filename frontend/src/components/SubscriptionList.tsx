@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { EmissionSubscription, User } from '../types';
-import { emissionsAPI } from '../api';
+import { emissionsAPI } from '@/services';
 import { THEME, getResponsive, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
 
 interface SubscriptionListProps {

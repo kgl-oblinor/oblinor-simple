@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import path from 'path';
-import { pool } from './db';
+import { pool } from './services/database';
 
 // Import routes
 import authRoutes from './routes/auth';

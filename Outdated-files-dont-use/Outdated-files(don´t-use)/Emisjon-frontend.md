@@ -85,7 +85,7 @@ git push
 
 Railway typically takes 1-2 minutes to build and deploy after push.
 
-**Alternative:** Test locally with `npm run dev` in both frontend/ and backend/, but to see it on the live URL you must push to GitHub first.
+**🚨 LIVE-ONLY SYSTEM:** No local development environment. All changes go directly to live production system via Git push.
 
 ## Build Verification Complete
 

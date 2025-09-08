@@ -1,5 +1,16 @@
 import axios from 'axios';
-import { LoginRequest, LoginResponse, User, Shareholder, Emission, EmissionSubscription } from './types';
+import { User, Shareholder, Emission, Subscription } from '@/types';
+
+// API specific types
+interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+interface LoginResponse {
+  token: string;
+  user: User;
+}
 
 // In production, use relative URLs since frontend is served from backend
 // If VITE_API_URL is empty string, use relative URLs

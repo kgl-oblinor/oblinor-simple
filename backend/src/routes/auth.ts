@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import { query, queryOne } from '../db';
-import { generateToken, auth, AuthRequest } from '../auth';
+import { query, queryOne } from '../services/database';
+import { generateToken, auth, AuthRequest } from '../middleware/auth';
 import { LoginRequest, User } from '../types';
 
 const router = Router();

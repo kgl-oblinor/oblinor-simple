@@ -23,43 +23,33 @@ https://oblinor-simple-production.up.railway.app        # Old URL
 
 ## 🚨 LIVE-ONLY SYSTEM - NO LOCAL DEVELOPMENT
 
-### 1. Environment Files Setup
+### ⚠️ NO LOCAL DEVELOPMENT ENVIRONMENT
 
-**Backend Environment (`backend/.env`):**
+**🚨 CRITICAL:** This system operates LIVE-ONLY mode:
+
 ```bash
-# Copy from .env.example and verify these settings:
-DATABASE_URL=postgresql://postgres:iuzakIAZhFviojhSMiTFfbgdnIAFRWGJ@hopper.proxy.rlwy.net:42209/railway
-JWT_SECRET=oblinor-local-dev-jwt-secret-change-in-production
-NODE_ENV=development
-PORT=4001
+# ONLY way to make changes:
+git add .
+git commit -m "Your changes"
+git push
+
+# Railway automatically deploys to LIVE system  
+# Real users see changes immediately!
+open https://oblinor-simple.up.railway.app/
 ```
 
-**Frontend Environment (`frontend/.env`):**
+### 🗄️ Database Access (Live Data Only)
+
 ```bash
-# For local development:
-VITE_API_URL=http://localhost:4001
+# Connect to live database for inspection
+node check_db.js           # Live database overview
+node debug_tables.js        # Detailed schema
 ```
 
-### 2. Start Development Servers
-
-**Terminal 1 - Backend:**
-```bash
-cd backend
-npm run dev
-# Should show: 🚀 Oblinor Simple Backend running on port 4001
-```
-
-**Terminal 2 - Frontend:**
-```bash
-cd frontend  
-npm run dev
-# Should show: ➜ Local: http://localhost:5174/
-```
-
-### 3. Verify Local Setup
-- ✅ Backend: http://localhost:4001/health should return "OK"
-- ✅ Frontend: http://localhost:5174/ should load Oblinor app
-- ✅ Login works with: admin@oblinor.no / Admin123!
+### ⚠️ Live System Verification
+- ✅ Production: https://oblinor-simple.up.railway.app/ 
+- ✅ Database: 30 real shareholders, 127,640 shares
+- ✅ Login: admin@oblinor.no / Admin123!
 
 ---
 

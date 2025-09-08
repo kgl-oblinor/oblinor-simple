@@ -32,7 +32,7 @@ export const THEME = {
 // Helper functions for responsive design
 export const isMobile = () => window.innerWidth <= THEME.breakpoints.mobile;
 
-// Type exports for TypeScript support<
+// Type exports for TypeScript support
 export type ThemeColors = typeof THEME.colors;
 export type ThemeSpacing = typeof THEME.spacing;
-export type ThemeBreakpoints = typeof THEME.breakpoints;>
+export type ThemeBreakpoints = typeof THEME.breakpoints;

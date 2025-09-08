@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { JWTPayload, AccessControl } from './types';
-import { queryOne } from './db';
+import { JWTPayload, AccessControl } from '../types';
+import { queryOne } from '../services/database';
 
 export interface AuthRequest extends Request {
   user?: {

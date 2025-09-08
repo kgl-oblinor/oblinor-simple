@@ -325,9 +325,9 @@ API STRUCTURE:
 └── emissionsAPI   - CRUD + subscription management
 
 ENVIRONMENT HANDLING:
-✅ Production: Relative URLs (served from backend)
-✅ Development: VITE_API_URL=http://localhost:4001
-✅ Smart URL resolution for deployment flexibility
+✅ Production: Relative URLs (served from backend) - LIVE-ONLY SYSTEM
+⚠️ NO LOCAL DEVELOPMENT - All changes go directly to live production
+✅ Smart URL resolution for Railway deployment
 ```
 
 ---
@@ -338,7 +338,7 @@ ENVIRONMENT HANDLING:
 ```typescript
 vite.config.ts (20 lines):
 ✅ React plugin integration
-✅ Custom port (5174) for development  
+⚠️ LIVE-ONLY SYSTEM - No local development ports  
 ✅ Path aliases (@/ → /src)
 ✅ Host configuration for Railway deployment
 ```
