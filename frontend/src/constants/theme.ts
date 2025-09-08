@@ -26,7 +26,7 @@ export const THEME = {
     default: 'all 0.2s ease',
     sidebar: 'left 0.3s ease',
     background: 'background-color 0.2s',
-    sidebarContent: 'margin-left 0.3s ease'
+    sidebarContent: 'margin-left 0.35s cubic-bezier(0.4, 0.0, 0.2, 1)'
   },
   sidebar: {
     widths: {
@@ -68,11 +68,16 @@ export const getResponsive = () => {
   };
 };
 
-// Sidebar content margin helper
+// Railway Production-Safe Sidebar Content Margin
 export const getSidebarContentMargin = (sidebarOpen: boolean) => {
+  // SSR-safe default for Railway server-side rendering
+  if (typeof window === 'undefined') return '270px';
+  
   const { isMobile } = getResponsive();
-  if (isMobile) return '0';
-  return sidebarOpen ? THEME.spacing.sidebarWidth : '60px';
+  if (isMobile) return '0px'; // Mobile: sidebar overlay, no margin needed
+  
+  // Desktop: Add buffer space to prevent overlap
+  return sidebarOpen ? '270px' : '60px'; // 250px + 20px buffer | 50px + 10px buffer
 };
 
 // ALPHA_COLORS for transparent backgrounds
