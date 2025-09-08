@@ -1,6 +1,6 @@
 # Oblinor Simple - Emission Platform
 
-🌐 **LIVE SYSTEM:** https://oblinoremisjonrailway-production.up.railway.app/
+🌐 **LIVE SYSTEM:** https://oblinor-simple.up.railway.app/
 
 A fully functional share emission platform where companies can issue new shares and investors can subscribe to them. Features real Norwegian shareholder data and strict level-based access control with blur effects.
 
@@ -33,7 +33,7 @@ ADMIN Level 2 → Full control + approve subscriptions
 ## 🚀 How to Use the Platform
 
 ### 1. Access the System
-Visit: **https://oblinoremisjonrailway-production.up.railway.app/**
+Visit: **https://oblinor-simple.up.railway.app/**
 
 ### 2. Test Accounts Available
 - **Admin (Full Control)**: `admin@oblinor.no` / `Admin123!`
@@ -153,7 +153,7 @@ color: '#fcfbfa'
 
 #### 1. **Railway (Production)** 🌐
 - Live production system on the internet
-- URL: https://oblinoremisjonrailway-production.up.railway.app/
+- URL: https://oblinor-simple.up.railway.app/
 - Automatically updates when you push to GitHub
 - Used by real users
 
@@ -194,7 +194,7 @@ open http://localhost:5175
 git push
 
 # 5. Railway automatically updates production
-# Users see changes on https://oblinoremisjonrailway-production.up.railway.app/
+# Users see changes on https://oblinor-simple.up.railway.app/
 ```
 
 ### AI Agent Documentation
@@ -219,7 +219,7 @@ The platform successfully demonstrates:
 
 ## 📞 Support & Contact
 
-- **Live System:** https://oblinoremisjonrailway-production.up.railway.app/
+- **Live System:** https://oblinor-simple.up.railway.app/
 - **Source Code:** https://github.com/kgl-oblinor/oblinor-simple
 - **Issues:** Report via GitHub Issues
 

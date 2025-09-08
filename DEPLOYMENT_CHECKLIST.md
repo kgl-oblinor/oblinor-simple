@@ -8,14 +8,15 @@ This checklist prevents common deployment mistakes and URL confusion.
 
 ## ⚠️ CRITICAL: CORRECT PRODUCTION URL
 
-**✅ WORKING PRODUCTION URL:**
+**✅ CURRENT PRODUCTION URL:**
 ```bash
-https://oblinoremisjonrailway-production.up.railway.app
+https://oblinor-simple.up.railway.app
 ```
 
-**❌ BROKEN URLs (DO NOT USE):**
+**❌ OLD URLs (NO LONGER USED):**
 ```bash
-https://oblinor-simple-production.up.railway.app  # Returns 502 Bad Gateway
+https://oblinoremisjonrailway-production.up.railway.app  # Old URL
+https://oblinor-simple-production.up.railway.app        # Old URL
 ```
 
 ---
@@ -89,7 +90,7 @@ git push
 ```
 
 ### 3. Post-Deployment Verification
-- [ ] Production URL loads: https://oblinoremisjonrailway-production.up.railway.app
+- [ ] Production URL loads: https://oblinor-simple.up.railway.app
 - [ ] Login works with admin credentials
 - [ ] Database connection is working
 - [ ] Claude-style sidebar toggles correctly on desktop
@@ -116,8 +117,8 @@ git push
 ## 🚨 COMMON PITFALLS TO AVOID
 
 ### 1. URL Confusion
-- ❌ **NEVER** use `oblinor-simple-production.up.railway.app`
-- ✅ **ALWAYS** use `oblinoremisjonrailway-production.up.railway.app`
+- ❌ **OLD URLs** (no longer used): `oblinoremisjonrailway-production.up.railway.app`, `oblinor-simple-production.up.railway.app`
+- ✅ **ALWAYS** use `oblinor-simple.up.railway.app`
 - 📝 When in doubt, check CLAUDE.md or README.md
 
 ### 2. Environment Variable Mistakes
@@ -177,7 +178,7 @@ Role: Admin Level 2 (full control)
 
 **Production URL (bookmark this):**
 ```
-https://oblinoremisjonrailway-production.up.railway.app
+https://oblinor-simple.up.railway.app
 ```
 
 ---

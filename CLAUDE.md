@@ -2,7 +2,7 @@
 
 **📍 SINGLE SOURCE OF TRUTH FOR ALL AI AGENTS**  
 **⚡ STATUS:** Production Live on Railway | **🎯 TARGET:** Norwegian share emission platform  
-**🔗 LIVE:** https://oblinoremisjonrailway-production.up.railway.app  
+**🔗 LIVE:** https://oblinor-simple.up.railway.app  
 **Last Updated:** 2025-09-07 Agent 4 Enhanced Responsive System Implementation Complete
 
 ---
@@ -12,14 +12,14 @@
 **Railway Production:**
 - **Frontend/Backend:** Single service on Railway (monorepo)
 - **Database:** PostgreSQL on Railway (external connection allowed)
-- **Domain:** oblinoremisjonrailway-production.up.railway.app
+- **Domain:** oblinor-simple.up.railway.app
 - **SSL:** Automatic HTTPS via Railway
 
 ## ⚠️ IMPORTANT: CORRECT PRODUCTION URL
 
 **🎯 ALWAYS USE THIS URL FOR PRODUCTION:**
 ```
-https://oblinoremisjonrailway-production.up.railway.app
+https://oblinor-simple.up.railway.app
 ```
 
 **❌ DO NOT USE (502 error):**
@@ -129,7 +129,7 @@ CONSTRAINT valid_level CHECK (
 
 #### 1. **Railway (Production)** 🌐
 - Live production system on the internet
-- URL: https://oblinoremisjonrailway-production.up.railway.app/
+- URL: https://oblinor-simple.up.railway.app/
 - Automatically updates when you push to GitHub
 - Used by real users
 
@@ -170,7 +170,7 @@ open http://localhost:5174
 git push
 
 # 5. Railway automatically updates production
-# Users see changes on https://oblinoremisjonrailway-production.up.railway.app/
+# Users see changes on https://oblinor-simple.up.railway.app/
 ```
 
 **Railway Deployment:**
