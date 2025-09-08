@@ -90,7 +90,7 @@ process.on('SIGINT', async () => {
 
 // Start server with error handling
 const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Oblinor Simple Backend running on port ${PORT}`);
+  console.log(`🚀 Oblinor Simple Backend running on port ${PORT} (v2)`);
   console.log(`📊 Environment: ${process.env.NODE_ENV}`);
   console.log(`🏥 Health check: http://localhost:${PORT}/health`);
   console.log(`🗄️ Database: ${pool ? 'Connected' : 'Disabled'}`);
