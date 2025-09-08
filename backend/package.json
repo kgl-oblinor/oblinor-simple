@@ -14,9 +14,7 @@
     "dotenv": "16.3.1",
     "express": "^4.21.2",
     "jsonwebtoken": "9.0.2",
-    "pg": "8.11.3",
-    "ts-node": "^10.9.2",
-    "typescript": "5.3.3"
+    "pg": "8.11.3"
   },
   "devDependencies": {
     "@types/bcrypt": "5.0.2",
@@ -25,6 +23,8 @@
     "@types/jsonwebtoken": "9.0.5",
     "@types/node": "20.10.5",
     "@types/pg": "8.10.9",
-    "ts-node-dev": "2.0.0"
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "2.0.0",
+    "typescript": "5.3.3"
   }
 }

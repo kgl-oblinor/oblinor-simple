@@ -15,7 +15,7 @@ import debugRoutes from './routes/debug';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 4001;
+const PORT = parseInt(process.env.PORT || '4001', 10);
 
 // Middleware
 app.use(cors());
@@ -80,11 +80,16 @@ process.on('SIGINT', async () => {
   process.exit(0);
 });
 
-// Start server
-app.listen(PORT, () => {
+// Start server with error handling
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Oblinor Simple Backend running on port ${PORT}`);
   console.log(`📊 Environment: ${process.env.NODE_ENV}`);
   console.log(`🏥 Health check: http://localhost:${PORT}/health`);
+  console.log(`🗄️ Database: ${pool ? 'Connected' : 'Disabled'}`);
+}).on('error', (err: any) => {
+  console.error('❌ Server failed to start:', err);
+  console.error('💡 Check if port is available or environment variables are set');
+  process.exit(1);
 });
 
 export default app;
