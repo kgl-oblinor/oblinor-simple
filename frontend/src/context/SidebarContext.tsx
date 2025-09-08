@@ -10,13 +10,15 @@ interface SidebarContextType {
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { isMobile } = getResponsive();
+  // 🎯 CLAUDE-STYLE DEFAULT: Start with false, then set correct state in useEffect
+  const [isOpen, setIsOpen] = useState(false);
   
-  // 🎯 CLAUDE-STYLE DEFAULT: Open on desktop/tablet, closed on mobile
-  const [isOpen, setIsOpen] = useState(!isMobile);
-  
-  // 📱 RESPONSIVE STATE SYNC: Ensure correct state when breakpoint changes
+  // 📱 INITIAL STATE SETUP AND RESPONSIVE SYNC
   useEffect(() => {
+    // Set initial state based on screen size
+    const { isMobile } = getResponsive();
+    setIsOpen(!isMobile); // Open on desktop/tablet, closed on mobile
+    
     const handleResize = () => {
       const { isMobile: currentIsMobile } = getResponsive();
       // Auto-open on desktop/tablet, but preserve user choice on mobile
