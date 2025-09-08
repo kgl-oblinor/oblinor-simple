@@ -1,7 +1,8 @@
 import React from 'react';
 import Sidebar from './Sidebar';
-import { THEME, getResponsive } from '../constants/theme';
+import { THEME, getResponsive, getSidebarContentMargin } from '../constants/theme';
 import { NavigationTab, NavigationTabChangeHandler } from '../types/navigation';
+import { useSidebar } from '../context/SidebarContext';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,15 +12,18 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange }) => {
   const { isMobile } = getResponsive();
+  const { isOpen: sidebarOpen } = useSidebar();
   
+  // 🎨 CLAUDE-STYLE CONTENT SHIFTING WITH AGENT 4's RESPONSIVE SYSTEM
   const contentStyle: React.CSSProperties = {
-    marginLeft: isMobile ? '0' : THEME.spacing.sidebarWidth,
+    marginLeft: getSidebarContentMargin(sidebarOpen),
     marginTop: isMobile ? '60px' : '0',
     padding: '20px',
     backgroundColor: THEME.colors.background,
     minHeight: '100vh',
     color: THEME.colors.primary,
-    transition: isMobile ? 'none' : THEME.transitions.sidebar,
+    transition: THEME.transitions.sidebarContent,
+    willChange: 'margin-left', // GPU acceleration hint
   };
 
   return (

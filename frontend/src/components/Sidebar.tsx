@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { THEME, getResponsive, ALPHA_COLORS, getResponsiveTypography } from '../constants/theme';
+import { THEME, getResponsive, ALPHA_COLORS, getResponsiveTypography, getResponsiveSidebarWidth } from '../constants/theme';
 import { NavigationTab, NavigationTabChangeHandler, UserTab, AdminTab } from '../types/navigation';
+import { useSidebar } from '../context/SidebarContext';
 
 interface SidebarProps {
   activeTab?: NavigationTab;
@@ -11,15 +12,12 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   const { user, logout } = useAuth();
   const { isMobile } = getResponsive(); // Agent 4's responsive system
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen, toggleSidebar } = useSidebar(); // Global sidebar state
+  const sidebarWidth = getResponsiveSidebarWidth();
 
   const handleLogout = () => {
     logout();
     setIsOpen(false);
-  };
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
   };
 
   const closeSidebar = () => {
@@ -38,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     top: 0,
     left: 0,
     right: 0,
-    zIndex: 1000,
+    zIndex: THEME.sidebar.zIndices.mobileHeader,
     borderBottom: `1px solid ${ALPHA_COLORS.background.strong}`,
   };
 
@@ -61,27 +59,31 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     right: 0,
     bottom: 0,
     backgroundColor: ALPHA_COLORS.primary.strong,
-    zIndex: 998,
+    zIndex: THEME.sidebar.zIndices.backdrop,
     opacity: isOpen ? 1 : 0,
     visibility: isOpen ? 'visible' : 'hidden',
-    transition: 'opacity 0.3s, visibility 0.3s',
+    transition: `opacity ${THEME.animations.duration.standard}, visibility ${THEME.animations.duration.standard}`,
   };
 
-  // Desktop sidebar styles (original)
+  // 🎨 CLAUDE-STYLE SIDEBAR WITH AGENT 4's RESPONSIVE SYSTEM
   const sidebarStyle: React.CSSProperties = {
-    width: isMobile ? '280px' : THEME.spacing.sidebarWidth,
+    width: sidebarWidth,
     height: '100vh',
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
     padding: '20px',
     position: 'fixed',
-    left: isMobile ? (isOpen ? 0 : '-280px') : 0,
-    top: isMobile ? 0 : 0,
+    left: 0,
+    top: 0,
     display: 'flex',
     flexDirection: 'column',
     borderRight: `1px solid ${ALPHA_COLORS.background.strong}`,
-    zIndex: 999,
-    transition: isMobile ? THEME.transitions.sidebar : 'none',
+    zIndex: THEME.sidebar.zIndices.sidebar,
+    
+    // 🚀 CLAUDE-STYLE TRANSFORM ANIMATION (replaces left positioning)
+    transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
+    transition: THEME.transitions.sidebar,
+    willChange: 'transform', // GPU acceleration hint
   };
 
   const headerStyle: React.CSSProperties = {
@@ -102,6 +104,19 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     ...getResponsiveTypography('h2'),
     cursor: 'pointer',
     padding: '4px',
+  };
+
+  // 🎯 CLAUDE-STYLE DESKTOP TOGGLE BUTTON
+  const toggleButtonStyle: React.CSSProperties = {
+    display: isMobile ? 'none' : 'block',
+    background: 'none',
+    border: 'none',
+    color: THEME.colors.background,
+    ...getResponsiveTypography('h2'),
+    cursor: 'pointer',
+    padding: '4px',
+    borderRadius: '4px',
+    transition: 'background-color 0.2s',
   };
 
   const userInfoStyle: React.CSSProperties = {
@@ -188,12 +203,29 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
       <div style={sidebarStyle}>
         <div style={headerStyle}>
           <span>Oblinor Simple</span>
+          
+          {/* Mobile close button */}
           <button 
             style={closeButtonStyle}
             onClick={closeSidebar}
             aria-label="Close menu"
           >
             ✕
+          </button>
+          
+          {/* Desktop/tablet toggle button */}
+          <button 
+            style={toggleButtonStyle}
+            onClick={toggleSidebar}
+            aria-label={isOpen ? "Collapse sidebar" : "Expand sidebar"}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.light;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
+          >
+            {isOpen ? '‹' : '›'}
           </button>
         </div>
         

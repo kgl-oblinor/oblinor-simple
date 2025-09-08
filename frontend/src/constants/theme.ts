@@ -24,8 +24,33 @@ export const THEME = {
   },
   transitions: {
     default: 'all 0.2s ease',
-    sidebar: 'left 0.3s ease',
+    sidebar: 'transform 350ms cubic-bezier(0.4, 0.0, 0.2, 1)',
+    sidebarContent: 'margin-left 350ms cubic-bezier(0.4, 0.0, 0.2, 1)',
     background: 'background-color 0.2s'
+  },
+  animations: {
+    easing: {
+      materialStandard: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
+      materialDecelerate: 'cubic-bezier(0.0, 0.0, 0.2, 1)',
+      materialAccelerate: 'cubic-bezier(0.4, 0.0, 1, 1)'
+    },
+    duration: {
+      fast: '200ms',
+      standard: '350ms',
+      slow: '500ms'
+    }
+  },
+  sidebar: {
+    widths: {
+      mobile: '280px',
+      tablet: '220px',
+      desktop: '250px'
+    },
+    zIndices: {
+      sidebar: 999,
+      backdrop: 998,
+      mobileHeader: 1000
+    }
   }
 } as const;
 
@@ -171,6 +196,27 @@ export const getResponsiveTypography = (variant: keyof typeof RESPONSIVE_TYPOGRA
 export const getResponsiveSpacing = (mobile: string, desktop: string) => {
   const { isMobile } = getResponsive();
   return isMobile ? mobile : desktop;
+};
+
+// 🎯 CLAUDE-STYLE SIDEBAR UTILITIES
+export const getResponsiveSidebarWidth = () => {
+  const { isMobile, isTablet, isDesktop } = getResponsive();
+  
+  if (isMobile) return THEME.sidebar.widths.mobile;
+  if (isTablet) return THEME.sidebar.widths.tablet;
+  if (isDesktop) return THEME.sidebar.widths.desktop;
+  
+  return THEME.sidebar.widths.desktop; // fallback
+};
+
+export const getSidebarContentMargin = (sidebarOpen: boolean) => {
+  const { isMobile, isTablet, isDesktop } = getResponsive();
+  
+  if (isMobile) return '0'; // Mobile uses overlay, no content margin
+  if (isTablet) return sidebarOpen ? THEME.sidebar.widths.tablet : '0';
+  if (isDesktop) return sidebarOpen ? THEME.sidebar.widths.desktop : '0';
+  
+  return '0'; // fallback
 };
 
 // Type exports for TypeScript support
