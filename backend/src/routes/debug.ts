@@ -1,11 +1,11 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { query } from '../db';
 import { auth } from '../auth';
 
 const router = Router();
 
 // GET /debug/tables - Show all database tables (Admin only)
-router.get('/tables', auth({ adminOnly: true }), async (req, res) => {
+router.get('/tables', auth({ adminOnly: true }), async (req: Request, res: Response) => {
   try {
     const result = await query(`
       SELECT table_name 
@@ -22,7 +22,7 @@ router.get('/tables', auth({ adminOnly: true }), async (req, res) => {
 });
 
 // GET /debug/schema/:table - Show table schema (Admin only)
-router.get('/schema/:table', auth({ adminOnly: true }), async (req, res) => {
+router.get('/schema/:table', auth({ adminOnly: true }), async (req: Request, res: Response) => {
   try {
     const { table } = req.params;
     
