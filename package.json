@@ -1,20 +1,15 @@
 {
-  "name": "oblinor-simple-monorepo",
+  "name": "oblinor-simple",
   "version": "1.0.0",
-  "description": "Root package for Railway deployment",
+  "description": "Clean Oblinor emission platform - frontend and backend only",
   "scripts": {
-    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
-    "build:backend": "cd backend && npm run build",
     "build:frontend": "cd frontend && VITE_API_URL='' npm run build",
+    "build:backend": "cd backend && npm run build", 
     "build": "npm run build:backend && npm run build:frontend && cp -r frontend/dist backend/",
     "start": "cd backend && npm start",
-    "deploy": "node deploy.js",
-    "deploy:quick": "node deploy.js 'Quick deploy with cache-bust'",
-    "verify:deployment": "curl -s https://oblinor-simple.up.railway.app/health && echo '\\n✅ Railway is healthy'",
-    "clear:cache": "echo '🧹 Use: Cmd+Shift+R (Mac) or Ctrl+Shift+F5 (Windows) to clear browser cache'"
+    "install:all": "cd backend && npm install && cd ../frontend && npm install"
   },
   "engines": {
     "node": ">=18.0.0"
-  },
-  "buildTime": 1757348845303
+  }
 }
