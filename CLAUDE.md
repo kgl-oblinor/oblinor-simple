@@ -123,55 +123,39 @@ CONSTRAINT valid_level CHECK (
 
 ---
 
-## 📝 IMPORTANT DEVELOPMENT NOTES
+## 🚨 CRITICAL: LIVE-ONLY PRODUCTION SYSTEM
 
-### 🔄 Two Ways to Run the System
+### ⚠️ NO LOCAL DEVELOPMENT - LIVE SYSTEM ONLY
 
-#### 1. **Railway (Production)** 🌐
-- Live production system on the internet
-- URL: https://oblinor-simple.up.railway.app/
-- Automatically updates when you push to GitHub
-- Used by real users
+**🚨 ADVARSEL:** Dette er et **LIVE produksjonssystem** med reelle brukere!
 
-#### 2. **Local (Development)** 💻  
-- Runs on your own machine for development
-- Backend: `localhost:4001` 
-- Frontend: `localhost:5174`
-- For testing and developing new features
+#### **LIVE PRODUKSJON** 🌐
+- **URL:** https://oblinor-simple.up.railway.app/
+- **Database:** Live PostgreSQL med ekte data (30 aksjonærer, 127,640 aksjer)  
+- **Brukere:** Reelle norske investorer bruker systemet daglig
+- **Endringer:** Går direkte live til reelle brukere
 
-### 🔄 Local Development Setup
-
-**REQUIRED: Create Environment Files**
-```bash
-# 1. Backend environment file
-# Create: backend/.env
-DATABASE_URL=postgresql://postgres:iuzakIAZhFviojhSMiTFfbgdnIAFRWGJ@hopper.proxy.rlwy.net:42209/railway
-JWT_SECRET=oblinor-local-dev-jwt-secret-change-in-production
-NODE_ENV=development
-PORT=4001
-
-# 2. Frontend environment file  
-# Create: frontend/.env
-VITE_API_URL=http://localhost:4001
-```
-
-### 🔄 Typical Development Workflow
+### 🔄 LIVE-ONLY Deployment Workflow
 
 ```bash
-# 1. Ensure environment files exist (see above)
-# 2. Develop locally on your machine
-cd backend && npm run dev    # Local backend
-cd frontend && npm run dev   # Local frontend
+# ADVARSEL: Alle endringer går direkte til produksjon!
 
-# 3. Test changes on localhost
-open http://localhost:5174
-
-# 4. Push to GitHub when satisfied
+# 1. Make code changes in your editor
+# 2. Push directly to live system
+git add .
+git commit -m "Your changes"
 git push
 
-# 5. Railway automatically updates production
-# Users see changes on https://oblinor-simple.up.railway.app/
+# 3. Railway deploys immediately to LIVE system
+# 4. Real users see changes instantly
+open https://oblinor-simple.up.railway.app/
 ```
+
+### 🚨 INGEN LOKAL UTVIKLING
+- **Ingen localhost** - Alt skjer på live system
+- **Ingen development miljø** - Kun produksjon  
+- **Ingen test-database** - Live data med reelle investorer
+- **Test grundig** før push - reelle brukere påvirkes umiddelbart
 
 **Railway Deployment:**
 1. Uses single service serving both API and frontend

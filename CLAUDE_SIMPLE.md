@@ -5,6 +5,7 @@
 
 **🎯 PRODUCTION URL:** https://oblinor-simple.up.railway.app/  
 **⚠️ IMPORTANT:** Always use oblinor-simple.up.railway.app - NOT oblinoremisjonrailway-production!  
+**🚨 CRITICAL:** LIVE-ONLY SYSTEM - NO LOCAL DEVELOPMENT - Real users affected by all changes!  
 
 **📚 DETAILED REFERENCE:** [CLAUDE_SIMPLE_DETAILED.md](./CLAUDE_SIMPLE_DETAILED.md) - Full technical documentation  
 **🚂 DEPLOYMENT GUIDE:** [RAILWAY_DEPLOYMENT_GUIDE.md](./RAILWAY_DEPLOYMENT_GUIDE.md) - Complete Railway setup
@@ -369,24 +370,20 @@ Plus 25 additional shareholders with 200-1,000 shares each.
 ## ⚡ QUICK COMMANDS
 
 ```bash
-# Initial setup
+# 🚨 LIVE-ONLY SYSTEM - NO LOCAL DEVELOPMENT
+
+# Make changes directly in code editor, then push to live system
 cd /Users/kristianlokken/Desktop/oblinor-simple
+git add .
+git commit -m "Your changes"
+git push
 
-# Start services individually
-cd backend && npm run dev    # Terminal 1 (port 4001)
-cd frontend && npm run dev   # Terminal 2 (port 5174)
-
-# API test
-curl http://localhost:4001/health
-
-# Frontend
-open http://localhost:5174
-
-# Live production system - CORRECTED URL
+# Railway automatically deploys to LIVE production system
+# Real users see changes immediately!
 open https://oblinor-simple.up.railway.app/
 
-# Database structure & functions
-node check_db.js           # Live database overview
+# Database structure & functions (connects to LIVE database)
+node check_db.js           # Live database overview  
 node debug_tables.js        # Detailed schema
 ```
 
@@ -395,7 +392,7 @@ node debug_tables.js        # Detailed schema
 **12 tables:** users, shareholders, emissions, trades, holdings, audit  
 **24 functions:** apply_emission(), cap_table_at(), request_trade(), assert_is_admin()  
 **Live data:** 30 shareholders, 127,640 shares, active Serie B emission  
-**Connection:** Same PostgreSQL database for local dev and production  
+**⚠️ WARNING:** Live PostgreSQL database with real investor data  
 
 *Full database documentation in Agent-backend.md section "KOMPLETT DATABASE STRUKTUR & FUNKSJONALITET"*
 

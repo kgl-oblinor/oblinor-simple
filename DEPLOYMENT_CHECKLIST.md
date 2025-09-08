@@ -1,8 +1,8 @@
-# 🚀 DEPLOYMENT CHECKLIST - Oblinor Simple
+# 🚨 LIVE-ONLY SYSTEM - NO LOCAL DEPLOYMENT
 
-**📍 SINGLE SOURCE OF TRUTH FOR DEPLOYMENT**
+**📍 SINGLE SOURCE OF TRUTH FOR LIVE SYSTEM**
 
-This checklist prevents common deployment mistakes and URL confusion.
+**⚠️ CRITICAL:** This is a LIVE-ONLY production system. No local development environment exists!
 
 ---
 
@@ -21,7 +21,7 @@ https://oblinor-simple-production.up.railway.app        # Old URL
 
 ---
 
-## 🔧 LOCAL DEVELOPMENT SETUP
+## 🚨 LIVE-ONLY SYSTEM - NO LOCAL DEVELOPMENT
 
 ### 1. Environment Files Setup
 
@@ -73,6 +73,20 @@ npm run dev
 - [ ] Environment variables are secure
 
 ### 2. Railway Deployment Process
+
+**🚀 NEW: CACHE-SAFE DEPLOYMENT (RECOMMENDED):**
+```bash
+# Automatic cache-busting deployment with verification
+npm run deploy "Your descriptive commit message"
+
+# Quick deploy with automatic message
+npm run deploy:quick
+
+# Manual verification (if needed)
+npm run verify:deployment
+```
+
+**📋 MANUAL DEPLOYMENT (OLD METHOD):**
 ```bash
 # 1. Commit changes
 git add .
@@ -81,12 +95,11 @@ git commit -m "Your descriptive commit message"
 # 2. Push to GitHub (triggers Railway auto-deploy)
 git push
 
-# 3. Monitor Railway logs for successful deployment
-# Railway automatically:
-# - Detects the push
-# - Runs npm run install:all && npm run build
-# - Starts the production server
-# - Makes it available on the production URL
+# 3. Wait 2-3 minutes then verify deployment
+npm run verify:deployment
+
+# 4. If cache issues, clear browser cache:
+npm run clear:cache
 ```
 
 ### 3. Post-Deployment Verification
@@ -131,7 +144,13 @@ git push
 - 🔍 Check TypeScript errors with `tsc --noEmit`
 - 🔍 Monitor Railway logs for deployment status
 
-### 4. Database Issues
+### 4. Cache Issues (SOLVED)
+- 🚨 **Problem:** Changes visible locally but not live
+- ✅ **Solution:** Use `npm run deploy` for automatic cache-busting
+- 🧹 **Manual fix:** Hard refresh (Cmd+Shift+R) or incognito mode
+- 🔍 **Verification:** `npm run verify:deployment` checks if changes are live
+
+### 5. Database Issues
 - ⚠️ Development and production share same database
 - 📊 Don't run destructive queries in development
 - 🔄 Use admin@oblinor.no / Admin123! for testing

@@ -2,6 +2,9 @@
 
 🌐 **LIVE SYSTEM:** https://oblinor-simple.up.railway.app/
 
+**🚨 WARNING: LIVE-ONLY PRODUCTION SYSTEM**  
+*This system has real users and live data. No local development - all changes go directly to production!*
+
 A fully functional share emission platform where companies can issue new shares and investors can subscribe to them. Features real Norwegian shareholder data and strict level-based access control with blur effects.
 
 ## 🎯 What is this?
@@ -147,55 +150,39 @@ color: '#fcfbfa'
 - Role and level verification for all operations
 - Secure password hashing with salt rounds
 
-## 🔧 For Developers
+## 🚨 CRITICAL: LIVE-ONLY PRODUCTION SYSTEM
 
-### Two Ways to Run the System
+### ⚠️ NO LOCAL DEVELOPMENT - LIVE SYSTEM ONLY
 
-#### 1. **Railway (Production)** 🌐
-- Live production system on the internet
-- URL: https://oblinor-simple.up.railway.app/
-- Automatically updates when you push to GitHub
-- Used by real users
+**🚨 WARNING:** This is a **LIVE production system** with real users!
 
-#### 2. **Local (Development)** 💻  
-- Runs on your own machine for development
-- Backend: `localhost:4001` 
-- Frontend: `localhost:5174`
-- For testing and developing new features
+#### **LIVE PRODUCTION ONLY** 🌐
+- **URL:** https://oblinor-simple.up.railway.app/
+- **Database:** Live PostgreSQL with real data (30 shareholders, 127,640 shares)
+- **Users:** Real Norwegian investors using the system daily  
+- **Changes:** Go directly live to real users
 
-### 🔄 Local Development Setup
-
-**REQUIRED: Create Environment Files**
-```bash
-# 1. Backend environment file
-# Create: backend/.env
-DATABASE_URL=postgresql://postgres:iuzakIAZhFviojhSMiTFfbgdnIAFRWGJ@hopper.proxy.rlwy.net:42209/railway
-JWT_SECRET=oblinor-local-dev-jwt-secret-change-in-production
-NODE_ENV=development
-PORT=4001
-
-# 2. Frontend environment file  
-# Create: frontend/.env
-VITE_API_URL=http://localhost:4001
-```
-
-### 🔄 Typical Development Workflow
+### 🔄 LIVE-ONLY Development Workflow
 
 ```bash
-# 1. Ensure environment files exist (see above)
-# 2. Develop locally on your machine
-cd backend && npm run dev    # Local backend
-cd frontend && npm run dev   # Local frontend
+# WARNING: All changes go directly to production!
 
-# 3. Test changes on localhost
-open http://localhost:5175
-
-# 4. Push to GitHub when satisfied
+# 1. Make code changes in your editor
+# 2. Push directly to live system
+git add .
+git commit -m "Your changes"
 git push
 
-# 5. Railway automatically updates production
-# Users see changes on https://oblinor-simple.up.railway.app/
+# 3. Railway deploys immediately to LIVE system
+# 4. Real users see changes instantly
+open https://oblinor-simple.up.railway.app/
 ```
+
+### 🚨 NO LOCAL DEVELOPMENT
+- **No localhost** - Everything happens on live system
+- **No development environment** - Production only
+- **No test database** - Live data with real investors  
+- **Test thoroughly** before push - real users affected immediately
 
 ## 🗄️ Database Structure & Functions
 
