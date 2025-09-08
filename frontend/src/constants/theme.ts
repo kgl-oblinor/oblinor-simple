@@ -44,7 +44,8 @@ export const THEME = {
     widths: {
       mobile: '280px',
       tablet: '220px',
-      desktop: '250px'
+      desktop: '250px',
+      collapsed: '60px'
     },
     zIndices: {
       sidebar: 999,
@@ -199,12 +200,12 @@ export const getResponsiveSpacing = (mobile: string, desktop: string) => {
 };
 
 // 🎯 CLAUDE-STYLE SIDEBAR UTILITIES
-export const getResponsiveSidebarWidth = () => {
+export const getResponsiveSidebarWidth = (isOpen: boolean) => {
   const { isMobile, isTablet, isDesktop } = getResponsive();
   
-  if (isMobile) return THEME.sidebar.widths.mobile;
-  if (isTablet) return THEME.sidebar.widths.tablet;
-  if (isDesktop) return THEME.sidebar.widths.desktop;
+  if (isMobile) return THEME.sidebar.widths.mobile; // Always full width on mobile
+  if (isTablet) return isOpen ? THEME.sidebar.widths.tablet : THEME.sidebar.widths.collapsed;
+  if (isDesktop) return isOpen ? THEME.sidebar.widths.desktop : THEME.sidebar.widths.collapsed;
   
   return THEME.sidebar.widths.desktop; // fallback
 };
@@ -213,8 +214,8 @@ export const getSidebarContentMargin = (sidebarOpen: boolean) => {
   const { isMobile, isTablet, isDesktop } = getResponsive();
   
   if (isMobile) return '0'; // Mobile uses overlay, no content margin
-  if (isTablet) return sidebarOpen ? THEME.sidebar.widths.tablet : '0';
-  if (isDesktop) return sidebarOpen ? THEME.sidebar.widths.desktop : '0';
+  if (isTablet) return sidebarOpen ? THEME.sidebar.widths.tablet : THEME.sidebar.widths.collapsed;
+  if (isDesktop) return sidebarOpen ? THEME.sidebar.widths.desktop : THEME.sidebar.widths.collapsed;
   
   return '0'; // fallback
 };

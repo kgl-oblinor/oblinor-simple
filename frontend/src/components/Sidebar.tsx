@@ -13,7 +13,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   const { user, logout } = useAuth();
   const { isMobile } = getResponsive(); // Agent 4's responsive system
   const { isOpen, setIsOpen, toggleSidebar } = useSidebar(); // Global sidebar state
-  const sidebarWidth = getResponsiveSidebarWidth();
+  const sidebarWidth = getResponsiveSidebarWidth(isOpen);
 
   const handleLogout = () => {
     logout();
@@ -71,7 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     height: '100vh',
     backgroundColor: THEME.colors.primary,
     color: THEME.colors.background,
-    padding: '20px',
+    padding: isOpen || !isMobile ? '20px' : '10px', // Less padding when collapsed
     position: 'fixed',
     left: 0,
     top: 0,
@@ -80,10 +80,18 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     borderRight: `1px solid ${ALPHA_COLORS.background.strong}`,
     zIndex: THEME.sidebar.zIndices.sidebar,
     
-    // 🚀 CLAUDE-STYLE TRANSFORM ANIMATION (replaces left positioning)
-    transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
-    transition: THEME.transitions.sidebar,
-    willChange: 'transform', // GPU acceleration hint
+    // 🚀 DIFFERENT ANIMATION FOR MOBILE VS DESKTOP
+    ...(isMobile ? {
+      // Mobile: Use transform for overlay behavior
+      transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
+      transition: THEME.transitions.sidebar,
+      willChange: 'transform'
+    } : {
+      // Desktop/Tablet: Use width animation for collapsed state
+      transition: `width ${THEME.animations.duration.standard} ${THEME.animations.easing.materialStandard}`,
+      willChange: 'width',
+      overflow: 'hidden'
+    })
   };
 
   const headerStyle: React.CSSProperties = {
@@ -206,7 +214,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
       {/* Sidebar */}
       <div style={sidebarStyle}>
         <div style={headerStyle}>
-          <span>Oblinor Simple</span>
+          {/* Hide title text when collapsed on desktop/tablet */}
+          {(isOpen || isMobile) && <span>Oblinor Simple</span>}
           
           {/* Mobile close button */}
           <button 
@@ -237,7 +246,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
           </button>
         </div>
         
-        {user && (
+        {user && (isOpen || isMobile) && (
           <div style={userInfoStyle}>
             <div style={{ fontWeight: 'bold', marginBottom: '8px' }}>
               {user.name}
@@ -252,7 +261,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
         )}
 
         <div style={{ flex: 1 }}>
-          {user && (
+          {user && (isOpen || isMobile) && (
             <nav style={navigationStyle}>
               {user.role === 'ADMIN' ? (
                 // Admin Navigation
@@ -379,18 +388,20 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
           )}
         </div>
 
-        <button
-          style={logoutButtonStyle}
-          onClick={handleLogout}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.strong;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.medium;
-          }}
-        >
-          Logout
-        </button>
+        {(isOpen || isMobile) && (
+          <button
+            style={logoutButtonStyle}
+            onClick={handleLogout}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.strong;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = ALPHA_COLORS.background.medium;
+            }}
+          >
+            Logout
+          </button>
+        )}
       </div>
     </>
   );
