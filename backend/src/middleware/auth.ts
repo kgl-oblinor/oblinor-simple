@@ -23,7 +23,7 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JWTPayload;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret-for-railway') as JWTPayload;
     
     // Get fresh user data from database
     const user = await queryOne('SELECT id, email, name, role, level FROM users WHERE id = $1', [decoded.id]);
@@ -86,5 +86,5 @@ export const generateToken = (user: any): string => {
     level: user.level
   };
 
-  return jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '24h' });
+  return jwt.sign(payload, process.env.JWT_SECRET || 'fallback-secret-for-railway', { expiresIn: '24h' });
 };

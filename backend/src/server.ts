@@ -42,13 +42,21 @@ app.use('/debug', debugRoutes);
 if (process.env.NODE_ENV === 'production') {
   const frontendPath = path.join(__dirname, '../dist');
   console.log('Serving frontend from:', frontendPath);
+  console.log('__dirname is:', __dirname);
+  console.log('NODE_ENV is:', process.env.NODE_ENV);
   app.use(express.static(frontendPath));
   
   // Handle React routing - serve index.html for all non-API routes
   app.get('*', (req, res) => {
     const indexPath = path.join(frontendPath, 'index.html');
     console.log('Serving index.html from:', indexPath);
-    res.sendFile(indexPath);
+    console.log('Request URL:', req.url);
+    res.sendFile(indexPath, (err) => {
+      if (err) {
+        console.error('Error serving index.html:', err);
+        res.status(500).json({ error: 'Failed to serve frontend' });
+      }
+    });
   });
 } else {
   // 404 handler for development
