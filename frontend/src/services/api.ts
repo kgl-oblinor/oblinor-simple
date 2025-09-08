@@ -12,9 +12,10 @@ interface LoginResponse {
   user: User;
 }
 
-// In production, use relative URLs since frontend is served from backend
-// If VITE_API_URL is empty string, use relative URLs
-const API_URL = import.meta.env.VITE_API_URL === '' ? '' : (import.meta.env.VITE_API_URL || 'http://localhost:4001');
+// Railway production setup - uses relative URLs
+// Frontend and backend served from same Railway domain
+// VITE_API_URL should be empty string in production
+const API_URL = import.meta.env.VITE_API_URL === '' ? '' : (import.meta.env.VITE_API_URL || '');
 
 // Create axios instance
 export const api = axios.create({
@@ -104,16 +105,16 @@ export const emissionsAPI = {
   delete: (id: number): Promise<{ emission: Emission }> =>
     api.delete(`/emissions/${id}`).then(res => res.data),
     
-  subscribe: (id: number, shares_requested: number): Promise<{ subscription: EmissionSubscription }> =>
+  subscribe: (id: number, shares_requested: number): Promise<{ subscription: Subscription }> =>
     api.post(`/emissions/${id}/subscribe`, { shares_requested }).then(res => res.data),
     
-  getSubscriptions: (id: number): Promise<{ subscriptions: EmissionSubscription[] }> =>
+  getSubscriptions: (id: number): Promise<{ subscriptions: Subscription[] }> =>
     api.get(`/emissions/${id}/subscriptions`).then(res => res.data),
     
-  updateSubscription: (emissionId: number, subId: number, data: { status: string; shares_allocated?: number }): Promise<{ subscription: EmissionSubscription }> =>
+  updateSubscription: (emissionId: number, subId: number, data: { status: string; shares_allocated?: number }): Promise<{ subscription: Subscription }> =>
     api.patch(`/emissions/${emissionId}/subscriptions/${subId}`, data).then(res => res.data),
     
-  getMySubscription: (id: number): Promise<EmissionSubscription> =>
+  getMySubscription: (id: number): Promise<Subscription> =>
     api.get(`/emissions/${id}/my-subscription`).then(res => res.data),
 };
 

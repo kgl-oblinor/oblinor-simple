@@ -20,7 +20,7 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
     price_per_share: 0,
     start_date: '',
     end_date: '',
-    status: 'DRAFT' as 'DRAFT' | 'ACTIVE' | 'COMPLETED',
+    status: 'DRAFT' as 'DRAFT' | 'ACTIVE' | 'CLOSED' | 'CANCELLED' | 'COMPLETED',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -266,10 +266,12 @@ const EmissionForm: React.FC<EmissionFormProps> = ({ emission, onClose, onSave }
         <select
           style={selectStyle}
           value={formData.status}
-          onChange={(e) => setFormData({ ...formData, status: e.target.value as 'DRAFT' | 'ACTIVE' | 'COMPLETED' })}
+          onChange={(e) => setFormData({ ...formData, status: e.target.value as 'DRAFT' | 'ACTIVE' | 'CLOSED' | 'CANCELLED' | 'COMPLETED' })}
         >
           <option value="DRAFT">Draft</option>
           <option value="ACTIVE">Active</option>
+          <option value="CLOSED">Closed</option>
+          <option value="CANCELLED">Cancelled</option>
           <option value="COMPLETED">Completed</option>
         </select>
       </div>
