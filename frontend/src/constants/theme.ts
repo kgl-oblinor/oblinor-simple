@@ -51,15 +51,22 @@ export const THEME = {
   }
 } as const;
 
-// Helper functions for responsive design
-export const isMobile = () => window.innerWidth <= THEME.breakpoints.mobile;
+// Railway Production-Safe Responsive System
+// SSR-compatible with server-side rendering safety
+export const isMobile = () => {
+  if (typeof window === 'undefined') return false;
+  return window.innerWidth <= THEME.breakpoints.mobile;
+};
 
-// Responsive system - Agent 4's enhanced version
-export const getResponsive = () => ({
-  isMobile: window.innerWidth <= 768,
-  isTablet: window.innerWidth > 768 && window.innerWidth <= 1024,
-  isDesktop: window.innerWidth > 1024
-});
+// Production-safe responsive system with SSR guard
+export const getResponsive = () => {
+  if (typeof window === 'undefined') return { isMobile: false, isTablet: false, isDesktop: true };
+  return {
+    isMobile: window.innerWidth <= 768,
+    isTablet: window.innerWidth > 768 && window.innerWidth <= 1024,
+    isDesktop: window.innerWidth > 1024
+  };
+};
 
 // Sidebar content margin helper
 export const getSidebarContentMargin = (sidebarOpen: boolean) => {
